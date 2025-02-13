@@ -1,0 +1,539 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--=====================================
+                    META TAG PART START
+        =======================================-->
+    <!-- REQUIRE META -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- TEMPLATE META -->
+    <meta name="name" content="Greeny">
+    <meta name="title" content="Greeny - eCommerce HTML Template">
+    <meta name="keywords"
+        content="organic, food, shop, ecommerce, store, html, bootstrap, template, agriculture, vegetables, webshop, farm, grocery, natural, online store">
+    <!--=====================================
+                    META-TAG PART END
+        =======================================-->
+
+    <!-- WEBPAGE TITLE -->
+    <title>Standard Home - BharatFarm</title>
+
+    <!--=====================================
+                    CSS LINK PART START
+        =======================================-->
+    <!-- FAVICON -->
+
+
+    <!-- FONTS -->
+    <link rel="stylesheet" href="fonts/flaticon/flaticon.css">
+    <link rel="stylesheet" href="fonts/icofont/icofont.min.css">
+    <link rel="stylesheet" href="fonts/fontawesome/fontawesome.min.css">
+
+    <!-- VENDOR -->
+    <link rel="stylesheet" href="vendor/venobox/venobox.min.css">
+    <link rel="stylesheet" href="vendor/slickslider/slick.min.css">
+    <link rel="stylesheet" href="vendor/niceselect/nice-select.min.css">
+    <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
+
+    <!-- CUSTOM -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/home-standard.css">
+    <!--=====================================
+                    CSS LINK PART END
+        =======================================-->
+</head>
+
+<body>
+    <div class="backdrop"></div>
+    <a class="backtop fas fa-arrow-up" href="#"></a>
+
+    <div class="header-top alert fade show">
+        <p>20% Discount All New Customers <a href='register.html'>get register</a></p>
+        <button data-bs-dismiss="alert"><i class="fas fa-times"></i></button>
+    </div>
+
+
+    <!--=====================================
+                    HEADER PART START
+        =======================================-->
+    <div id="header"></div> <!-- ✅ Correct ID for header placement -->
+
+    <script type="module">
+        import { loadHeader } from './header.js';
+
+        // ✅ Ensure the element exists before setting innerHTML
+        document.getElementById('header').innerHTML = loadHeader();
+    </script>
+
+
+
+    <!--=====================================
+                    HEADER PART END
+        =======================================-->
+
+    <!--=====================================
+                  CART SIDEBAR PART START
+        =======================================-->
+    <div id="cart-sidebar"></div> <!-- ✅ Placeholder for Cart Sidebar -->
+
+    <script type="module">
+        import { loadCartSidebar } from './cart.js';
+
+        // ✅ Ensure the element exists before setting innerHTML
+        document.getElementById('cart-sidebar').innerHTML = loadCartSidebar();
+    </script>
+
+    <!--=====================================
+                    CART SIDEBAR PART END
+        =======================================-->
+
+    <!--=====================================
+                    NAVBAR PART START
+        =======================================-->
+    <div id="nav"></div>
+    <script type="module">
+        import { loadNavbar } from './navbar.js';
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById('nav').innerHTML = loadNavbar();
+        });
+    </script>
+    <!--=====================================
+                    NAVBAR PART END
+        =======================================-->
+
+    <!--=====================================
+                    PRODUCT VIEW START
+        =======================================-->
+    <div class="modal fade" id="product-view">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button class="modal-close icofont-close" data-bs-dismiss="modal"></button>
+                <div class="product-view">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6">
+                            <div class="view-gallery">
+                                <div class="view-label-group">
+                                    <label class="view-label new">new</label>
+                                    <label class="view-label off">-10%</label>
+                                </div>
+                                <ul class="preview-slider slider-arrow">
+                                    <li><img src="images/product/01.jpg" alt="product"></li>
+                                    <li><img src="images/product/01.jpg" alt="product"></li>
+                                    <li><img src="images/product/01.jpg" alt="product"></li>
+                                    <li><img src="images/product/01.jpg" alt="product"></li>
+                                </ul>
+                                <ul class="thumb-slider">
+                                    <li><img src="images/product/01.jpg" alt="product"></li>
+                                    <li><img src="images/product/01.jpg" alt="product"></li>
+                                    <li><img src="images/product/01.jpg" alt="product"></li>
+                                    <li><img src="images/product/01.jpg" alt="product"></li>
+                                    <li><img src="images/product/01.jpg" alt="product"></li>
+                                    <li><img src="images/product/01.jpg" alt="product"></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            <div class="view-details">
+                                <h3 class="view-name">
+                                    <a href='product-video.html'>existing product name</a>
+                                </h3>
+                                <div class="view-meta">
+                                    <p>SKU:<span>1234567</span></p>
+                                    <p>BRAND:<a href="#">radhuni</a></p>
+                                </div>
+                                <div class="view-rating">
+                                    <i class="active icofont-star"></i>
+                                    <i class="active icofont-star"></i>
+                                    <i class="active icofont-star"></i>
+                                    <i class="active icofont-star"></i>
+                                    <i class="icofont-star"></i>
+                                    <a href='product-video.html'>(3 reviews)</a>
+                                </div>
+                                <h3 class="view-price">
+                                    <del>₹38.00</del>
+                                    <span>₹24.00<small>/per kilo</small></span>
+                                </h3>
+                                <p class="view-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit non tempora
+                                    magni repudiandae sint suscipit tempore quis maxime explicabo veniam eos
+                                    reprehenderit fuga</p>
+                                <div class="view-list-group">
+                                    <label class="view-list-title">tags:</label>
+                                    <ul class="view-tag-list">
+                                        <li><a href="#">organic</a></li>
+                                        <li><a href="#">vegetable</a></li>
+                                        <li><a href="#">chilis</a></li>
+                                    </ul>
+                                </div>
+                                <div class="view-list-group">
+                                    <label class="view-list-title">Share:</label>
+                                    <ul class="view-share-list">
+                                        <li><a href="#" class="icofont-facebook" title="Facebook"></a></li>
+                                        <li><a href="#" class="icofont-twitter" title="Twitter"></a></li>
+                                        <li><a href="#" class="icofont-linkedin" title="Linkedin"></a></li>
+                                        <li><a href="#" class="icofont-instagram" title="Instagram"></a></li>
+                                    </ul>
+                                </div>
+                                <div class="view-add-group">
+                                    <button class="product-add" title="Add to Cart">
+                                        <i class="fas fa-shopping-basket"></i>
+                                        <span>add to cart</span>
+                                    </button>
+                                    <div class="product-action">
+                                        <button class="action-minus" title="Quantity Minus"><i
+                                                class="icofont-minus"></i></button>
+                                        <input class="action-input" title="Quantity Number" type="text" name="quantity"
+                                            value="1">
+                                        <button class="action-plus" title="Quantity Plus"><i
+                                                class="icofont-plus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="view-action-group">
+                                    <a class="view-wish wish" href="#" title="Add Your Wishlist">
+                                        <i class="icofont-heart"></i>
+                                        <span>add to wish</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--=====================================
+                    PRODUCT VIEW END
+        =======================================-->
+
+
+    <!--=====================================
+                    BANNER PART START
+        =======================================-->
+    <section class="banner-part">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="home-grid-slider slider-dots w-90 mx-auto">
+                                <div class="banner-wrap bg1">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6 col-lg-6">
+                                            <div class="banner-content">
+                                                <h2>we are delivered organic foods item within Few hours.</h2>
+                                                <a href="#" class="btn btn-inline">
+                                                    <i class="fas fa-shopping-basket"></i>
+                                                    <span>shop now</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6">
+                                            <div class="banner-image">
+                                                <img src="images/home/index/01.png" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="banner-wrap bg2">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6 col-lg-6">
+                                            <div class="banner-content">
+                                                <h2>get your organic healthy foods item online today.</h2>
+                                                <a href="#" class="btn btn-inline">
+                                                    <i class="fas fa-shopping-basket"></i>
+                                                    <span>shop now</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6">
+                                            <div class="banner-image">
+                                                <img src="images/home/index/02.png" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="banner-wrap bg3">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6 col-lg-6">
+                                            <div class="banner-content">
+                                                <h2>Get fresh organic food items delivered to your doorstep in just a
+                                                    day.</h2>
+                                                <a href="#" class="btn btn-inline">
+                                                    <i class="fas fa-shopping-basket"></i>
+                                                    <span>shop now</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6">
+                                            <div class="banner-image">
+                                                <img src="images/home/index/03.png" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-md-6 col-lg-5 mx-4 ">
+                                <div class="banner-promo">
+                                    <a href="#"><img src="images/promo/home/04.jpg" alt="promo"></a>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-5 mx-4">
+                                <div class="banner-promo">
+                                    <a href="#"><img src="images/promo/home/05.jpg" alt="promo"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--=====================================
+                    BANNER PART END
+        =======================================-->
+
+
+    <!--=====================================
+                    INTRO PART START
+        =======================================-->
+    <section class="section intro-part">
+        <div class="container">
+            <div class="row intro-content">
+                <div class="col-sm-6 col-lg-3">
+                    <div class="intro-wrap">
+                        <div class="intro-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <div class="intro-content">
+                            <h5>free home delivery</h5>
+                            <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="intro-wrap">
+                        <div class="intro-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <div class="intro-content">
+                            <h5>instant return policy</h5>
+                            <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="intro-wrap">
+                        <div class="intro-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div class="intro-content">
+                            <h5>quick support system</h5>
+                            <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="intro-wrap">
+                        <div class="intro-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <div class="intro-content">
+                            <h5>secure payment way</h5>
+                            <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--=====================================
+                    INTRO PART END
+        =======================================-->
+
+
+    <!--=====================================
+                    DEALS PART START
+        =======================================-->
+        <section class="section deals-part">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-heading">
+                            <h2>Vegetables</h2>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-4" id="vegetable-container">
+                    <!-- Vegetables will be injected here -->
+                </div>
+            </div>
+        </section>
+
+    <!--=====================================
+                    DEALS PART END
+        =======================================-->
+
+    <!--=====================================
+                    NEW ITEM PART START
+        =======================================-->
+        <section class="section newitem-part">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="section-heading">
+                            <h2>FARMING TOOLS</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="tools-container">
+                    <!-- Farming Tools will be injected here -->
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="section-btn-25">
+                            <a class='btn btn-outline' href='shop-4column.html'>
+                                <i class="fas fa-eye"></i>
+                                <span>View All Tools</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        
+    <!--=====================================
+                    NEW ITEM PART END
+        =======================================-->
+
+
+    <!--=====================================
+                    NICHE PART START
+        =======================================-->
+        <section class="section niche-part">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-heading">
+                            <h2>BEST SELLING PRODUCTS</h2>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-4" id="mixed-container">
+                    <!-- Mixed products (Fruits + Vegetables) will be injected here -->
+                </div>
+        
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-btn-25">
+                            <a class='btn btn-outline' href='shop-4column.html'>
+                                <i class="fas fa-eye"></i>
+                                <span>View All Products</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <script type="module">
+            import { loadProductCard } from './productCard.js';
+        
+            document.addEventListener("DOMContentLoaded", async () => {
+                const toolsContainer = document.getElementById("tools-container");
+                const vegetableContainer = document.getElementById("vegetable-container");
+                const mixedContainer = document.getElementById("mixed-container");
+        
+                try {
+                    const response = await fetch("http://localhost:5000/api/products");
+                    const products = await response.json();
+        
+                    console.log("✅ Products from Database:", products);
+        
+                    if (products.length === 0) {
+                        toolsContainer.innerHTML = "<p class='text-center'>No tools available.</p>";
+                        vegetableContainer.innerHTML = "<p class='text-center'>No products available.</p>";
+                        mixedContainer.innerHTML = "<p class='text-center'>No products available.</p>";
+                        return;
+                    }
+        
+                    // ✅ Filter only "Farming Tools" (Max 6)
+                    const toolsProducts = products
+                        .filter(product => product.category.toLowerCase() === "tools")
+                        .slice(0, 6);
+        
+                    // ✅ Filter only "Vegetables" (Max 8)
+                    const vegetableProducts = products
+                        .filter(product => product.category.toLowerCase() === "vegetables")
+                        .slice(0, 8);
+        
+                    // ✅ Filter "Vegetables & Fruits" (Mixed - Max 8)
+                    const mixedProducts = products
+                        .filter(product => ["vegetables", "fruits"].includes(product.category.toLowerCase()))
+                        .slice(0, 8);
+        
+                    // ✅ Render products dynamically
+                    toolsContainer.innerHTML = toolsProducts.map(loadProductCard).join("");
+                    vegetableContainer.innerHTML = vegetableProducts.map(loadProductCard).join("");
+                    mixedContainer.innerHTML = mixedProducts.map(loadProductCard).join("");
+        
+                } catch (error) {
+                    console.error("❌ Error fetching products:", error);
+                    toolsContainer.innerHTML = "<p class='text-danger text-center'>Failed to load tools.</p>";
+                    vegetableContainer.innerHTML = "<p class='text-danger text-center'>Failed to load products.</p>";
+                    mixedContainer.innerHTML = "<p class='text-danger text-center'>Failed to load products.</p>";
+                }
+            });
+        </script>
+        
+        
+    <!--=====================================
+                    NICHE PART END
+        =======================================-->
+
+    <!--=====================================
+                     FOOTER PART START
+        =======================================-->
+    <div id="footer"></div>
+
+    <script type="module">
+        import { loadFooter } from './footer.js';
+        document.getElementById('footer').innerHTML = loadFooter();
+    </script>
+
+    <!--=====================================
+                      FOOTER PART END
+        =======================================-->
+
+    <!--=====================================
+                    JS LINK PART START
+        =======================================-->
+    <!-- VENDOR -->
+    <script src="vendor/bootstrap/jquery-1.12.4.min.js"></script>
+    <script src="vendor/bootstrap/popper.min.js"></script>
+    <script src="vendor/bootstrap/bootstrap.min.js"></script>
+    <script src="vendor/countdown/countdown.min.js"></script>
+    <script src="vendor/niceselect/nice-select.min.js"></script>
+    <script src="vendor/slickslider/slick.min.js"></script>
+    <script src="vendor/venobox/venobox.min.js"></script>
+
+    <!-- CUSTOM -->
+    <script src="js/nice-select.js"></script>
+    <script src="js/countdown.js"></script>
+    <script src="js/accordion.js"></script>
+    <script src="js/venobox.js"></script>
+    <script src="js/slick.js"></script>
+    <script src="js/main.js"></script>
+    <!--=====================================
+                    JS LINK PART END
+        =======================================-->
+</body>
+
+</html>
