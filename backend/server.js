@@ -2,7 +2,7 @@ import "dotenv/config";
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-
+import multer from "multer";
 import userRoutes from "./routes/userRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import cartRoutes from "./routes/cartRoutes.js";
@@ -41,7 +41,21 @@ app.use("/api/products", productRoutes);
 app.use("/api/payment", paymentRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes); // Added order routes
-app.use("/uploads", express.static("uploads"));
+
+const upload = multer({
+  storage:multer.diskStorage({
+    destination:function(req,file ,cb){
+      cb(null,"uploads")
+    },
+    filename:function(req,file,cb){
+      cb(null,file.fieldname+".jpg")
+    }
+  })
+}).single("user");
+
+app.post("/uploads", upload , (req,res)=>{
+  res.send("file Uploaded")
+} );
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

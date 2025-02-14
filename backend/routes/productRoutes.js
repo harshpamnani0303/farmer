@@ -1,5 +1,4 @@
 import express from "express";
-import multer from "multer";
 import Product from "../models/Product.js";
 
 const router = express.Router();
@@ -105,40 +104,9 @@ router.delete("/:id", async (req, res) => {
     }
 });
 
-// 🖼️ Set up Multer storage
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, "uploads/"); // Save files in "uploads" folder
-    },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + "-" + file.originalname);
-    }
-});
 
-const upload = multer({ storage });
 
-// ✅ Create New Product with Image Upload
-router.post("/add", upload.single("image"), async (req, res) => {
-    try {
-        const { name, price, description, category, stock } = req.body;
-        const image = req.file ? `/uploads/${req.file.filename}` : "";
 
-        const newProduct = new Product({
-            name,
-            price,
-            description,
-            category,
-            stock,
-            image,
-        });
-
-        await newProduct.save();
-        res.status(201).json({ message: "Product added successfully!", product: newProduct });
-    } catch (error) {
-        console.error("❌ Error adding product:", error);
-        res.status(500).json({ error: "Failed to add product" });
-    }
-});
 
 
 export default router;
