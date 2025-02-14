@@ -1,19 +1,23 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <!--=====================================
                     META TAG PART START
         =======================================-->
     <!-- REQUIRE META -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
     <!-- TEMPLATE META -->
-    <meta name="name" content="Greeny">
-    <meta name="title" content="Greeny - eCommerce HTML Template">
-    <meta name="keywords"
-        content="organic, food, shop, ecommerce, store, html, bootstrap, template, agriculture, vegetables, webshop, farm, grocery, natural, online store">
+    <meta name="name" content="Greeny" />
+    <meta name="title" content="Greeny - eCommerce HTML Template" />
+    <meta
+      name="keywords"
+      content="organic, food, shop, ecommerce, store, html, bootstrap, template, agriculture, vegetables, webshop, farm, grocery, natural, online store"
+    />
     <!--=====================================
                     META-TAG PART END
         =======================================-->
@@ -26,30 +30,28 @@
         =======================================-->
     <!-- FAVICON -->
 
-
     <!-- FONTS -->
-    <link rel="stylesheet" href="fonts/flaticon/flaticon.css">
-    <link rel="stylesheet" href="fonts/icofont/icofont.min.css">
-    <link rel="stylesheet" href="fonts/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="fonts/flaticon/flaticon.css" />
+    <link rel="stylesheet" href="fonts/icofont/icofont.min.css" />
+    <link rel="stylesheet" href="fonts/fontawesome/fontawesome.min.css" />
 
     <!-- VENDOR -->
-    <link rel="stylesheet" href="vendor/venobox/venobox.min.css">
-    <link rel="stylesheet" href="vendor/slickslider/slick.min.css">
-    <link rel="stylesheet" href="vendor/niceselect/nice-select.min.css">
-    <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/venobox/venobox.min.css" />
+    <link rel="stylesheet" href="vendor/slickslider/slick.min.css" />
+    <link rel="stylesheet" href="vendor/niceselect/nice-select.min.css" />
+    <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css" />
 
     <!-- CUSTOM -->
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/checkout.css">
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/checkout.css" />
     <!--=====================================
                     CSS LINK PART END
         =======================================-->
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="backdrop"></div>
     <a class="backtop fas fa-arrow-up" href="#"></a>
-
 
     <!--=====================================
                     HEADER PART START
@@ -57,8 +59,8 @@
     <div id="header"></div>
 
     <script type="module">
-        import { loadHeader } from './header.js';
-        document.getElementById('header').innerHTML = loadHeader();
+      import { loadHeader } from "./header.js";
+      document.getElementById("header").innerHTML = loadHeader();
     </script>
     <!--=====================================
                     HEADER PART END
@@ -69,11 +71,11 @@
         =======================================-->
     <div id="nav"></div>
     <script type="module">
-        import { loadNavbar } from './navbar.js';
+      import { loadNavbar } from "./navbar.js";
 
-        document.addEventListener("DOMContentLoaded", function () {
-            document.getElementById('nav').innerHTML = loadNavbar();
-        });
+      document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("nav").innerHTML = loadNavbar();
+      });
     </script>
     <!--=====================================
                     NAVBAR PART END
@@ -82,14 +84,16 @@
     <!--=====================================
                   CART SIDEBAR PART START
         =======================================-->
-    <div id="cart-sidebar"></div> <!-- ✅ Placeholder for Cart Sidebar -->
+    <div id="cart-sidebar"></div>
+    <!-- ✅ Placeholder for Cart Sidebar -->
 
     <script type="module">
-        import { loadCartSidebar } from './cart.js';
-        let userId = localStorage.getItem('userId');
-        console.log(userId);
-        // ✅ Ensure the element exists before setting innerHTML
-        document.getElementById('cart-sidebar').innerHTML = loadCartSidebar(userId);
+      import { loadCartSidebar } from "./cart.js";
+      let userId = localStorage.getItem("userId");
+      console.log(userId);
+      // ✅ Ensure the element exists before setting innerHTML
+      document.getElementById("cart-sidebar").innerHTML =
+        loadCartSidebar(userId);
     </script>
     <!--=====================================
                     CART SIDEBAR PART END
@@ -99,378 +103,590 @@
                     PRODUCT VIEW START
         =======================================-->
     <div class="modal fade" id="product-view">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <button class="modal-close icofont-close" data-bs-dismiss="modal"></button>
-                <div class="product-view">
-                    <div class="row">
-                        <div class="col-md-6 col-lg-6">
-                            <div class="view-gallery">
-                                <div class="view-label-group">
-                                    <label class="view-label new">new</label>
-                                    <label class="view-label off">-10%</label>
-                                </div>
-                                <ul class="preview-slider slider-arrow">
-                                    <li><img src="images/product/01.jpg" alt="product"></li>
-                                    <li><img src="images/product/01.jpg" alt="product"></li>
-                                    <li><img src="images/product/01.jpg" alt="product"></li>
-                                    <li><img src="images/product/01.jpg" alt="product"></li>
-                                </ul>
-                                <ul class="thumb-slider">
-                                    <li><img src="images/product/01.jpg" alt="product"></li>
-                                    <li><img src="images/product/01.jpg" alt="product"></li>
-                                    <li><img src="images/product/01.jpg" alt="product"></li>
-                                    <li><img src="images/product/01.jpg" alt="product"></li>
-                                    <li><img src="images/product/01.jpg" alt="product"></li>
-                                    <li><img src="images/product/01.jpg" alt="product"></li>
-
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6">
-                            <div class="view-details">
-                                <h3 class="view-name">
-                                    <a href='product-video.html'>existing product name</a>
-                                </h3>
-                                <div class="view-meta">
-                                    <p>SKU:<span>1234567</span></p>
-                                    <p>BRAND:<a href="#">radhuni</a></p>
-                                </div>
-                                <div class="view-rating">
-                                    <i class="active icofont-star"></i>
-                                    <i class="active icofont-star"></i>
-                                    <i class="active icofont-star"></i>
-                                    <i class="active icofont-star"></i>
-                                    <i class="icofont-star"></i>
-                                    <a href='product-video.html'>(3 reviews)</a>
-                                </div>
-                                <h3 class="view-price">
-                                    <del>₹38.00</del>
-                                    <span>₹24.00<small>/per kilo</small></span>
-                                </h3>
-                                <p class="view-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit non tempora
-                                    magni repudiandae sint suscipit tempore quis maxime explicabo veniam eos
-                                    reprehenderit fuga</p>
-                                <div class="view-list-group">
-                                    <label class="view-list-title">tags:</label>
-                                    <ul class="view-tag-list">
-                                        <li><a href="#">organic</a></li>
-                                        <li><a href="#">vegetable</a></li>
-                                        <li><a href="#">chilis</a></li>
-                                    </ul>
-                                </div>
-                                <div class="view-list-group">
-                                    <label class="view-list-title">Share:</label>
-                                    <ul class="view-share-list">
-                                        <li><a href="#" class="icofont-facebook" title="Facebook"></a></li>
-                                        <li><a href="#" class="icofont-twitter" title="Twitter"></a></li>
-                                        <li><a href="#" class="icofont-linkedin" title="Linkedin"></a></li>
-                                        <li><a href="#" class="icofont-instagram" title="Instagram"></a></li>
-                                    </ul>
-                                </div>
-                                <div class="view-add-group">
-                                    <button class="product-add" title="Add to Cart">
-                                        <i class="fas fa-shopping-basket"></i>
-                                        <span>add to cart</span>
-                                    </button>
-                                    <div class="product-action">
-                                        <button class="action-minus" title="Quantity Minus"><i
-                                                class="icofont-minus"></i></button>
-                                        <input class="action-input" title="Quantity Number" type="text" name="quantity"
-                                            value="1">
-                                        <button class="action-plus" title="Quantity Plus"><i
-                                                class="icofont-plus"></i></button>
-                                    </div>
-                                </div>
-                                <div class="view-action-group">
-                                    <a class="view-wish wish" href="#" title="Add Your Wishlist">
-                                        <i class="icofont-heart"></i>
-                                        <span>add to wish</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <button
+            class="modal-close icofont-close"
+            data-bs-dismiss="modal"
+          ></button>
+          <div class="product-view">
+            <div class="row">
+              <div class="col-md-6 col-lg-6">
+                <div class="view-gallery">
+                  <div class="view-label-group">
+                    <label class="view-label new">new</label>
+                    <label class="view-label off">-10%</label>
+                  </div>
+                  <ul class="preview-slider slider-arrow">
+                    <li><img src="images/product/01.jpg" alt="product" /></li>
+                    <li><img src="images/product/01.jpg" alt="product" /></li>
+                    <li><img src="images/product/01.jpg" alt="product" /></li>
+                    <li><img src="images/product/01.jpg" alt="product" /></li>
+                  </ul>
+                  <ul class="thumb-slider">
+                    <li><img src="images/product/01.jpg" alt="product" /></li>
+                    <li><img src="images/product/01.jpg" alt="product" /></li>
+                    <li><img src="images/product/01.jpg" alt="product" /></li>
+                    <li><img src="images/product/01.jpg" alt="product" /></li>
+                    <li><img src="images/product/01.jpg" alt="product" /></li>
+                    <li><img src="images/product/01.jpg" alt="product" /></li>
+                  </ul>
                 </div>
+              </div>
+              <div class="col-md-6 col-lg-6">
+                <div class="view-details">
+                  <h3 class="view-name">
+                    <a href="product-video.html">existing product name</a>
+                  </h3>
+                  <div class="view-meta">
+                    <p>SKU:<span>1234567</span></p>
+                    <p>BRAND:<a href="#">radhuni</a></p>
+                  </div>
+                  <div class="view-rating">
+                    <i class="active icofont-star"></i>
+                    <i class="active icofont-star"></i>
+                    <i class="active icofont-star"></i>
+                    <i class="active icofont-star"></i>
+                    <i class="icofont-star"></i>
+                    <a href="product-video.html">(3 reviews)</a>
+                  </div>
+                  <h3 class="view-price">
+                    <del>₹38.00</del>
+                    <span>₹24.00<small>/per kilo</small></span>
+                  </h3>
+                  <p class="view-desc">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit non
+                    tempora magni repudiandae sint suscipit tempore quis maxime
+                    explicabo veniam eos reprehenderit fuga
+                  </p>
+                  <div class="view-list-group">
+                    <label class="view-list-title">tags:</label>
+                    <ul class="view-tag-list">
+                      <li><a href="#">organic</a></li>
+                      <li><a href="#">vegetable</a></li>
+                      <li><a href="#">chilis</a></li>
+                    </ul>
+                  </div>
+                  <div class="view-list-group">
+                    <label class="view-list-title">Share:</label>
+                    <ul class="view-share-list">
+                      <li>
+                        <a
+                          href="#"
+                          class="icofont-facebook"
+                          title="Facebook"
+                        ></a>
+                      </li>
+                      <li>
+                        <a href="#" class="icofont-twitter" title="Twitter"></a>
+                      </li>
+                      <li>
+                        <a
+                          href="#"
+                          class="icofont-linkedin"
+                          title="Linkedin"
+                        ></a>
+                      </li>
+                      <li>
+                        <a
+                          href="#"
+                          class="icofont-instagram"
+                          title="Instagram"
+                        ></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="view-add-group">
+                    <button class="product-add" title="Add to Cart">
+                      <i class="fas fa-shopping-basket"></i>
+                      <span>add to cart</span>
+                    </button>
+                    <div class="product-action">
+                      <button class="action-minus" title="Quantity Minus">
+                        <i class="icofont-minus"></i>
+                      </button>
+                      <input
+                        class="action-input"
+                        title="Quantity Number"
+                        type="text"
+                        name="quantity"
+                        value="1"
+                      />
+                      <button class="action-plus" title="Quantity Plus">
+                        <i class="icofont-plus"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="view-action-group">
+                    <a
+                      class="view-wish wish"
+                      href="#"
+                      title="Add Your Wishlist"
+                    >
+                      <i class="icofont-heart"></i>
+                      <span>add to wish</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
     <!--=====================================
                         PRODUCT VIEW END
             =======================================-->
 
-
     <!--=====================================
                     BANNER PART START
         =======================================-->
-    <section class="inner-section single-banner" style="background: url(images/single-banner.jpg) no-repeat center;">
-        <div class="container">
-            <h2>checkout</h2>
-        </div>
+    <section
+      class="inner-section single-banner"
+      style="background: url(images/single-banner.jpg) no-repeat center"
+    >
+      <div class="container">
+        <h2>checkout</h2>
+      </div>
     </section>
     <!--=====================================
                     BANNER PART END
         =======================================-->
 
-
     <!--=====================================
                     CHECKOUT PART START
         =======================================-->
     <section class="inner-section checkout-part">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="account-card">
-                        <div class="account-title">
-                            <h4>Your order</h4>
-                        </div>
-                        <div class="account-content">
-                            <div class="table-scroll">
-                                <table class="table-list">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Serial</th>
-                                            <th scope="col">Product</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Price</th>
-                                            <th scope="col">Quantity</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="cart-items">
-                                        <!-- Cart items will be injected here by JavaScript -->
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="account-card">
+              <div class="account-title">
+                <h4>Your order</h4>
+              </div>
+              <div class="account-content">
+                <div class="table-scroll">
+                  <table class="table-list">
+                    <thead>
+                      <tr>
+                        <th scope="col">Serial</th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="cart-items">
+                      <!-- Cart items will be injected here by JavaScript -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
 
-                        <!-- Move JavaScript below -->
-                        <script>
-                            document.addEventListener("DOMContentLoaded", function () {
-                                const userId = localStorage.getItem("userId"); // Fetch userId from localStorage
-                                loadCartItems(userId);
-                            });
+              <!-- Move JavaScript below -->
+              <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                  const userId = localStorage.getItem("userId"); // Fetch userId from localStorage
+                  loadCartItems(userId);
+                });
 
-                            async function loadCartItems(userId) {
-                                try {
-                                    const response = await fetch(`http://localhost:5000/api/cart/user/${userId}`);
-                                    if (!response.ok) throw new Error("Failed to fetch cart data");
+                async function loadCartItems(userId) {
+                  try {
+                    const response = await fetch(
+                      `http://localhost:5000/api/cart/user/${userId}`
+                    );
+                    if (!response.ok)
+                      throw new Error("Failed to fetch cart data");
 
-                                    const cartItems = await response.json();
-                                    renderCartItems(cartItems);
-                                } catch (error) {
-                                    console.error("❌ Error loading cart:", error);
-                                }
-                            }
+                    const cartItems = await response.json();
+                    renderCartItems(cartItems);
+                  } catch (error) {
+                    console.error("❌ Error loading cart:", error);
+                  }
+                }
 
-                            function renderCartItems(cartItems) {
-                                let cartTable = document.getElementById("cart-items");
-                                cartTable.innerHTML = ""; // Clear existing rows
+                function renderCartItems(cartItems) {
+                  let cartTable = document.getElementById("cart-items");
+                  cartTable.innerHTML = ""; // Clear existing rows
 
-                                if (!cartItems.length) {
-                                    cartTable.innerHTML = `<tr><td colspan="6"><h6 style="text-align:center;">No items in the cart</h6></td></tr>`;
-                                    return;
-                                }
+                  if (!cartItems.length) {
+                    cartTable.innerHTML = `<tr><td colspan="6"><h6 style="text-align:center;">No items in the cart</h6></td></tr>`;
+                    return;
+                  }
 
-                                cartItems.forEach((item, index) => {
-                                    let row = document.createElement("tr");
-                                    row.innerHTML = `
-                                        <td class="table-serial"><h6>${index + 1}</h6></td>
-                                        <td class="table-image"><img src="${item.image}" alt="product" style="width:50px; height:50px;"></td>
-                                        <td class="table-name"><h6>${item.name}</h6></td>
-                                        <td class="table-price"><h6>₹${item.price}<small>/kilo</small></h6></td>
-                                        <td class="table-quantity"><h6>${item.quantity}</h6></td>
+                  cartItems.forEach((item, index) => {
+                    let row = document.createElement("tr");
+                    row.innerHTML = `
+                                        <td class="table-serial"><h6>${
+                                          index + 1
+                                        }</h6></td>
+                                        <td class="table-image"><img src="${
+                                          item.image
+                                        }" alt="product" style="width:50px; height:50px;"></td>
+                                        <td class="table-name"><h6>${
+                                          item.name
+                                        }</h6></td>
+                                        <td class="table-price"><h6>₹${
+                                          item.price
+                                        }<small>/kilo</small></h6></td>
+                                        <td class="table-quantity"><h6>${
+                                          item.quantity
+                                        }</h6></td>
                                         <td class="table-action">
                                             <a class="view" href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#product-view">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a class="trash" href="#" title="Remove from Cart" data-id="${item.productId}">
+                                            <a class="trash" href="#" title="Remove from Cart" data-id="${
+                                              item.productId
+                                            }">
                                                 <i class="icofont-trash"></i>
                                             </a>
                                         </td>
                                     `;
-                                    cartTable.appendChild(row);
-                                });
+                    cartTable.appendChild(row);
+                  });
 
-                                // Attach event listeners for delete buttons
-                                document.querySelectorAll(".trash").forEach((button) => {
-                                    button.addEventListener("click", async function () {
-                                        let productId = this.getAttribute("data-id");
-                                        await removeFromCart(productId);
-                                    });
-                                });
-                            }
+                  // Attach event listeners for delete buttons
+                  document.querySelectorAll(".trash").forEach((button) => {
+                    button.addEventListener("click", async function () {
+                      let productId = this.getAttribute("data-id");
+                      await removeFromCart(productId);
+                    });
+                  });
+                }
 
-                            async function removeFromCart(productId) {
-                                try {
-                                    const userId = localStorage.getItem("userId"); // Fetch userId from localStorage
-                                    const response = await fetch(`http://localhost:5000/api/cart/remove/${userId}/${productId}`, {
-                                        method: "DELETE",
-                                    });
+                async function removeFromCart(productId) {
+                  try {
+                    const userId = localStorage.getItem("userId"); // Fetch userId from localStorage
+                    const response = await fetch(
+                      `http://localhost:5000/api/cart/remove/${userId}/${productId}`,
+                      {
+                        method: "DELETE",
+                      }
+                    );
 
-                                    if (!response.ok) throw new Error("Failed to remove item");
+                    if (!response.ok) throw new Error("Failed to remove item");
 
-                                    console.log("✅ Item removed successfully");
+                    console.log("✅ Item removed successfully");
 
-                                    // Reload the page to reflect the changes
-                                    location.reload();
-                                } catch (error) {
-                                    console.error("❌ Error removing item:", error);
-                                }
-                            }
-
-                        </script>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="account-card">
-                        <div class="account-title">
-                            <h4>Delivery Schedule</h4>
-                        </div>
-                        <div class="account-content">
-                            <div class="row">
-                                <div class="col-md-6 col-lg-4 alert fade show">
-                                    <div class="profile-card schedule active">
-                                        <h6>express</h6>
-                                        <p>90 min express delivery</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-4 alert fade show">
-                                    <div class="profile-card schedule">
-                                        <h6>8am-10pm</h6>
-                                        <p>8.00 AM - 10.00 PM</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-4 alert fade show">
-                                    <div class="profile-card schedule">
-                                        <h6>Next day</h6>
-                                        <p>Next day or Tomorrow</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="account-card">
-                        <div class="account-title">
-                            <h4>contact number</h4>
-                            <button data-bs-toggle="modal" data-bs-target="#contact-add">add contact</button>
-                        </div>
-                        <div class="account-content">
-                            <div class="row">
-                                <div class="col-md-6 col-lg-4 alert fade show">
-                                    <div class="profile-card contact active">
-                                        <h6>Primary</h6>
-                                        <p id="phone-number">Loading...</p> <!-- Will update dynamically -->
-                                        <ul>
-                                            <li>
-                                                <button class="edit icofont-edit" title="Edit This" data-bs-toggle="modal" data-bs-target="#contact-edit"></button>
-                                            </li>
-                                            <li>
-                                                <button class="trash icofont-ui-delete" title="Remove This" data-bs-dismiss="alert"></button>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <script>
-                            document.addEventListener("DOMContentLoaded", async function () {
-                                const phoneNumberElement = document.getElementById("phone-number");
-                                const userId = localStorage.getItem("userId"); // Get user ID from localStorage
-                        
-                                if (!userId) {
-                                    console.error("User ID not found in localStorage");
-                                    phoneNumberElement.innerText = "User Not Found";
-                                    return;
-                                }
-                        
-                                try {
-                                    const response = await fetch(`http://localhost:5000/api/users/${userId}`); // Adjust API endpoint as needed
-                                    
-                                    if (!response.ok) {
-                                        console.error("Failed to fetch user data:", response.statusText);
-                                        phoneNumberElement.innerText = "Error Loading Phone Number";
-                                        return;
-                                    }
-                        
-                                    const user = await response.json();
-                                    
-                                    if (user && user.phoneNumber) {
-                                        phoneNumberElement.innerText = user.phoneNumber; // Display phone number
-                                    } else {
-                                        phoneNumberElement.innerText = "Not Available";
-                                    }
-                                } catch (error) {
-                                    console.error("Error fetching user data:", error);
-                                    phoneNumberElement.innerText = "Error Fetching Data";
-                                }
-                            });
-                        </script>     
-                         
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="account-card">
-                        <div class="account-title">
-                            <h4>delivery address</h4>
-                            <button data-bs-toggle="modal" data-bs-target="#address-add">add address</button>
-                        </div>
-                        <div class="account-content">
-                            <div class="row">
-                                <div class="col-md-6 col-lg-4 alert fade show">
-                                    <div class="profile-card address active">
-                                        <h6>Home</h6>
-                                        <p>jalkuri, fatullah, narayanganj-1420. word no-09, road no-17/A</p>
-                                        <ul class="user-action">
-                                            <li><button class="edit icofont-edit" title="Edit This"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit"></button></li>
-                                            <li><button class="trash icofont-ui-delete" title="Remove This"
-                                                    data-bs-dismiss="alert"></button></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-4 alert fade show">
-                                    <div class="profile-card address">
-                                        <h6>Office</h6>
-                                        <p>east tejturi bazar, dhaka-1200. word no-04, road no-13/c, house no-4/b</p>
-                                        <ul class="user-action">
-                                            <li><button class="edit icofont-edit" title="Edit This"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit"></button></li>
-                                            <li><button class="trash icofont-ui-delete" title="Remove This"
-                                                    data-bs-dismiss="alert"></button></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-4 alert fade show">
-                                    <div class="profile-card address">
-                                        <h6>Bussiness</h6>
-                                        <p>kawran bazar, dhaka-1100. word no-02, road no-13/d, house no-7/m</p>
-                                        <ul class="user-action">
-                                            <li><button class="edit icofont-edit" title="Edit This"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit"></button></li>
-                                            <li><button class="trash icofont-ui-delete" title="Remove This"
-                                                    data-bs-dismiss="alert"></button></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="checkout-check">
-                                <input type="checkbox" id="checkout-check">
-                                <label for="checkout-check">By making this purchase you agree to our <a href="#">Terms
-                                        and
-                                        Conditions</a>.</label>
-                            </div>
-                            <div class="checkout-proced">
-                                <a class='btn btn-inline' href='invoice.html'>proced to checkout</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    // Reload the page to reflect the changes
+                    location.reload();
+                  } catch (error) {
+                    console.error("❌ Error removing item:", error);
+                  }
+                }
+              </script>
             </div>
+          </div>
+          <div class="col-lg-12">
+            <div class="account-card">
+              <div class="account-title">
+                <h4>Delivery Schedule</h4>
+              </div>
+              <div class="account-content">
+                <div class="row">
+                  <div class="col-md-6 col-lg-4 alert fade show">
+                    <div class="profile-card schedule active">
+                      <h6>express</h6>
+                      <p>90 min express delivery</p>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-lg-4 alert fade show">
+                    <div class="profile-card schedule">
+                      <h6>8am-10pm</h6>
+                      <p>8.00 AM - 10.00 PM</p>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-lg-4 alert fade show">
+                    <div class="profile-card schedule">
+                      <h6>Next day</h6>
+                      <p>Next day or Tomorrow</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <div class="account-card">
+              <div class="account-title">
+                <h4>contact number</h4>
+                <button data-bs-toggle="modal" data-bs-target="#contact-add">
+                  add contact
+                </button>
+              </div>
+              <div class="account-content">
+                <div class="row">
+                  <div class="col-md-6 col-lg-4 alert fade show">
+                    <div class="profile-card contact active">
+                      <h6>Primary</h6>
+                      <p id="phone-number">Loading...</p>
+                      <!-- Will update dynamically -->
+                      <ul>
+                        <li>
+                          <button
+                            class="edit icofont-edit"
+                            title="Edit This"
+                            data-bs-toggle="modal"
+                            data-bs-target="#contact-edit"
+                          ></button>
+                        </li>
+                        <li>
+                          <button
+                            class="trash icofont-ui-delete"
+                            title="Remove This"
+                            data-bs-dismiss="alert"
+                          ></button>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="profile-card contact active">
+                      <h6>Secondary</h6>
+                      <p id="phone-number-second">Loading...</p>
+                      <!-- Will update dynamically -->
+                      <ul>
+                        <li>
+                          <button
+                            class="edit icofont-edit"
+                            title="Edit This"
+                            data-bs-toggle="modal"
+                            data-bs-target="#contact-edit2"
+                          ></button>
+                        </li>
+                        <li>
+                          <button
+                            class="trash icofont-ui-delete"
+                            title="Remove This"
+                            data-bs-dismiss="alert"
+                          ></button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <script>
+                document.addEventListener(
+                  "DOMContentLoaded",
+                  async function () {
+                    const phoneNumberElement =
+                      document.getElementById("phone-number");
+                    const phoneNumberSecondElement = document.getElementById(
+                      "phone-number-second"
+                    );
+                    const editFirstElement =
+                      document.getElementById("update-first");
+                    const editSecondElement =
+                      document.getElementById("update-second");
+                    const userId = localStorage.getItem("userId"); // Get user ID from localStorage
+
+                    if (!userId) {
+                      console.error("User ID not found in localStorage");
+                      phoneNumberElement.innerText = "User Not Found";
+                      return;
+                    }
+
+                    try {
+                      const response = await fetch(
+                        `http://localhost:5000/api/users/${userId}`
+                      ); // Adjust API endpoint as needed
+
+                      if (!response.ok) {
+                        console.error(
+                          "Failed to fetch user data:",
+                          response.statusText
+                        );
+                        phoneNumberElement.innerText =
+                          "Error Loading Phone Number";
+                        phoneNumberSecondElement.innerText =
+                          "Error Loading Phone Number";
+                        return;
+                      }
+
+                      const user = await response.json();
+
+                      if (user && user.phoneNumber) {
+                        phoneNumberElement.innerText = user.phoneNumber; // Display phone number
+                        editFirstElement.value = user.phoneNumber; // Display phone number
+                      } else {
+                        phoneNumberElement.innerText = "Not Available";
+                      }
+
+                      if (user && user.phoneNumberSecond) {
+                        phoneNumberSecondElement.innerText =
+                          user.phoneNumberSecond; // Display phone number
+                        editSecondElement.value = user.phoneNumberSecond; // Display phone number
+                      } else {
+                        phoneNumberSecondElement.innerText = "Not Available";
+                      }
+                    } catch (error) {
+                      console.error("Error fetching user data:", error);
+                      phoneNumberElement.innerText = "Error Fetching Data";
+                      phoneNumberSecondElement.innerText =
+                        "Error Fetching Data";
+                    }
+                  }
+                );
+              </script>
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <div class="account-card">
+              <div class="account-title">
+                <h4>delivery address</h4>
+                <button data-bs-toggle="modal" data-bs-target="#address-add">
+                  add address
+                </button>
+              </div>
+              <div class="account-content">
+                <div class="row">
+                  <div class="col-md-6 col-lg-4 alert fade show">
+                    <div class="profile-card address active">
+                      <h6>Home</h6>
+                      <p id="first-address">Loading...</p>
+                      <ul class="user-action">
+                        <li>
+                          <button
+                            class="edit icofont-edit"
+                            title="Edit This"
+                            data-bs-toggle="modal"
+                            data-bs-target="#address-edit"
+                          ></button>
+                        </li>
+                        <li>
+                          <button
+                            class="trash icofont-ui-delete"
+                            title="Remove This"
+                            data-bs-dismiss="alert"
+                          ></button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-lg-4 alert fade show">
+                    <div class="profile-card address">
+                      <h6>Office</h6>
+                      <p id="second-address">Loading...</p>
+                      <ul class="user-action">
+                        <li>
+                          <button
+                            class="edit icofont-edit"
+                            title="Edit This"
+                            data-bs-toggle="modal"
+                            data-bs-target="#address-edit2"
+                          ></button>
+                        </li>
+                        <li>
+                          <button
+                            class="trash icofont-ui-delete"
+                            title="Remove This"
+                            data-bs-dismiss="alert"
+                          ></button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- <div class="col-md-6 col-lg-4 alert fade show">
+                    <div class="profile-card address">
+                      <h6>Bussiness</h6>
+                      <p>
+                        kawran bazar, dhaka-1100. word no-02, road no-13/d,
+                        house no-7/m
+                      </p>
+                      <ul class="user-action">
+                        <li>
+                          <button
+                            class="edit icofont-edit"
+                            title="Edit This"
+                            data-bs-toggle="modal"
+                            data-bs-target="#address-edit"
+                          ></button>
+                        </li>
+                        <li>
+                          <button
+                            class="trash icofont-ui-delete"
+                            title="Remove This"
+                            data-bs-dismiss="alert"
+                          ></button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div> -->
+                </div>
+                <div class="checkout-check">
+                  <input type="checkbox" id="checkout-check" />
+                  <label for="checkout-check"
+                    >By making this purchase you agree to our
+                    <a href="#">Terms and Conditions</a>.</label
+                  >
+                </div>
+                <div class="checkout-proced">
+                  <a class="btn btn-inline" href="invoice.html"
+                    >proced to checkout</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <script>
+          document.addEventListener("DOMContentLoaded", async function () {
+            const addressFirstElement =
+              document.getElementById("first-address");
+            const addressSecondElement =
+              document.getElementById("second-address");
+            const editFirstElement = document.getElementById("update-address");
+            // const editSecondElement =
+            //   document.getElementById("update-second");
+            const userId = localStorage.getItem("userId"); // Get user ID from localStorage
+
+            if (!userId) {
+              console.error("User ID not found in localStorage");
+              addressFirstElement.innerText = "User Not Found";
+              return;
+            }
+
+            try {
+              const response = await fetch(
+                `http://localhost:5000/api/users/${userId}`
+              ); // Adjust API endpoint as needed
+
+              if (!response.ok) {
+                console.error(
+                  "Failed to fetch user data:",
+                  response.statusText
+                );
+                addressFirstElement.innerText = "Error Loading Phone Number";
+                addressSecondElement.innerText = "Error Loading Phone Number";
+                return;
+              }
+
+              const user = await response.json();
+
+              if (user && user.address) {
+                addressFirstElement.innerText = user.address; // Display phone number
+                editFirstElement.value = user.address; // Display phone number
+              } else {
+                addressFirstElement.innerText = "Not Available";
+              }
+
+              if (user && user.addressSecond) {
+                addressSecondElement.innerText = user.addressSecond; // Display phone number
+                // editSecondElement.value = user.addressSecond; // Display phone number
+              } else {
+                addressSecondElement.innerText = "Not Available";
+              }
+            } catch (error) {
+              console.error("Error fetching user data:", error);
+              addressFirstElement.innerText = "Error Fetching Data";
+              addressSecondElement.innerText = "Error Fetching Data";
+            }
+          });
+        </script>
+      </div>
     </section>
     <!-- <div class="col-lg-12">
                     <div class="account-card mb-0">
@@ -489,236 +705,547 @@
                     CHECKOUT PART END
         =======================================-->
 
-
     <!--=====================================
                     MODAL ADD FORM START
         =======================================-->
     <!-- contact add form -->
     <div class="modal fade" id="contact-add">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <button class="modal-close" data-bs-dismiss="modal"><i class="icofont-close"></i></button>
-                <form class="modal-form">
-                    <div class="form-title">
-                        <h3>add new contact</h3>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">title</label>
-                        <select class="form-select">
-                            <option selected="">choose title</option>
-                            <option value="primary">primary</option>
-                            <option value="secondary">secondary</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">number</label>
-                        <input class="form-control" type="text" placeholder="Enter your number">
-                    </div>
-                    <button class="form-btn" type="submit">save contact info</button>
-                </form>
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <button class="modal-close" data-bs-dismiss="modal">
+            <i class="icofont-close"></i>
+          </button>
+          <form class="modal-form">
+            <div class="form-title">
+              <h3>add new contact</h3>
             </div>
+            <div class="form-group">
+              <label class="form-label">title</label>
+              <select class="form-select">
+                <option selected="">choose title</option>
+                <option value="primary">primary</option>
+                <option value="secondary">secondary</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">number</label>
+              <input
+                class="form-control"
+                type="text"
+                placeholder="Enter your number"
+              />
+            </div>
+            <button class="form-btn" type="submit">save contact info</button>
+          </form>
         </div>
+      </div>
     </div>
 
     <!-- address add form -->
     <div class="modal fade" id="address-add">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <button class="modal-close" data-bs-dismiss="modal"><i class="icofont-close"></i></button>
-                <form class="modal-form">
-                    <div class="form-title">
-                        <h3>add new address</h3>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">title</label>
-                        <select class="form-select">
-                            <option selected="">choose title</option>
-                            <option value="home">home</option>
-                            <option value="office">office</option>
-                            <option value="Bussiness">Bussiness</option>
-                            <option value="academy">academy</option>
-                            <option value="others">others</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">address</label>
-                        <textarea class="form-control" placeholder="Enter your address"></textarea>
-                    </div>
-                    <button class="form-btn" type="submit">save address info</button>
-                </form>
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <button class="modal-close" data-bs-dismiss="modal">
+            <i class="icofont-close"></i>
+          </button>
+          <form class="modal-form">
+            <div class="form-title">
+              <h3>add new address</h3>
             </div>
+            <div class="form-group">
+              <label class="form-label">title</label>
+              <select class="form-select">
+                <option selected="">choose title</option>
+                <option value="home">home</option>
+                <option value="office">office</option>
+                <option value="Bussiness">Bussiness</option>
+                <option value="academy">academy</option>
+                <option value="others">others</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">address</label>
+              <textarea
+                class="form-control"
+                placeholder="Enter your address"
+              ></textarea>
+            </div>
+            <button class="form-btn" type="submit">save address info</button>
+          </form>
         </div>
+      </div>
     </div>
 
     <!-- payment add form -->
     <div class="modal fade" id="payment-add">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <button class="modal-close" data-bs-dismiss="modal"><i class="icofont-close"></i></button>
-                <form class="modal-form">
-                    <div class="form-title">
-                        <h3>add new payment</h3>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">card number</label>
-                        <input class="form-control" type="text" placeholder="Enter your card number">
-                    </div>
-                    <button class="form-btn" type="submit">save card info</button>
-                </form>
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <button class="modal-close" data-bs-dismiss="modal">
+            <i class="icofont-close"></i>
+          </button>
+          <form class="modal-form">
+            <div class="form-title">
+              <h3>add new payment</h3>
             </div>
+            <div class="form-group">
+              <label class="form-label">card number</label>
+              <input
+                class="form-control"
+                type="text"
+                placeholder="Enter your card number"
+              />
+            </div>
+            <button class="form-btn" type="submit">save card info</button>
+          </form>
         </div>
+      </div>
     </div>
     <!--=====================================
                     MODAL ADD FORM END
         =======================================-->
-
 
     <!--=====================================
                     MODAL EDIT FORM START
         =======================================-->
     <!-- contact edit form -->
     <div class="modal fade" id="contact-edit">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <button class="modal-close" data-bs-dismiss="modal"><i class="icofont-close"></i></button>
-                <form class="modal-form">
-                    <div class="form-title">
-                        <h3>edit contact info</h3>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">title</label>
-                        <select class="form-select">
-                            <option value="primary" selected="">primary</option>
-                            <option value="secondary">secondary</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">number</label>
-                        <input class="form-control" type="text" value="+8801838288389">
-                    </div>
-                    <button class="form-btn" type="submit">save contact info</button>
-                </form>
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <button class="modal-close" data-bs-dismiss="modal">
+            <i class="icofont-close"></i>
+          </button>
+          <form class="modal-form">
+            <div class="form-title">
+              <h3>edit contact info</h3>
             </div>
+            <!-- <div class="form-group">
+              <label class="form-label">title</label>
+              <select class="form-select">
+                <option value="primary" selected="">primary</option>
+                <option value="secondary">secondary</option>
+              </select>
+            </div> -->
+            <div class="form-group">
+              <label class="form-label">number</label>
+              <input
+                class="form-control"
+                id="update-first"
+                type="text"
+                value="+8801838288389"
+              />
+            </div>
+            <button class="form-btn" id="edit-primary">
+              save contact info
+            </button>
+          </form>
         </div>
+      </div>
+
+      <script>
+        document
+          .getElementById("edit-primary")
+          .addEventListener("click", async function (event) {
+            event.preventDefault(); // Prevents form from reloading the page
+
+            const userId = localStorage.getItem("userId");
+            if (!userId) {
+              alert("User ID not found. Please log in again.");
+              return;
+            }
+
+            const newNumber = document
+              .getElementById("update-first")
+              .value.trim();
+
+            if (!/^\d{10}$/.test(newNumber)) {
+              alert("Invalid phone number. Must be 10 digits.");
+              return;
+            }
+
+            try {
+              const response = await fetch(
+                "http://localhost:5000/api/users/update",
+                {
+                  method: "PUT",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    userId,
+                    phoneNumber: newNumber, // Corrected variable name
+                  }),
+                }
+              );
+
+              const data = await response.json();
+              console.log("Response from API:", data);
+
+              if (response.ok) {
+                document.getElementById("phone-number").innerText =
+                  data.user.phoneNumber || "Not Available";
+
+                // **Close the modal after successful update**
+                const modalElement = document.getElementById("contact-edit");
+                const modalInstance = bootstrap.Modal.getInstance(modalElement);
+                modalInstance.hide(); // Hides the modal
+              } else {
+                alert(data.message || "Failed to update contact.");
+              }
+            } catch (error) {
+              console.error("❌ Error updating contact:", error);
+              alert("Something went wrong. Please try again.");
+            }
+          });
+      </script>
+    </div>
+
+    <div class="modal fade" id="contact-edit2">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <button class="modal-close" data-bs-dismiss="modal">
+            <i class="icofont-close"></i>
+          </button>
+          <form class="modal-form">
+            <div class="form-title">
+              <h3>edit contact info</h3>
+            </div>
+            <!-- <div class="form-group">
+              <label class="form-label">title</label>
+              <select class="form-select">
+                <option value="primary" selected="">primary</option>
+                <option value="secondary">secondary</option>
+              </select>
+            </div> -->
+            <div class="form-group">
+              <label class="form-label">number</label>
+              <input
+                class="form-control"
+                id="update-second"
+                type="text"
+                value="+8801838288389"
+              />
+            </div>
+            <button class="form-btn" id="edit-secondary">
+              save contact info
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <script>
+        document
+          .getElementById("edit-secondary")
+          .addEventListener("click", async function (event) {
+            event.preventDefault(); // Prevents form from reloading the page
+
+            const userId = localStorage.getItem("userId");
+            if (!userId) {
+              alert("User ID not found. Please log in again.");
+              return;
+            }
+
+            const newNumber = document
+              .getElementById("update-second")
+              .value.trim();
+
+            if (!/^\d{10}$/.test(newNumber)) {
+              alert("Invalid phone number. Must be 10 digits.");
+              return;
+            }
+
+            try {
+              const response = await fetch(
+                "http://localhost:5000/api/users/update",
+                {
+                  method: "PUT",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    userId,
+                    phoneNumberSecond: newNumber, // Corrected variable name
+                  }),
+                }
+              );
+
+              const data = await response.json();
+              console.log("Response from API:", data);
+
+              if (response.ok) {
+                document.getElementById("phone-number-second").innerText =
+                  data.user.phoneNumber || "Not Available";
+
+                // **Close the modal after successful update**
+                const modalElement = document.getElementById("contact-edit2");
+                const modalInstance = bootstrap.Modal.getInstance(modalElement);
+                modalInstance.hide(); // Hides the modal
+              } else {
+                alert(data.message || "Failed to update contact.");
+              }
+            } catch (error) {
+              console.error("❌ Error updating contact:", error);
+              alert("Something went wrong. Please try again.");
+            }
+          });
+      </script>
     </div>
 
     <!-- address edit form -->
     <div class="modal fade" id="address-edit">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <button class="modal-close" data-bs-dismiss="modal"><i class="icofont-close"></i></button>
-                <form class="modal-form">
-                    <div class="form-title">
-                        <h3>edit address info</h3>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">title</label>
-                        <select class="form-select">
-                            <option value="home" selected="">home</option>
-                            <option value="office">office</option>
-                            <option value="Bussiness">Bussiness</option>
-                            <option value="academy">academy</option>
-                            <option value="others">others</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">address</label>
-                        <textarea class="form-control"
-                            placeholder="jalkuri, fatullah, narayanganj-1420. word no-09, road no-17/A"></textarea>
-                    </div>
-                    <button class="form-btn" type="submit">save address info</button>
-                </form>
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <button class="modal-close" data-bs-dismiss="modal">
+            <i class="icofont-close"></i>
+          </button>
+          <form class="modal-form">
+            <div class="form-title">
+              <h3>edit address info</h3>
             </div>
+            <!-- <div class="form-group"> -->
+            <!-- <label class="form-label">title</label> -->
+            <!-- <select class="form-select">
+                <option value="home" selected="">home</option>
+                <option value="office">office</option>
+                <option value="Bussiness">Bussiness</option>
+                <option value="academy">academy</option>
+                <option value="others">others</option>
+              </select> -->
+            <!-- </div> -->
+            <div class="form-group">
+              <label class="form-label">address</label>
+              <textarea
+                class="form-control"
+                id="update-address"
+                placeholder="jalkuri, fatullah, narayanganj-1420. word no-09, road no-17/A"
+              ></textarea>
+            </div>
+            <button class="form-btn" id="edit-address">
+              save address info
+            </button>
+          </form>
         </div>
+      </div>
+      <script>
+        document
+          .getElementById("edit-address")
+          .addEventListener("click", async function (event) {
+            event.preventDefault(); // Prevents form from reloading the page
+
+            const userId = localStorage.getItem("userId");
+            if (!userId) {
+              alert("User ID not found. Please log in again.");
+              return;
+            }
+
+            const newAddress = document
+              .getElementById("update-address")
+              .value.trim();
+
+            try {
+              const response = await fetch(
+                "http://localhost:5000/api/users/update",
+                {
+                  method: "PUT",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    userId,
+                    address: newAddress, // Corrected variable name
+                  }),
+                }
+              );
+
+              const data = await response.json();
+              console.log("Response from API:", data);
+
+              if (response.ok) {
+                document.getElementById("first-address").innerText =
+                  data.user.address || "Not Available";
+
+                // **Close the modal after successful update**
+                const modalElement = document.getElementById("address-edit");
+                const modalInstance = bootstrap.Modal.getInstance(modalElement);
+                modalInstance.hide(); // Hides the modal
+              } else {
+                alert(data.message || "Failed to update address.");
+              }
+            } catch (error) {
+              console.error("❌ Error updating address:", error);
+              alert("Something went wrong. Please try again.");
+            }
+          });
+      </script>
+    </div>
+
+    <div class="modal fade" id="address-edit2">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <button class="modal-close" data-bs-dismiss="modal">
+            <i class="icofont-close"></i>
+          </button>
+          <form class="modal-form">
+            <div class="form-title">
+              <h3>edit address info</h3>
+            </div>
+            <!-- <div class="form-group"> -->
+            <!-- <label class="form-label">title</label> -->
+            <!-- <select class="form-select">
+                <option value="home" selected="">home</option>
+                <option value="office">office</option>
+                <option value="Bussiness">Bussiness</option>
+                <option value="academy">academy</option>
+                <option value="others">others</option>
+              </select> -->
+            <!-- </div> -->
+            <div class="form-group">
+              <label class="form-label">address</label>
+              <textarea
+                class="form-control"
+                id="update-address2"
+                placeholder="jalkuri, fatullah, narayanganj-1420. word no-09, road no-17/A"
+              ></textarea>
+            </div>
+            <button class="form-btn" id="edit-address2">
+              save address info
+            </button>
+          </form>
+        </div>
+      </div>
+      <script>
+        document
+          .getElementById("edit-address2")
+          .addEventListener("click", async function (event) {
+            event.preventDefault(); // Prevents form from reloading the page
+
+            const userId = localStorage.getItem("userId");
+            if (!userId) {
+              alert("User ID not found. Please log in again.");
+              return;
+            }
+
+            const newAddress = document
+              .getElementById("update-address2")
+              .value.trim();
+
+            try {
+              const response = await fetch(
+                "http://localhost:5000/api/users/update",
+                {
+                  method: "PUT",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    userId,
+                    address: newAddress, // Corrected variable name
+                  }),
+                }
+              );
+
+              const data = await response.json();
+              console.log("Response from API:", data);
+
+              if (response.ok) {
+                document.getElementById("second-address").innerText =
+                  data.user.address || "Not Available";
+
+                // **Close the modal after successful update**
+                const modalElement = document.getElementById("address-edit2");
+                const modalInstance = bootstrap.Modal.getInstance(modalElement);
+                modalInstance.hide(); // Hides the modal
+              } else {
+                alert(data.message || "Failed to update address.");
+              }
+            } catch (error) {
+              console.error("❌ Error updating address:", error);
+              alert("Something went wrong. Please try again.");
+            }
+          });
+      </script>
     </div>
     <!--=====================================
                     MODAL EDIT FORM END
         =======================================-->
 
-
     <!--=====================================
                     NEWSLETTER PART START
         =======================================-->
-    <section class="news-part" style="background: url(images/newsletter.jpg) no-repeat center;">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-5 col-lg-6 col-xl-7">
-                    <div class="news-text">
-                        <h2>Get 20% Discount for Subscriber</h2>
-                        <p>Lorem ipsum dolor consectetur adipisicing accusantium</p>
-                    </div>
-                </div>
-                <div class="col-md-7 col-lg-6 col-xl-5">
-                    <form class="news-form">
-                        <input type="text" placeholder="Enter Your Email Address">
-                        <button><span><i class="icofont-ui-email"></i>Subscribe</span></button>
-                    </form>
-                </div>
+    <section
+      class="news-part"
+      style="background: url(images/newsletter.jpg) no-repeat center"
+    >
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-5 col-lg-6 col-xl-7">
+            <div class="news-text">
+              <h2>Get 20% Discount for Subscriber</h2>
+              <p>Lorem ipsum dolor consectetur adipisicing accusantium</p>
             </div>
+          </div>
+          <div class="col-md-7 col-lg-6 col-xl-5">
+            <form class="news-form">
+              <input type="text" placeholder="Enter Your Email Address" />
+              <button>
+                <span><i class="icofont-ui-email"></i>Subscribe</span>
+              </button>
+            </form>
+          </div>
         </div>
+      </div>
     </section>
     <!--=====================================
                     NEWSLETTER PART END
         =======================================-->
 
-
     <!--=====================================
                     INTRO PART START
         =======================================-->
     <section class="intro-part">
-        <div class="container">
-            <div class="row intro-content">
-                <div class="col-sm-6 col-lg-3">
-                    <div class="intro-wrap">
-                        <div class="intro-icon">
-                            <i class="fas fa-truck"></i>
-                        </div>
-                        <div class="intro-content">
-                            <h5>free home delivery</h5>
-                            <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="intro-wrap">
-                        <div class="intro-icon">
-                            <i class="fas fa-sync-alt"></i>
-                        </div>
-                        <div class="intro-content">
-                            <h5>instant return policy</h5>
-                            <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="intro-wrap">
-                        <div class="intro-icon">
-                            <i class="fas fa-headset"></i>
-                        </div>
-                        <div class="intro-content">
-                            <h5>quick support system</h5>
-                            <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="intro-wrap">
-                        <div class="intro-icon">
-                            <i class="fas fa-lock"></i>
-                        </div>
-                        <div class="intro-content">
-                            <h5>secure payment way</h5>
-                            <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
-                        </div>
-                    </div>
-                </div>
+      <div class="container">
+        <div class="row intro-content">
+          <div class="col-sm-6 col-lg-3">
+            <div class="intro-wrap">
+              <div class="intro-icon">
+                <i class="fas fa-truck"></i>
+              </div>
+              <div class="intro-content">
+                <h5>free home delivery</h5>
+                <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
+              </div>
             </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="intro-wrap">
+              <div class="intro-icon">
+                <i class="fas fa-sync-alt"></i>
+              </div>
+              <div class="intro-content">
+                <h5>instant return policy</h5>
+                <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="intro-wrap">
+              <div class="intro-icon">
+                <i class="fas fa-headset"></i>
+              </div>
+              <div class="intro-content">
+                <h5>quick support system</h5>
+                <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="intro-wrap">
+              <div class="intro-icon">
+                <i class="fas fa-lock"></i>
+              </div>
+              <div class="intro-content">
+                <h5>secure payment way</h5>
+                <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
     <!--=====================================
                     INTRO PART END
         =======================================-->
-
 
     <!--=====================================
                      FOOTER PART START
@@ -726,13 +1253,12 @@
     <div id="footer"></div>
 
     <script type="module">
-        import { loadFooter } from './footer.js';
-        document.getElementById('footer').innerHTML = loadFooter();
+      import { loadFooter } from "./footer.js";
+      document.getElementById("footer").innerHTML = loadFooter();
     </script>
     <!--=====================================
                       FOOTER PART END
         =======================================-->
-
 
     <!--=====================================
                     JS LINK PART START
@@ -756,6 +1282,5 @@
     <!--=====================================
                     JS LINK PART END
         =======================================-->
-</body>
-
+  </body>
 </html>

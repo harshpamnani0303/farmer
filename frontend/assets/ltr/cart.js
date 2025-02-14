@@ -181,8 +181,6 @@ export function loadCartSidebar(userId) {
     console.log("Cart Items Before Update:", cartItems);
   }
 
-  // Fixed Quantity issue
-
   function addEventListeners() {
     document.querySelectorAll(".cart-delete").forEach((button) => {
       button.addEventListener("click", function () {
