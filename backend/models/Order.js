@@ -59,27 +59,20 @@ const orderSchema = new mongoose.Schema({
 // Auto-increment orderNumber before saving
 orderSchema.pre("save", async function (next) {
   if (!this.orderNumber) {
-    // Only set orderNumber if it's a new order
     try {
-      const session = await mongoose.startSession();
-      session.startTransaction();
-
       let counter = await Counter.findOneAndUpdate(
         { name: "orderNumber" },
         { $inc: { value: 1 } },
-        { new: true, upsert: true, session }
+        { new: true, upsert: true }
       );
 
       // Ensure first order starts at 1001
       if (counter.value === 1) {
         counter.value = 1001;
-        await counter.save({ session });
+        await counter.save();
       }
 
       this.orderNumber = counter.value;
-
-      await session.commitTransaction();
-      session.endSession();
     } catch (error) {
       return next(error);
     }

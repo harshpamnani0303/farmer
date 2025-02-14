@@ -470,6 +470,10 @@
               <strong>Contact Number:</strong>
               <span id="invoiceContactNumber">Loading...</span>
             </p>
+
+            <h3>Cart Items</h3>
+            <ul id="invoiceCartItems"></ul>
+
             <button id="downloadInvoice" class="btn btn-inline">
               Download Invoice
             </button>
@@ -526,7 +530,7 @@
 
                 const cartItems = await cartResponse.json();
 
-                if (cartItems.length === 0) {
+                if (!cartItems || cartItems.length === 0) {
                   alert("Your cart is empty!");
                   return;
                 }
@@ -553,6 +557,7 @@
                 };
 
                 console.log("pass first");
+
                 // Send order data to backend
                 const orderResponse = await fetch(
                   "http://localhost:5000/api/orders",
@@ -562,6 +567,7 @@
                     body: JSON.stringify(orderData),
                   }
                 );
+
                 console.log("pass second");
 
                 if (!orderResponse.ok) throw new Error("Failed to place order");
@@ -582,6 +588,18 @@
                 document.getElementById("invoiceContactNumber").innerText =
                   checkoutData.phoneNumber;
 
+                // Populate cart items in invoice modal
+                let cartItemsHTML = "";
+                cartItems.forEach((item, index) => {
+                  cartItemsHTML += `
+        <li>${index + 1}. ${item.name} - Quantity: ${item.quantity} | Price: $${
+                    item.price
+                  } | Total: $${(item.price * item.quantity).toFixed(2)}</li>
+      `;
+                });
+                document.getElementById("invoiceCartItems").innerHTML =
+                  cartItemsHTML;
+
                 // Show invoice modal
                 document.getElementById("invoiceModal").style.display = "flex";
               } catch (error) {
@@ -595,26 +613,31 @@
             .getElementById("closeModal")
             .addEventListener("click", function () {
               document.getElementById("invoiceModal").style.display = "none";
+              window.location.href = "index.html";
             });
 
           // Download Invoice
           document
             .getElementById("downloadInvoice")
             .addEventListener("click", function () {
-              const invoiceContent = `
-      Order Number: ${document.getElementById("invoiceOrderNumber").innerText}
-      Total Items: ${document.getElementById("invoiceTotalItems").innerText}
-      Total Amount: $${document.getElementById("invoiceTotalAmount").innerText}
-      Delivery Schedule: ${
-        document.getElementById("invoiceDeliverySchedule").innerText
-      }
-      Delivery Address: ${
-        document.getElementById("invoiceDeliveryAddress").innerText
-      }
-      Contact Number: ${
-        document.getElementById("invoiceContactNumber").innerText
-      }
-    `;
+              let invoiceContent = `
+Order Number: ${document.getElementById("invoiceOrderNumber").innerText}
+Total Items: ${document.getElementById("invoiceTotalItems").innerText}
+Total Amount: $${document.getElementById("invoiceTotalAmount").innerText}
+Delivery Schedule: ${
+                document.getElementById("invoiceDeliverySchedule").innerText
+              }
+Delivery Address: ${document.getElementById("invoiceDeliveryAddress").innerText}
+Contact Number: ${document.getElementById("invoiceContactNumber").innerText}
+
+Cart Items:
+  `;
+
+              document
+                .querySelectorAll("#invoiceCartItems li")
+                .forEach((item) => {
+                  invoiceContent += `\n- ${item.innerText}`;
+                });
 
               const blob = new Blob([invoiceContent], { type: "text/plain" });
               const link = document.createElement("a");
@@ -623,6 +646,7 @@
               document.body.appendChild(link);
               link.click();
               document.body.removeChild(link);
+              window.location.href = "index.html";
             });
         </script>
       </div>
