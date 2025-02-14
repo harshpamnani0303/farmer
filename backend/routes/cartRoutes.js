@@ -43,37 +43,45 @@ router.get("/user/:userId", async (req, res) => {
 
 
 
-// ❌ Remove the old "/product/:productId" route (it's not needed)
-
 // ✅ Update cart item quantity (FIXED)
-router.put("/cart/update", async (req, res) => {
+router.put("/update", async (req, res) => {  
     try {
+        console.log("📥 Incoming Request:", req.body); // ✅ Debug request data
+
         const { userId, productId, quantity } = req.body;
 
-        console.log("🔹 Received Cart Update Request:", { userId, productId, quantity });
+        if (!userId || !productId || quantity == null) {
+            console.error("❌ Error: Missing required fields", { userId, productId, quantity });
+            return res.status(400).json({ message: "Missing required fields" });
+        }
 
         if (quantity < 1) {
             return res.status(400).json({ message: "Quantity must be at least 1" });
         }
 
         const updatedCart = await Cart.findOneAndUpdate(
-            { userId, "items.productId": productId },
-            { $set: { "items.$.quantity": quantity } },
+            { userId, productId },
+            { $inc: { quantity: quantity } }, // Increment quantity by given value
             { new: true }
-        );
+        ).populate("productId");
+        
+console.log(updatedCart);
+
 
         if (!updatedCart) {
-            console.log("❌ Cart item not found!");
+            console.error("❌ Cart item not found!");
             return res.status(404).json({ message: "Cart item not found" });
         }
 
         console.log("✅ Cart Updated Successfully:", updatedCart);
-        res.json(updatedCart);
+        res.json({ items: updatedCart.items });
+
     } catch (error) {
         console.error("❌ Error updating cart:", error);
         res.status(500).json({ message: "Internal server error" });
     }
 });
+
 
 
 

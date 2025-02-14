@@ -1,55 +1,65 @@
 export function loadCartSidebar(userId) {
-    let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    let cartItems = [];
 
-    async function fetchCart(userId) {
+    async function fetchCart() {
         try {
-            console.log(`Fetching cart for user: ${userId}`);
+            console.log(`🛒 Fetching cart for user: ${userId}`);
 
             const response = await fetch(`http://localhost:5000/api/cart/user/${userId}`);
             if (!response.ok) throw new Error("Failed to fetch cart data");
 
-            cartItems = await response.json();
+            cartItems = await response.json() || [];  // Ensure cartItems is an array
             console.log("✅ Cart data:", cartItems);
 
-            localStorage.setItem("cartItems", JSON.stringify(cartItems)); // 🔥 Backend ka data save karo
+            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
             updateCartUI();
             updateCartHeader();
+
+            addEventListeners();  // Attach event listeners only after cart data is ready
         } catch (error) {
             console.error("❌ Error fetching cart:", error);
         }
     }
 
-    async function updateCart(userId, productId, quantity) {
+
+    async function updateQuantity(productId, newQuantity) {
         try {
+            console.log(`🔹 Updating ProductID: ${productId}, New Quantity: ${newQuantity}`);
+
             const response = await fetch("http://localhost:5000/api/cart/update", {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ userId, productId, quantity }),
+                body: JSON.stringify({ userId, productId, quantity: newQuantity }),
             });
 
-            if (!response.ok) throw new Error("Failed to update cart");
+            if (!response.ok) throw new Error("Failed to update quantity");
 
             const updatedCart = await response.json();
-            console.log("✅ Updated Cart:", updatedCart);
+            console.log("✅ Updated Cart from API:", updatedCart);
 
-            localStorage.setItem("cartItems", JSON.stringify(updatedCart)); // ✅ Updated data save karo
+            cartItems = updatedCart.items;
+            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
             updateCartUI();
             updateCartHeader();
-
         } catch (error) {
-            console.error("❌ Error updating cart:", error);
+            console.error("❌ Error updating quantity:", error);
+            fetchCart(); // Reload the cart if update fails
         }
     }
 
-    async function removeItem(userId, productId) {
+    async function removeItem(productId) {
         try {
+            console.log(`🗑️ Removing ProductID: ${productId}`);
+
             const response = await fetch(`http://localhost:5000/api/cart/remove/${userId}/${productId}`, {
                 method: "DELETE",
             });
 
             if (!response.ok) throw new Error("Failed to remove item");
 
-            await fetchCart(userId); // ✅ Remove ke baad backend se latest cart lo
+            await fetchCart(); // Reload cart after item removal
         } catch (error) {
             console.error("❌ Error removing item:", error);
         }
@@ -80,7 +90,7 @@ export function loadCartSidebar(userId) {
                         <div class="cart-action-group">
                             <div class="product-action">
                                 <button class="action-minus"><i class="icofont-minus"></i></button>
-                                <input class="action-input" type="text" value="${item.quantity}" readonly>
+                                <input class="quantity" type="text" value="${item.quantity}" readonly>
                                 <button class="action-plus"><i class="icofont-plus"></i></button>
                             </div>
                             <h6 class="item-total">₹${(item.price * item.quantity).toFixed(2)}</h6>
@@ -93,7 +103,7 @@ export function loadCartSidebar(userId) {
         totalItemsSpan.textContent = `Total items (${cartItems.length})`;
         totalPriceSpan.textContent = `₹${cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}`;
 
-        addEventListeners(); // ✅ Events refresh karo
+        addEventListeners(); // Reattach event listeners
     }
 
     function updateCartHeader() {
@@ -102,99 +112,51 @@ export function loadCartSidebar(userId) {
 
         const cartCount = document.querySelector(".header-cart sup");
         const cartTotal = document.querySelector(".header-cart small");
+        // console.log(totalItems);
 
         if (cartCount && cartTotal) {
             cartCount.textContent = totalItems;
             cartTotal.textContent = `₹${totalPrice}`;
         }
+        console.log("Cart Items Before Update:", cartItems);
     }
 
     function addEventListeners() {
-        document.querySelectorAll(".action-plus").forEach(button => {
-            button.onclick = async function () {
+        document.querySelectorAll(".action-plus, .action-minus").forEach(button => {
+            button.addEventListener("click", function () {
                 const cartItem = this.closest(".cart-item");
                 if (!cartItem) return;
-    
+        
                 const itemId = cartItem.dataset.id;
-                const item = cartItems.find(i => String(i.productId) === String(itemId));
-    
-                console.log(`🔹 Plus Clicked: ProductID: ${itemId}, Current Quantity: ${item ? item.quantity : 'Not Found'}`);
-    
-                if (item) {
-                    try {
-                        const newQuantity = item.quantity + 1;
-                        console.log(`🔹 Sending API Request: ${itemId}, New Quantity: ${newQuantity}`);
-    
-                        const response = await fetch("http://localhost:5000/api/cart/update", {
-                            method: "PUT",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ userId, productId: itemId, quantity: newQuantity }),
-                        });
-    
-                        console.log("🔹 API Response:", response);
-    
-                        if (!response.ok) throw new Error("Failed to update quantity");
-    
-                        const updatedCart = await response.json();
-                        console.log("✅ Updated Cart from API:", updatedCart);
-    
-                        cartItems = updatedCart.items;
-                        localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    
-                        updateCartUI();
-                        updateCartHeader();
-                    } catch (error) {
-                        console.error("❌ Error updating quantity:", error);
-                    }
-                }
-            };
+                let item = cartItems.find(i => String(i.productId) === String(itemId));
+        
+                if (!item) return;
+        
+                let isIncrement = this.classList.contains("action-plus");
+                let newQuantity = isIncrement ? item.quantity + 1 : Math.max(1, item.quantity - 1);
+                console.log("new hai ye "+newQuantity);
+        
+                // ✅ Call updateQuantity function instead of direct API call
+                updateQuantity(itemId, newQuantity);
+            });
         });
-    
-        document.querySelectorAll(".action-minus").forEach(button => {
-            button.onclick = async function () {
+        
+        document.querySelectorAll(".cart-delete").forEach(button => {
+            button.addEventListener("click", function () {
                 const cartItem = this.closest(".cart-item");
                 if (!cartItem) return;
-    
+
                 const itemId = cartItem.dataset.id;
-                const item = cartItems.find(i => String(i.productId) === String(itemId));
-    
-                console.log(`🔹 Minus Clicked: ProductID: ${itemId}, Current Quantity: ${item ? item.quantity : 'Not Found'}`);
-    
-                if (item && item.quantity > 1) {
-                    try {
-                        const newQuantity = item.quantity - 1;
-                        console.log(`🔹 Sending API Request: ${itemId}, New Quantity: ${newQuantity}`);
-    
-                        const response = await fetch("http://localhost:5000/api/cart/update", {
-                            method: "PUT",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ userId, productId: itemId, quantity: newQuantity }),
-                        });
-    
-                        console.log("🔹 API Response:", response);
-    
-                        if (!response.ok) throw new Error("Failed to update quantity");
-    
-                        const updatedCart = await response.json();
-                        console.log("✅ Updated Cart from API:", updatedCart);
-    
-                        cartItems = updatedCart.items;
-                        localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    
-                        updateCartUI();
-                        updateCartHeader();
-                    } catch (error) {
-                        console.error("❌ Error updating quantity:", error);
-                    }
-                }
-            };
+                removeItem(itemId);
+            });
+        });
+
+        document.querySelector(".cart-close").addEventListener("click", function () {
+            document.querySelector(".cart-sidebar").classList.remove("open");
         });
     }
-    
-    
-    
 
-    fetchCart(userId);
+    fetchCart();
 
     return `
         <aside class="cart-sidebar">

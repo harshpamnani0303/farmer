@@ -86,11 +86,7 @@ export async function addToCart(userId, productId, productName, productPrice, pr
 
         console.log("✅ Added to Cart (Backend):", data);
         alert("✅ Product added to cart successfully! 🛒");
-
-        setTimeout(() => {
-            location.reload();
-        }, 10); 
-
+        location.reload();
     } catch (error) {
         console.error("❌ Error adding to cart:", error);
         alert("❌ Failed to add product to cart.");

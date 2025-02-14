@@ -123,12 +123,13 @@
                     });
     
                     const data = await response.json();
-    
+                    
                     if (response.ok) {
+                        console.log(data);
                         localStorage.setItem("token", data.token);  // Store token
                         localStorage.setItem("userName", data.user.name); 
-                        localStorage.setItem("userId", data.user._id);  // ✅ Store userId
-    
+                        localStorage.setItem("userId", data.user.userId);  // ✅ Store userId
+                        
                         alert("✅ Login successful! Redirecting...");
                         window.location.href = "index.html"; // Redirect to homepage
                     } else {
