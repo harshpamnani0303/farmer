@@ -138,6 +138,9 @@ router.get("/:userId", async (req, res) => {
       name: user.name,
       email: user.email,
       phoneNumber: user.phoneNumber,
+      phoneNumberSecond: user.phoneNumberSecond,
+      address: user.address,
+      addressSecond: user.addressSecond,
       userId: user.userId,
     });
   } catch (error) {
