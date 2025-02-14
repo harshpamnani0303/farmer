@@ -129,6 +129,8 @@
                         localStorage.setItem("token", data.token);  // Store token
                         localStorage.setItem("userName", data.user.name); 
                         localStorage.setItem("userId", data.user.userId);  // ✅ Store userId
+                        localStorage.setItem("phoneNumber", data.user.phoneNumber);  // ✅ Store phoneNumber
+                        console.log(data.user.phoneNumber);
                         
                         alert("✅ Login successful! Redirecting...");
                         window.location.href = "index.html"; // Redirect to homepage

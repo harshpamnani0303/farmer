@@ -19,7 +19,6 @@ export function loadProductCard(product) {
                     <div class="product-label">
                         ${product.discount > 0 ? `<label class="label-text off">-${product.discount}%</label>` : ""}
                     </div>
-                    <button class="product-wish wish"><i class="fas fa-heart"></i></button>
                     <a class="product-image" title="Product View" href="#" data-bs-toggle="modal" data-bs-target="#product-view">
                         <img src="images/product/02.jpg" alt="${product.name}">
                     </a>

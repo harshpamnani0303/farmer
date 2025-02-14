@@ -50,61 +50,64 @@
     <!--=====================================
                     USER FORM PART START
         =======================================-->
-    <section class="user-form-part">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12 col-sm-10 col-md-12 col-lg-12 col-xl-10">
-                    <div class="user-form-logo">
-                        <a href='index.htm'><img src="images/logo.png" alt="logo"></a>
-                    </div>
-                    <div class="user-form-card">
-                        <div class="user-form-title">
-                            <h2>Join Now!</h2>
-                            <p>Setup A New Account In A Minute</p>
+        <section class="user-form-part">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-sm-10 col-md-12 col-lg-12 col-xl-10">
+                        <div class="user-form-logo">
+                            <a href='index.htm'><img src="images/logo.png" alt="logo"></a>
                         </div>
-                        <div class="user-form-group">
-                            <ul class="user-form-social">
-                                <li><a href="#" class="facebook"><i class="fab fa-facebook-f"></i>Join with facebook</a>
-                                </li>
-                                <li><a href="#" class="google"><i class="fab fa-google"></i>Join with google</a></li>
-                            </ul>
-                            <div class="user-form-divider">
-                                <p>or</p>
+                        <div class="user-form-card">
+                            <div class="user-form-title">
+                                <h2>Join Now!</h2>
+                                <p>Setup A New Account In A Minute</p>
                             </div>
-                            <form class="user-form">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Enter your name">
+                            <div class="user-form-group">
+                                <ul class="user-form-social">
+                                    <li><a href="#" class="facebook"><i class="fab fa-facebook-f"></i>Join with Facebook</a></li>
+                                    <li><a href="#" class="google"><i class="fab fa-google"></i>Join with Google</a></li>
+                                </ul>
+                                <div class="user-form-divider">
+                                    <p>or</p>
                                 </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="Enter your email">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Enter your password">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Enter repeat password">
-                                </div>
-                                <div class="form-check mb-3">
-                                    <input class="form-check-input" type="checkbox" value="" id="check">
-                                    <label class="form-check-label" for="check">Accept all the <a href="#">Terms &
-                                            Conditions</a></label>
-                                </div>
-                                <div class="form-button">
-                                    <button type="submit">register</button>
-                                </div>
-                            </form>
+                                <form class="user-form">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Enter your name">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" placeholder="Enter your email">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Enter your phone number">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" placeholder="Enter your password">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" placeholder="Enter repeat password">
+                                    </div>
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="checkbox" value="" id="check">
+                                        <label class="form-check-label" for="check">Accept all the <a href="#">Terms &
+                                                Conditions</a></label>
+                                    </div>
+                                    <div class="form-button">
+                                        <button type="submit">Register</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                    <div class="user-form-remind">
-                        <p>Already Have An Account?<a href='login.html'>login here</a></p>
-                    </div>
-                    <div class="user-form-footer">
-                        <p>Greeny | &COPY; Copyright by <a href="#">Mironcoder</a></p>
+                        <div class="user-form-remind">
+                            <p>Already Have An Account? <a href='login.html'>Login here</a></p>
+                        </div>
+                        <div class="user-form-footer">
+                            <p>Greeny | &COPY; Copyright by <a href="#">Mironcoder</a></p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+        
     <!--=====================================
                     USER FORM PART END
         =======================================-->
@@ -115,31 +118,32 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const registerForm = document.querySelector(".user-form");
-
+    
             registerForm.addEventListener("submit", async function (event) {
                 event.preventDefault(); // Prevent default form submission
-
+    
                 const name = document.querySelector("input[placeholder='Enter your name']").value;
                 const email = document.querySelector("input[placeholder='Enter your email']").value;
+                const phoneNumber = document.querySelector("input[placeholder='Enter your phone number']").value;
                 const password = document.querySelector("input[placeholder='Enter your password']").value;
                 const repeatPassword = document.querySelector("input[placeholder='Enter repeat password']").value;
-
+    
                 if (password !== repeatPassword) {
                     alert("Passwords do not match!");
                     return;
                 }
-
-                const userData = { name, email, password };
-
+    
+                const userData = { name, email, phoneNumber, password };
+    
                 try {
                     const response = await fetch("http://localhost:5000/api/users/register", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify(userData)
                     });
-
+    
                     const data = await response.json();
-
+    
                     if (response.ok) {
                         alert("Registration successful! Redirecting to login page...");
                         window.location.href = "login.html"; // Redirect to login page
@@ -153,6 +157,7 @@
             });
         });
     </script>
+    
 <!-- script backend js end -->
     <!--=====================================
                     JS LINK PART START
