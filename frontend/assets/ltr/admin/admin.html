@@ -47,6 +47,7 @@
                             <th class="border p-2">Category</th>
                             <th class="border p-2">Stock</th>
                             <th class="border p-2">Price</th>
+                            <th class="border p-2">Product Image</th>  <!-- ✅ Added Product Image Heading -->
                             <th class="border p-2">Actions</th>
                         </tr>
                     </thead>
@@ -55,19 +56,38 @@
                 </table>
                 <button class="mt-4 bg-red-500 text-white px-4 py-2 rounded" onclick="deleteSelected()">Delete Selected</button>
             </div>
+            
 
             <!-- Add Product Modal -->
             <div id="addProductModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
                 <div class="bg-white p-6 rounded-lg shadow-lg w-96">
                     <h3 class="text-xl font-bold mb-4">Add Product</h3>
+                    
                     <input type="text" id="productName" placeholder="Product Name" class="w-full p-2 border rounded mb-2">
-                    <input type="text" id="productCategory" placeholder="Category" class="w-full p-2 border rounded mb-2">
+                    
+                    <select id="productCategory" class="w-full p-2 border rounded mb-2">
+                        <option value="" disabled selected>Select Category</option>
+                        <option value="vegetable">Vegetable</option>
+                        <option value="fruit">Fruit</option>
+                        <option value="tools">Tools</option>
+                        <option value="seeds">Seeds</option>
+                    </select>
+            
                     <input type="number" id="productStock" placeholder="Stock" class="w-full p-2 border rounded mb-2">
                     <input type="number" id="productPrice" placeholder="Price" class="w-full p-2 border rounded mb-2">
+            
+                    <!-- Image Upload Option -->
+                    <label class="block text-gray-700">Upload Product Image</label>
+                    <input type="file" id="productImage" accept="image/*" class="w-full p-2 border rounded mb-2">
+            
                     <button class="bg-green-600 text-white px-4 py-2 rounded w-full" onclick="addProduct()">Add</button>
                     <button class="mt-2 text-gray-600 w-full" onclick="toggleModal('addProductModal')">Cancel</button>
                 </div>
             </div>
+            
+            
+            
+            
         </main>
     </div>
 
@@ -97,33 +117,43 @@
         }
 
         function addProduct() {
-            let name = document.getElementById("productName").value;
-            let category = document.getElementById("productCategory").value;
-            let stock = document.getElementById("productStock").value;
-            let price = document.getElementById("productPrice").value;
-            
-            if (!name || !category || !stock || !price) {
-                alert("All fields are required!");
-                return;
-            }
-            
-            let table = document.getElementById("productTable");
-            let row = table.insertRow();
-            row.innerHTML = `
-                <td class="border p-2"><input type="checkbox" class="productCheckbox"></td>
-                <td class="border p-2">${table.rows.length}</td>
-                <td class="border p-2">${name}</td>
-                <td class="border p-2">${category}</td>
-                <td class="border p-2 text-green-600 font-bold">${stock}</td>
-                <td class="border p-2">$${price}</td>
-                <td class="border p-2">
-                    <button class="bg-blue-500 text-white px-2 py-1 rounded">Edit</button>
-                    <button class="bg-red-500 text-white px-2 py-1 rounded" onclick="this.closest('tr').remove()">Delete</button>
-                </td>
-            `;
-            
-            toggleModal('addProductModal');
-        }
-    </script>
+    let name = document.getElementById("productName").value;
+    let category = document.getElementById("productCategory").value;
+    let stock = document.getElementById("productStock").value;
+    let price = document.getElementById("productPrice").value;
+    let imageInput = document.getElementById("productImage");
+    
+    if (!name || !category || !stock || !price || !imageInput.files.length) {
+        alert("All fields are required!");
+        return;
+    }
+
+    // Read the uploaded image
+    let file = imageInput.files[0];
+    let reader = new FileReader();
+    
+    reader.onload = function (event) {
+        let table = document.getElementById("productTable");
+        let row = table.insertRow();
+        row.innerHTML = `
+            <td class="border p-2"><input type="checkbox" class="productCheckbox"></td>
+            <td class="border p-2">${table.rows.length}</td>
+            <td class="border p-2">${name}</td>
+            <td class="border p-2">${category}</td>
+            <td class="border p-2 text-green-600 font-bold">${stock}</td>
+            <td class="border p-2">₹${price}</td>
+            <td class="border p-2"><img src="${event.target.result}" class="w-16 h-16 object-cover rounded"></td>  <!-- ✅ Image Added -->
+            <td class="border p-2">
+                <button class="bg-blue-500 text-white px-2 py-1 rounded">Edit</button>
+                <button class="bg-red-500 text-white px-2 py-1 rounded" onclick="this.closest('tr').remove()">Delete</button>
+            </td>
+        `;
+    };
+
+    reader.readAsDataURL(file); // Convert image to Base64
+
+    toggleModal('addProductModal');
+}
+</script>
 </body>
 </html>
