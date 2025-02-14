@@ -53,8 +53,6 @@ router.put("/update", async (req, res) => {
       return res.status(400).json({ message: "Quantity must be at least 1" });
     }
 
-    console.log("Backend quanity", quantity);
-
     const updatedCart = await Cart.findOneAndUpdate(
       { userId, productId },
       { $set: { quantity: quantity } }, // Increment quantity by given value
