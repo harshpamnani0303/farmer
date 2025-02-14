@@ -108,4 +108,32 @@ router.delete("/:orderId", async (req, res) => {
     }
 });
 
+router.get("/order/:orderId", async (req, res) => {
+    try {
+        const order = await Order.findById(req.params.orderId).populate("products.product");
+
+        if (!order) {
+            return res.status(404).json({ message: "Order not found" });
+        }
+
+        // Determine order date logic
+        let orderDate = new Date();
+        if (order.deliverySchedule === "Next day" || order.deliverySchedule === "8am-10pm" && orderDate.getHours() >= 22) {
+            orderDate.setDate(orderDate.getDate() + 1); // Move to next day
+        }
+
+        // Calculate total amount
+        const totalAmount = order.products.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+
+        res.json({
+            orderNumber: order.orderNumber,
+            orderDate: orderDate.toDateString(),
+            totalAmount: totalAmount.toFixed(2),
+            paymentMethod: "Cash on Delivery" // Static for now, update if dynamic
+        });
+    } catch (error) {
+        res.status(500).json({ message: "Server error", error });
+    }
+});
+
 export default router;

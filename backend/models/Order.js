@@ -1,6 +1,16 @@
 import mongoose from "mongoose";
 
+// Counter Schema for Auto-Increment Order Numbers
+const counterSchema = new mongoose.Schema({
+    name: { type: String, required: true, unique: true },
+    value: { type: Number, required: true }
+});
+
+const Counter = mongoose.model("Counter", counterSchema);
+
+// Order Schema
 const orderSchema = new mongoose.Schema({
+    orderNumber: { type: Number, unique: true }, // Auto-increment order number
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     products: [
         {
@@ -35,6 +45,36 @@ const orderSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now }
 });
 
-// ✅ Use ES Module Export
+// Auto-increment orderNumber before saving
+orderSchema.pre("save", async function (next) {
+    if (!this.orderNumber) { // Only set orderNumber if it's a new order
+        try {
+            const session = await mongoose.startSession();
+            session.startTransaction();
+
+            let counter = await Counter.findOneAndUpdate(
+                { name: "orderNumber" },
+                { $inc: { value: 1 } },
+                { new: true, upsert: true, session }
+            );
+
+            // Ensure first order starts at 1001
+            if (counter.value === 1) {
+                counter.value = 1001;
+                await counter.save({ session });
+            }
+
+            this.orderNumber = counter.value;
+
+            await session.commitTransaction();
+            session.endSession();
+        } catch (error) {
+            return next(error);
+        }
+    }
+    next();
+});
+
+// Create Order model
 const Order = mongoose.model("Order", orderSchema);
 export default Order;

@@ -83,12 +83,11 @@ export function loadCartSidebar(userId) {
 
     cartList.innerHTML = cartItems.length
       ? cartItems
-          .map(
-            (item) => `
+        .map(
+          (item) => `
                 <li class="cart-item" data-id="${item.productId}">
                     <div class="cart-media">
-                        <a href="#"><img src="${item.image}" alt="${
-              item.name
+                        <a href="#"><img src="${item.image}" alt="${item.name
             }"></a>
                         <button class="cart-delete"><i class="far fa-trash-alt"></i></button>
                     </div>
@@ -100,20 +99,19 @@ export function loadCartSidebar(userId) {
                         <div class="cart-action-group">
                             <div class="product-action">
                                 <button class="action-minus"><i class="icofont-minus"></i></button>
-                                <input class="quantity" type="text" value="${
-                                  item.quantity
-                                }" readonly>
+                                <input class="quantity" type="text" value="${item.quantity
+            }" readonly>
                                 <button class="action-plus"><i class="icofont-plus"></i></button>
                             </div>
                             <h6 class="item-total">₹${(
-                              item.price * item.quantity
-                            ).toFixed(2)}</h6>
+              item.price * item.quantity
+            ).toFixed(2)}</h6>
                         </div>
                     </div>
                 </li>
             `
-          )
-          .join("")
+        )
+        .join("")
       : `<p class="empty-cart">Your cart is empty!</p>`;
 
     totalItemsSpan.textContent = `Total items (${cartItems.length})`;
@@ -169,7 +167,7 @@ export function loadCartSidebar(userId) {
     const totalPrice = cartItems
       .reduce((total, item) => total + item.price * item.quantity, 0)
       .toFixed(2);
-
+    localStorage.setItem("total", totalPrice);
     const cartCount = document.querySelector(".header-cart sup");
     const cartTotal = document.querySelector(".header-cart small");
     // console.log(totalItems);

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Orders & Products</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-gradient-to-b from-green-700 to-green-500 text-white p-5 shadow-lg">
+            <h1 class="text-3xl font-extrabold mb-6 text-center">Admin Panel</h1>
+            <nav>
+                <ul class="space-y-4">
+                    <li class="hover:bg-green-600 p-3 rounded"><a href="#">Dashboard</a></li>
+                    <li class="hover:bg-green-600 p-3 rounded"><a href="#">Orders</a></li>
+                    <li class="hover:bg-green-600 p-3 rounded"><a href="#">Products</a></li>
+                    <li class="hover:bg-green-600 p-3 rounded"><a href="#">Users</a></li>
+                    <li class="hover:bg-green-600 p-3 rounded"><a href="#">Reports</a></li>
+                    <li class="hover:bg-green-600 p-3 rounded"><a href="#">Coupons</a></li>
+                    <li class="hover:bg-green-600 p-3 rounded"><a href="#">Notifications</a></li>
+                    <li class="hover:bg-green-600 p-3 rounded"><a href="#">Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="flex-1 p-8">
+            <h2 class="text-4xl font-bold mb-8 text-gray-800">Orders & Products</h2>
+            
+            <!-- Order Filtering -->
+            <div class="mb-6">
+                <button class="bg-blue-500 text-white px-4 py-2 rounded" onclick="filterOrders('all')">All</button>
+                <button class="bg-yellow-500 text-white px-4 py-2 rounded" onclick="filterOrders('pending')">Pending</button>
+                <button class="bg-green-500 text-white px-4 py-2 rounded" onclick="filterOrders('delivered')">Delivered</button>
+                <button class="bg-red-500 text-white px-4 py-2 rounded" onclick="filterOrders('cancelled')">Cancelled</button>
+            </div>
+
+            <!-- Orders Table -->
+            <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
+                <table class="w-full border-collapse border border-gray-200">
+                    <thead>
+                        <tr class="bg-gray-200">
+                            <th class="border p-2">Order ID</th>
+                            <th class="border p-2">Customer</th>
+                            <th class="border p-2">Status</th>
+                            <th class="border p-2">Total</th>
+                            <th class="border p-2">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orderTable"></tbody>
+                </table>
+            </div>
+
+            <!-- Products Table -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <table class="w-full border-collapse border border-gray-200">
+                    <thead>
+                        <tr class="bg-gray-200">
+                            <th class="border p-2">Product ID</th>
+                            <th class="border p-2">Name</th>
+                            <th class="border p-2">Stock</th>
+                            <th class="border p-2">Price</th>
+                            <th class="border p-2">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productTable"></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        async function fetchOrders() {
+            const response = await fetch("http://localhost:5000/api/orders");
+            const orders = await response.json();
+            let orderTable = document.getElementById("orderTable");
+            orderTable.innerHTML = "";
+            orders.forEach(order => {
+                orderTable.innerHTML += `
+                    <tr>
+                        <td class="border p-2">${order.orderNumber}</td>
+                        <td class="border p-2">${order.customer}</td>
+                        <td class="border p-2">${order.status}</td>
+                        <td class="border p-2">$${order.totalAmount}</td>
+                        <td class="border p-2">
+                            <button class="bg-blue-500 text-white px-2 py-1 rounded">View</button>
+                            <button class="bg-red-500 text-white px-2 py-1 rounded">Cancel</button>
+                        </td>
+                    </tr>`;
+            });
+        }
+
+        async function fetchProducts() {
+            const response = await fetch("http://localhost:5000/api/products");
+            const products = await response.json();
+            let productTable = document.getElementById("productTable");
+            productTable.innerHTML = "";
+            products.forEach(product => {
+                productTable.innerHTML += `
+                    <tr>
+                        <td class="border p-2">${product._id}</td>
+                        <td class="border p-2">${product.name}</td>
+                        <td class="border p-2">${product.stock}</td>
+                        <td class="border p-2">$${product.price}</td>
+                        <td class="border p-2">
+                            <button class="bg-blue-500 text-white px-2 py-1 rounded">Edit</button>
+                            <button class="bg-red-500 text-white px-2 py-1 rounded">Delete</button>
+                        </td>
+                    </tr>`;
+            });
+        }
+
+        function filterOrders(status) {
+            let rows = document.querySelectorAll("#orderTable tr");
+            rows.forEach(row => {
+                let orderStatus = row.cells[2].innerText.toLowerCase();
+                row.style.display = status === 'all' || orderStatus === status ? "" : "none";
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            fetchOrders();
+            fetchProducts();
+        });
+    </script>
+</body>
+</html>

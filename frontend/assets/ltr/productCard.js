@@ -40,15 +40,16 @@ export function loadProductCard(product) {
                         <span>₹${product.price}<small>/ ${product.unit}</small></span>
                     </h6>
 
-                    <button class="product-add add-to-cart" 
+                    <button class="btn btn-inline add-to-cart " 
                         data-id="${product._id}" 
                         data-name="${product.name}" 
                         data-price="${product.price}" 
-                        data-img="images/product/02.jpg">
-                        <i class="fas fa-shopping-basket"></i> <span>Add To Cart</span>
+                        data-img="images/product/02.jpg"
+                        style="width: 100%; height: 40px; padding: 0 10px; margin-top: 10px;">
+                        <i class="fas fa-shopping-basket"></i> <span >Add To Cart</span>
                     </button>
 
-                    <button class="product-add buy-now-btn my-2" title="Buy Now" onclick="window.location.href='orderlist.html'">
+                    <button class="product-add buy-now-btn my-2 " title="Buy Now" onclick="window.location.href='orderlist.html'">
                         </i> <span>Buy Now</span>
                     </button>
 
