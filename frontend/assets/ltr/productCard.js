@@ -20,7 +20,7 @@ export function loadProductCard(product) {
                         ${product.discount > 0 ? `<label class="label-text off">-${product.discount}%</label>` : ""}
                     </div>
                     <a class="product-image" title="Product View" href="#" data-bs-toggle="modal" data-bs-target="#product-view">
-                        <img src="images/product/02.jpg" alt="${product.name}">
+                        <img src="images/product/03.jpg" alt="${product.name}">
                     </a>
                 </div>
                 <div class="product-content">
