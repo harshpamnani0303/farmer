@@ -22,6 +22,42 @@ export function loadCartSidebar(userId) {
     }
   }
 
+  function checkLoginBeforeCheckout() {
+    const isLoggedIn = localStorage.getItem("userId"); // Assume token indicates login
+  
+    if (isLoggedIn) {
+      // ✅ User is logged in, redirect to checkout
+      window.location.href = "checkout.html";
+    } else {
+      // 🚫 User not logged in, show alert and redirect to login page
+      const alertContainer = document.createElement("div");
+      alertContainer.className = "alert alert-warning alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3";
+      alertContainer.style.zIndex = "1050";
+      alertContainer.role = "alert";
+      alertContainer.innerHTML = `
+        <strong>Warning!</strong> You must log in before proceeding to checkout.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      `;
+      document.body.appendChild(alertContainer);
+  
+      setTimeout(() => {
+        alertContainer.remove();
+        window.location.href = "login.html"; // Redirect to login page
+      }, 3000);
+    }
+  }
+  
+  
+  document.addEventListener("DOMContentLoaded", () => {
+    const checkoutButton = document.querySelector(".cart-checkout-btn");
+    checkoutButton.addEventListener("click", (event) => {
+      if (!checkLoginBeforeCheckout()) {
+        event.preventDefault(); // Prevent navigation if not logged in
+      }
+    });
+  });
+  
+
   async function updateQuantity(productId, newQuantity) {
     try {
       console.log(
