@@ -411,7 +411,7 @@
                   // `;
                   row.innerHTML = `
           <td class="table-serial"><h6>${index + 1}</h6></td>
-          <td class="table-image"><img src="images/product/05.jpg" alt="product" /></td>
+          <td class="table-image"><img src="${item.image}" alt="product" /></td>
           <td class="table-name"><h6>${item.name}</h6></td>
           <td class="table-price"><h6>$${item.price.toFixed(
             2
@@ -540,8 +540,6 @@
                   0
                 );
 
-
-                
                 const orderData = {
                   user: userId,
                   products: cartItems.map((item) => ({
