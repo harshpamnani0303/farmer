@@ -108,17 +108,21 @@
     <!--=====================================
                     PRODUCT VIEW START
         =======================================-->
-        <div class="modal fade" id="product-view" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog">
-              <!-- Content dynamically injected by createProductModal() -->
+    <!-- Product View Modal -->
+    <div id="product-view" class="modal fade" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Content will be inserted here by JavaScript -->
             </div>
-          </div>
-          
-          <!-- ✅ Include productView.js as Module -->
-          <script type="module">
-            import { createProductModal } from './productView.js';
-          </script>
-          
+        </div>
+    </div>
+
+
+    <!-- ✅ Include productView.js as Module -->
+    <script type="module">
+        import { createProductModal } from './productView.js';
+    </script>
+
     <!--=====================================
                     PRODUCT VIEW END
         =======================================-->
@@ -216,13 +220,13 @@
     <!--=====================================
                     INTRO PART START
         =======================================-->
-        <div id="section"></div>
+    <div id="section"></div>
 
-        <!-- Import the ES6 Module -->
-        <script type="module">
-          import createIntroSection from './intro.js';
-          document.getElementById('section').innerHTML = createIntroSection();
-        </script>
+    <!-- Import the ES6 Module -->
+    <script type="module">
+        import createIntroSection from './intro.js';
+        document.getElementById('section').innerHTML = createIntroSection();
+    </script>
     <!--=====================================
                     INTRO PART END
         =======================================-->

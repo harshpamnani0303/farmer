@@ -17,18 +17,17 @@ export function loadProductCard(product) {
       <div class="product-card">
         <div class="product-media">
           <a class="product-image" 
-             title="Product View" 
-             href="#" 
-             data-bs-toggle="modal" 
-             data-bs-target="#product-view"
-             data-name="${product.name}" 
-             data-img="http://localhost:5000${product.image}" 
-             data-price="${product.price}" 
-             data-unit="${product.unit}" 
-             data-desc="${product.description || 'No description available'}" 
-             data-tags="${product.tags ? product.tags.join(',') : ''}">
-            <img src="http://localhost:5000${product.image}" alt="${product.name}">
-          </a>
+   title="Product View" 
+   href="#" 
+   data-name="${product.name}" 
+   data-img="http://localhost:5000${product.image}" 
+   data-price="${product.price}" 
+   data-unit="${product.unit}" 
+   data-desc="${product.description || 'No description available'}" 
+   data-tags="${product.tags ? product.tags.join(',') : ''}">
+   <img src="http://localhost:5000${product.image}" alt="${product.name}">
+</a>
+
         </div>
         <div class="product-content">
           <h6 class="product-name">
