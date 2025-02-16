@@ -6,7 +6,7 @@ export function loadFooter() {
                 <div class="col-sm-6 col-xl-6">
                     <div class="footer-widget">
                         <a class="footer-logo" href="#">
-                            <h2>BharatFarm</h2>
+                                <img src="images/logo.png" alt="logo">
                         </a>
                         <p class="footer-desc">Adipisci asperiores ipsum ipsa repellat consequatur repudiandae quisquam
                             assumenda dolor perspiciatis sit ipsum dolor amet.</p>

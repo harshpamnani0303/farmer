@@ -14,42 +14,40 @@ export async function fetchProducts() {
 export function loadProductCard(product) {
   return `
         <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
-            <div class="product-card">
-                <div class="product-media">
-                    <div class="product-label">
-                        ${
-                          product.discount > 0
-                            ? `<label class="label-text off">-${product.discount}%</label>`
-                            : ""
-                        }
-                    </div>
-                    <a class="product-image" title="Product View" href="#" data-bs-toggle="modal" data-bs-target="#product-view">
-                        <img src="http://localhost:5000${product.image}" alt="${
-    product.name
-  }">
-                    </a>
-                </div>
-                <div class="product-content">
-                    <div class="product-rating">
-                        ${Array(5)
-                          .fill(0)
-                          .map((_, i) =>
-                            i < product.rating.average
-                              ? `<i class="active icofont-star"></i>`
-                              : `<i class="icofont-star"></i>`
-                          )
-                          .join("")} (${product.rating.count})
-                    </div>
-                    <h6 class="product-name">
-                        <a class="product-image" title="Product View" href="#" data-bs-toggle="modal" data-bs-target="#product-view">
-                            ${product.name}
-                        </a>
-                    </h6>
-                    <h6 class="product-price">
-                        <span>₹${product.price}<small>/ ${
-    product.unit
-  }</small></span>
-                    </h6>
+      <div class="product-card">
+        <div class="product-media">
+          <a class="product-image" 
+             title="Product View" 
+             href="#" 
+             data-bs-toggle="modal" 
+             data-bs-target="#product-view"
+             data-name="${product.name}" 
+             data-img="http://localhost:5000${product.image}" 
+             data-price="${product.price}" 
+             data-unit="${product.unit}" 
+             data-desc="${product.description || 'No description available'}" 
+             data-tags="${product.tags ? product.tags.join(',') : ''}">
+            <img src="http://localhost:5000${product.image}" alt="${product.name}">
+          </a>
+        </div>
+        <div class="product-content">
+          <h6 class="product-name">
+            <a href="#" 
+               class="product-image"
+               data-bs-toggle="modal" 
+               data-bs-target="#product-view"
+               data-name="${product.name}" 
+               data-img="http://localhost:5000${product.image}" 
+               data-price="${product.price}" 
+               data-unit="${product.unit}" 
+               data-desc="${product.description || 'No description available'}" 
+               data-tags="${product.tags ? product.tags.join(',') : ''}">
+              ${product.name}
+            </a>
+          </h6>
+          <h6 class="product-price">
+            <span>₹${product.price}<small>/ ${product.unit}</small></span>
+          </h6>
 
                     <button class="btn btn-inline add-to-cart " 
                         data-id="${product._id}" 
@@ -60,15 +58,9 @@ export function loadProductCard(product) {
                         <i class="fas fa-shopping-basket"></i> <span >Add To Cart</span>
                     </button>
 
-                    <button class="product-add buy-now-btn my-2 " title="Buy Now" onclick="window.location.href='orderlist.html'">
+                    <button class="product-add buy-now-btn my-2 " title="Buy Now" onclick="window.location.href='checkout.html'">
                         </i> <span>Buy Now</span>
                     </button>
-
-                    <div class="product-action">
-                        <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
-                        <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1">
-                        <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
-                    </div>
                 </div>
             </div>
         </div>

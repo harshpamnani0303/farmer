@@ -101,9 +101,9 @@ export function loadHeader() {
                     <button class="header-src"><i class="fas fa-search"></i></button>
                 </div>
 
-                <a class='header-logo' href='index.html'>
-                    <h2>Logo</h2>
-                </a>
+               <a class='header-logo' href='index.htm'>
+                        <img src="images/logo.png" alt="logo">
+                    </a>
 
                 <a class='header-widget' href='login.html' title='My Account'>
                     <img src="images/user.png" alt="user">

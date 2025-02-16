@@ -1,11 +1,3 @@
-
-
-
-
-
-
-
-
 // FOR FAQS
 jQuery(document).ready(function($){
     
