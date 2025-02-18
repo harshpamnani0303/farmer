@@ -611,91 +611,153 @@
 
                 const orderResult = await orderResponse.json();
 
+                // Update invoice modal data
+                document.getElementById("invoiceOrderNumber").innerText =
+                  orderResult.orderNumber;
+                document.getElementById("invoiceTotalItems").innerText =
+                  1;
+                document.getElementById("invoiceTotalAmount").innerText =
+                  checkoutProduct.price;
+                document.getElementById("invoiceDeliverySchedule").innerText =
+                  checkoutData.deliverySchedule;
+                document.getElementById("invoiceDeliveryAddress").innerText =
+                  checkoutData.address;
+                document.getElementById("invoiceContactNumber").innerText =
+                  checkoutData.phoneNumber;
+
+                // Populate cart items in invoice modal
+                let cartItemsHTML = "";
+                cartItemsHTML += `
+    <tr>
+      <td class="py-2 px-4 border">${checkoutProduct.name}</td>
+      <td class="py-2 px-4 border">1</td>
+      <td class="py-2 px-4 border">₹${checkoutProduct.price}</td>
+      <td class="py-2 px-4 border">₹${(checkoutProduct.price * 1).toFixed(2)}</td>
+    </tr>
+  `;
+
+                document.getElementById("invoiceCartItems").innerHTML = cartItemsHTML;
               }
               else {
+                const cartResponse = await fetch(
+                  `http://localhost:5000/api/cart/user/${userId}`
+                );
 
-              
-              const cartResponse = await fetch(
-                `http://localhost:5000/api/cart/user/${userId}`
-              );
+                if (!cartResponse.ok)
+                  throw new Error("Failed to fetch cart data");
 
-              if (!cartResponse.ok)
-                throw new Error("Failed to fetch cart data");
+                const cartItems = await cartResponse.json();
 
-              const cartItems = await cartResponse.json();
-
-              if (!cartItems || cartItems.length === 0) {
-                alert("Your cart is empty!");
-                return;
-              }
-
-              const totalAmount = cartItems.reduce(
-                (acc, item) => acc + item.price * item.quantity,
-                0
-              );
-
-              const orderData = {
-                user: userId,
-                products: cartItems.map((item) => ({
-                  product: item.productId,
-                  quantity: item.quantity,
-                })),
-                totalAmount,
-                deliverySchedule: checkoutData.deliverySchedule,
-                contactNumbers: [
-                  { label: "primary", number: checkoutData.phoneNumber },
-                ],
-                deliveryAddresses: [
-                  { label: "Home", address: checkoutData.address },
-                ],
-              };
-
-              console.log("pass first");
-
-              // Send order data to backend
-              const orderResponse = await fetch(
-                "http://localhost:5000/api/orders",
-                {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify(orderData),
+                if (!cartItems || cartItems.length === 0) {
+                  alert("Your cart is empty!");
+                  return;
                 }
-              );
 
-              console.log("pass second");
+                const totalAmount = cartItems.reduce(
+                  (acc, item) => acc + item.price * item.quantity,
+                  0
+                );
 
-              if (!orderResponse.ok) throw new Error("Failed to place order");
+                const orderData = {
+                  user: userId,
+                  products: cartItems.map((item) => ({
+                    product: item.productId,
+                    quantity: item.quantity,
+                  })),
+                  totalAmount,
+                  deliverySchedule: checkoutData.deliverySchedule,
+                  contactNumbers: [
+                    { label: "primary", number: checkoutData.phoneNumber },
+                  ],
+                  deliveryAddresses: [
+                    { label: "Home", address: checkoutData.address },
+                  ],
+                };
 
-              const orderResult = await orderResponse.json();
-              }
-              // Update invoice modal data
-              document.getElementById("invoiceOrderNumber").innerText =
-                orderResult.orderNumber;
-              document.getElementById("invoiceTotalItems").innerText =
-                cartItems.length;
-              document.getElementById("invoiceTotalAmount").innerText =
-                totalAmount.toFixed(2);
-              document.getElementById("invoiceDeliverySchedule").innerText =
-                checkoutData.deliverySchedule;
-              document.getElementById("invoiceDeliveryAddress").innerText =
-                checkoutData.address;
-              document.getElementById("invoiceContactNumber").innerText =
-                checkoutData.phoneNumber;
+                console.log("pass first");
 
-              // Populate cart items in invoice modal
-              let cartItemsHTML = "";
-              cartItems.forEach((item, index) => {
-                cartItemsHTML += `
+                // Send order data to backend
+                const orderResponse = await fetch(
+                  "http://localhost:5000/api/orders",
+                  {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(orderData),
+                  }
+                );
+
+                console.log("pass second");
+
+                if (!orderResponse.ok) throw new Error("Failed to place order");
+
+                const orderResult = await orderResponse.json();
+
+                // Update invoice modal data
+                document.getElementById("invoiceOrderNumber").innerText =
+                  orderResult.orderNumber;
+                document.getElementById("invoiceTotalItems").innerText =
+                  cartItems.length;
+                document.getElementById("invoiceTotalAmount").innerText =
+                  totalAmount.toFixed(2);
+                document.getElementById("invoiceDeliverySchedule").innerText =
+                  checkoutData.deliverySchedule;
+                document.getElementById("invoiceDeliveryAddress").innerText =
+                  checkoutData.address;
+                document.getElementById("invoiceContactNumber").innerText =
+                  checkoutData.phoneNumber;
+
+                // Populate cart items in invoice modal
+                let cartItemsHTML = "";
+                cartItems.forEach((item, index) => {
+                  cartItemsHTML += `
     <tr>
       <td class="py-2 px-4 border">${item.name}</td>
       <td class="py-2 px-4 border">${item.quantity}</td>
-      <td class="py-2 px-4 border">$${item.price.toFixed(2)}</td>
-      <td class="py-2 px-4 border">$${(item.price * item.quantity).toFixed(2)}</td>
+      <td class="py-2 px-4 border">₹${item.price.toFixed(2)}</td>
+      <td class="py-2 px-4 border">₹${(item.price * item.quantity).toFixed(2)}</td>
     </tr>
   `;
-              });
+                });
 
-              document.getElementById("invoiceCartItems").innerHTML = cartItemsHTML;
+                document.getElementById("invoiceCartItems").innerHTML = cartItemsHTML;
+
+                document
+                  .getElementById("downloadInvoice")
+                  .addEventListener("click", function () {
+                    let invoiceContent = `
+Order Number: ${document.getElementById("invoiceOrderNumber").innerText}
+Total Items: ${document.getElementById("invoiceTotalItems").innerText}
+Total Amount: $${document.getElementById("invoiceTotalAmount").innerText}
+Delivery Schedule: ${document.getElementById("invoiceDeliverySchedule").innerText}
+Delivery Address: ${document.getElementById("invoiceDeliveryAddress").innerText}
+Contact Number: ${document.getElementById("invoiceContactNumber").innerText}
+
+Cart Items:
+`;
+
+                    // Loop through the table rows and extract data
+                    document.querySelectorAll("#invoiceCartItems tr").forEach((row) => {
+                      const cells = row.querySelectorAll("td");
+                      const itemName = cells[0].innerText;
+                      const quantity = cells[1].innerText;
+                      const price = cells[2].innerText;
+                      const total = cells[3].innerText;
+
+                      // Append each cart item to the invoice content
+                      invoiceContent += `\n- ${itemName} | Quantity: ${quantity} | Price: ${price} | Total: ${total}`;
+                    });
+
+                    const blob = new Blob([invoiceContent], { type: "text/plain" });
+                    const link = document.createElement("a");
+                    link.href = URL.createObjectURL(blob);
+                    link.download = "Invoice.txt";
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    window.location.href = "index.html";
+                  });
+
+              }
 
 
               // Show invoice modal
