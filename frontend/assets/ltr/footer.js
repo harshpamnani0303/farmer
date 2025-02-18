@@ -8,8 +8,8 @@ export function loadFooter() {
                         <a class="footer-logo" href="#">
                                 <img src="images/logo.png" alt="logo">
                         </a>
-                        <p class="footer-desc">Adipisci asperiores ipsum ipsa repellat consequatur repudiandae quisquam
-                            assumenda dolor perspiciatis sit ipsum dolor amet.</p>
+                        <p class="footer-desc">Fresh from the fields to your home – promoting sustainable farming, supporting local communities, and delivering quality produce with care and dedication.</p>
+</p>
                         <ul class="footer-social">
                             <li><a class="icofont-facebook" href="#"></a></li>
                             <li><a class="icofont-twitter" href="#"></a></li>
@@ -61,7 +61,7 @@ export function loadFooter() {
             <div class="row">
                 <div class="col-12">
                     <div class="footer-bottom">
-                        <p class="footer-copytext">&copy; All Copyrights Reserved by <span>BharatFarmer</span> </p>
+                        <p class="footer-copytext">&copy; All Copyrights Reserved by <span>BharatFarmers</span> </p>
                         <div class="footer-card">
                             <a href="#"><img src="images/payment/jpg/01.jpg" alt="payment"></a>
                             <a href="#"><img src="images/payment/jpg/02.jpg" alt="payment"></a>

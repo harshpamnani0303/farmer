@@ -1,4 +1,3 @@
-// Event listener to store the selected category in localStorage
 document.addEventListener("DOMContentLoaded", () => {
     document.body.addEventListener("click", (event) => {
         const link = event.target.closest(".category-link");
@@ -7,8 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
-
-// Function to load the navbar
 export const loadNavbar = () => `
     <nav class="navbar-part">
         <div class="container">

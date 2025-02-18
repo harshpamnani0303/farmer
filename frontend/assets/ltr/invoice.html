@@ -1,889 +1,751 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!--=====================================
+
+<head>
+  <!--=====================================
                     META TAG PART START
         =======================================-->
-    <!-- REQUIRE META -->
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+  <!-- REQUIRE META -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <!-- TEMPLATE META -->
-    <meta name="name" content="Greeny" />
-    <meta name="title" content="Greeny - eCommerce HTML Template" />
-    <meta
-      name="keywords"
-      content="organic, food, shop, ecommerce, store, html, bootstrap, template, agriculture, vegetables, webshop, farm, grocery, natural, online store"
-    />
-    <!--=====================================
+  <!-- TEMPLATE META -->
+  <meta name="name" content="Greeny" />
+  <meta name="title" content="Greeny - eCommerce HTML Template" />
+  <meta name="keywords"
+    content="organic, food, shop, ecommerce, store, html, bootstrap, template, agriculture, vegetables, webshop, farm, grocery, natural, online store" />
+  <!--=====================================
                     META-TAG PART END
         =======================================-->
 
-    <!-- WEBPAGE TITLE -->
-    <title>Greeny - Invoice</title>
+  <!-- WEBPAGE TITLE -->
+  <title>BharatFarmers - Invoice</title>
 
-    <!--=====================================
+  <!--=====================================
                     CSS LINK PART START
         =======================================-->
-    <!-- FAVICON -->
-    <link rel="icon" href="images/favicon.png" />
+  <!-- FAVICON -->
 
-    <!-- FONTS -->
-    <link rel="stylesheet" href="fonts/flaticon/flaticon.css" />
-    <link rel="stylesheet" href="fonts/icofont/icofont.min.css" />
-    <link rel="stylesheet" href="fonts/fontawesome/fontawesome.min.css" />
+  <!-- FONTS -->
+  <link rel="stylesheet" href="fonts/flaticon/flaticon.css" />
+  <link rel="stylesheet" href="fonts/icofont/icofont.min.css" />
+  <link rel="stylesheet" href="fonts/fontawesome/fontawesome.min.css" />
 
-    <!-- VENDOR -->
-    <link rel="stylesheet" href="vendor/venobox/venobox.min.css" />
-    <link rel="stylesheet" href="vendor/slickslider/slick.min.css" />
-    <link rel="stylesheet" href="vendor/niceselect/nice-select.min.css" />
-    <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css" />
+  <!-- VENDOR -->
+  <link rel="stylesheet" href="vendor/venobox/venobox.min.css" />
+  <link rel="stylesheet" href="vendor/slickslider/slick.min.css" />
+  <link rel="stylesheet" href="vendor/niceselect/nice-select.min.css" />
+  <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css" />
 
-    <!-- CUSTOM -->
-    <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="css/invoice.css" />
-    <!--=====================================
+  <!-- CUSTOM -->
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/invoice.css" />
+  <!--=====================================
                     CSS LINK PART END
         =======================================-->
-  </head>
+</head>
 
-  <body>
-    <div class="backdrop"></div>
-    <a class="backtop fas fa-arrow-up" href="#"></a>
+<body>
+  <div class="backdrop"></div>
+  <a class="backtop fas fa-arrow-up" href="#"></a>
 
-    <!--=====================================
+  <!--=====================================
                     HEADER PART START
         =======================================-->
-    <div id="header"></div>
-    <!-- ✅ Correct ID for header placement -->
+  <div id="header"></div>
+  <!-- ✅ Correct ID for header placement -->
 
-    <script type="module">
-      import { loadHeader } from "./header.js";
+  <script type="module">
+    import { loadHeader } from "./header.js";
 
-      // ✅ Ensure the element exists before setting innerHTML
-      document.getElementById("header").innerHTML = loadHeader();
-    </script>
-    <!--=====================================
+    // ✅ Ensure the element exists before setting innerHTML
+    document.getElementById("header").innerHTML = loadHeader();
+  </script>
+  <!--=====================================
                         HEADER PART END
             =======================================-->
 
-    <!--=====================================
+  <!--=====================================
                       CART SIDEBAR PART START
             =======================================-->
-    <div id="cart-sidebar"></div>
-    <!-- ✅ Placeholder for Cart Sidebar -->
+  <div id="cart-sidebar"></div>
+  <!-- ✅ Placeholder for Cart Sidebar -->
 
-    <script type="module">
-      import { loadCartSidebar } from "./cart.js";
-      let userId = localStorage.getItem("userId");
-      console.log(userId);
-      // ✅ Ensure the element exists before setting innerHTML
-      document.getElementById("cart-sidebar").innerHTML =
-        loadCartSidebar(userId);
-    </script>
+  <script type="module">
+    import { loadCartSidebar } from "./cart.js";
+    let userId = localStorage.getItem("userId");
+    console.log(userId);
+    // ✅ Ensure the element exists before setting innerHTML
+    document.getElementById("cart-sidebar").innerHTML =
+      loadCartSidebar(userId);
+  </script>
 
-    <!--=====================================
+  <!--=====================================
                         CART SIDEBAR PART END
             =======================================-->
 
-    <!--=====================================
+  <!--=====================================
                         NAVBAR PART START
             =======================================-->
-    <div id="nav"></div>
-    <script type="module">
-      import { loadNavbar } from "./navbar.js";
+  <div id="nav"></div>
+  <script type="module">
+    import { loadNavbar } from "./navbar.js";
 
-      document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById("nav").innerHTML = loadNavbar();
-      });
-    </script>
-    <!--=====================================
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("nav").innerHTML = loadNavbar();
+    });
+  </script>
+  <!--=====================================
                         NAVBAR PART END
             =======================================-->
 
-    <!--=====================================
+  <!--=====================================
                     BANNER PART START
         =======================================-->
-    <section
-      class="inner-section single-banner"
-      style="background: url(images/single-banner.jpg) no-repeat center"
-    >
-      <div class="container">
-        <h2>Order invoice</h2>
-      </div>
-    </section>
-    <!--=====================================
+  <section class="inner-section single-banner" style="background: url(images/single-banner.jpg) no-repeat center">
+    <div class="container">
+      <h2>Order invoice</h2>
+    </div>
+  </section>
+  <!--=====================================
                     BANNER PART END
         =======================================-->
 
-    <!--=====================================
+  <!--=====================================
                     INVOICE PART START
         =======================================-->
-    <section class="inner-section invoice-part">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="account-card">
-              <div class="account-title">
-                <h4>Order Received</h4>
-              </div>
-              <div class="account-content">
-                <div class="invoice-recieved">
-                  <h6>
-                    Order Number: <span id="order-number">Loading...</span>
-                  </h6>
-
-                  <script>
-                    document.addEventListener(
-                      "DOMContentLoaded",
-                      async function () {
-                        const orderNumberElement =
-                          document.getElementById("order-number");
-
-                        try {
-                          const response = await fetch(
-                            "http://localhost:5000/api/orders/next-order-number"
-                          );
-
-                          if (!response.ok) {
-                            throw new Error("Failed to fetch order number");
-                          }
-
-                          const data = await response.json();
-                          orderNumberElement.innerText = data.nextOrderNumber; // Display the next order number
-                        } catch (error) {
-                          console.error(
-                            "❌ Error fetching next order number:",
-                            error
-                          );
-                          orderNumberElement.innerText = "Error";
-                        }
-                      }
-                    );
-                  </script>
-
-                  <h6>Order Date: <span id="order-date">Loading...</span></h6>
-
-                  <script>
-                    document.addEventListener("DOMContentLoaded", function () {
-                      const today = new Date();
-                      let orderDate = new Date(today); // Default to today
-
-                      // Get checkoutData from localStorage
-                      const checkoutData = JSON.parse(
-                        localStorage.getItem("checkoutData")
-                      );
-
-                      if (checkoutData && checkoutData.deliverySchedule) {
-                        const deliverySchedule =
-                          checkoutData.deliverySchedule.toLowerCase(); // Convert to lowercase for uniformity
-
-                        if (
-                          ["next day", "nextday", "tomorrow"].includes(
-                            deliverySchedule
-                          )
-                        ) {
-                          orderDate.setDate(orderDate.getDate() + 1); // Move to the next day
-                        }
-                      }
-
-                      // Format the date as "12 Feb 2025"
-                      const options = {
-                        day: "2-digit",
-                        month: "short",
-                        year: "numeric",
-                      };
-                      const formattedDate = orderDate
-                        .toLocaleDateString("en-GB", options)
-                        .replace(",", "");
-
-                      document.getElementById("order-date").innerText =
-                        formattedDate;
-                    });
-                  </script>
-
-                  <h6>
-                    Total Amount: <span id="total-amount">Loading...</span>
-                  </h6>
-
-                  <script>
-                    document.addEventListener("DOMContentLoaded", function () {
-                      const totalAmount = localStorage.getItem("total");
-
-                      if (totalAmount) {
-                        // Format as Indian Rupees
-                        const formattedAmount = new Intl.NumberFormat("en-IN", {
-                          style: "currency",
-                          currency: "INR",
-                        }).format(totalAmount);
-
-                        document.getElementById("total-amount").innerText =
-                          formattedAmount;
-                      } else {
-                        document.getElementById("total-amount").innerText =
-                          "₹0.00"; // Default if no data
-                      }
-                    });
-                  </script>
-
-                  <h6>
-                    Payment Method:
-                    <span id="payment-method">Cash On Delivery</span>
-                  </h6>
-                </div>
-              </div>
+  <section class="inner-section invoice-part">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="account-card">
+            <div class="account-title">
+              <h4>Order Received</h4>
             </div>
-          </div>
+            <div class="account-content">
+              <div class="invoice-recieved">
+                <h6>
+                  Order Number: <span id="order-number">Loading...</span>
+                </h6>
 
-          <div class="col-lg-6">
-            <div class="account-card">
-              <div class="account-title">
-                <h4>Order Details</h4>
-              </div>
-              <div class="account-content">
-                <ul class="invoice-details">
-                  <li>
-                    <h6>Total Item</h6>
-                    <p id="totalItem">Loading...</p>
-                  </li>
-                  <li>
-                    <h6>Order Time</h6>
-                    <p id="orderTime">Loading...</p>
-                  </li>
-                  <li>
-                    <h6>Delivery Time</h6>
-                    <p id="deliveryTime">Loading...</p>
-                  </li>
-                  <li>
-                    <h6>Delivery Location</h6>
-                    <p id="deliveryLocation">Loading...</p>
-                  </li>
-                </ul>
-              </div>
+                <script>
+                  document.addEventListener(
+                    "DOMContentLoaded",
+                    async function () {
+                      const orderNumberElement =
+                        document.getElementById("order-number");
 
-              <script>
-                document.addEventListener(
-                  "DOMContentLoaded",
-                  async function () {
-                    const userId = localStorage.getItem("userId");
+                      try {
+                        const response = await fetch(
+                          "http://localhost:5000/api/orders/next-order-number"
+                        );
+
+                        if (!response.ok) {
+                          throw new Error("Failed to fetch order number");
+                        }
+
+                        const data = await response.json();
+                        orderNumberElement.innerText = data.nextOrderNumber; // Display the next order number
+                      } catch (error) {
+                        console.error(
+                          "❌ Error fetching next order number:",
+                          error
+                        );
+                        orderNumberElement.innerText = "Error";
+                      }
+                    }
+                  );
+                </script>
+
+                <h6>Order Date: <span id="order-date">Loading...</span></h6>
+
+                <script>
+                  document.addEventListener("DOMContentLoaded", function () {
+                    const today = new Date();
+                    let orderDate = new Date(today); // Default to today
+
+                    // Get checkoutData from localStorage
                     const checkoutData = JSON.parse(
                       localStorage.getItem("checkoutData")
                     );
 
-                    // Update Order Time (Current Time)
-                    const now = new Date();
-                    document.getElementById("orderTime").innerText =
-                      now.toLocaleTimeString() + " " + now.toLocaleDateString();
+                    if (checkoutData && checkoutData.deliverySchedule) {
+                      const deliverySchedule =
+                        checkoutData.deliverySchedule.toLowerCase(); // Convert to lowercase for uniformity
 
-                    // Update Delivery Time & Location from localStorage
-                    if (checkoutData) {
-                      document.getElementById("deliveryTime").innerText =
-                        checkoutData.deliverySchedule || "Not Available";
-                      document.getElementById("deliveryLocation").innerText =
-                        checkoutData.address || "Not Available";
-                    } else {
-                      document.getElementById("deliveryTime").innerText =
-                        "Not Available";
-                      document.getElementById("deliveryLocation").innerText =
-                        "Not Available";
-                    }
-
-                    // Fetch total items in cart
-                    if (userId) {
-                      try {
-                        const response = await fetch(
-                          `http://localhost:5000/api/cart/user/${userId}`
-                        );
-                        if (!response.ok)
-                          throw new Error("Failed to fetch cart items");
-
-                        const cartData = await response.json();
-                        document.getElementById(
-                          "totalItem"
-                        ).innerText = `${cartData.length} Items`;
-                      } catch (error) {
-                        console.error("❌ Error fetching cart items:", error);
-                        document.getElementById("totalItem").innerText =
-                          "Error Loading";
+                      if (
+                        ["next day", "nextday", "tomorrow"].includes(
+                          deliverySchedule
+                        )
+                      ) {
+                        orderDate.setDate(orderDate.getDate() + 1); // Move to the next day
                       }
-                    } else {
-                      document.getElementById("totalItem").innerText =
-                        "User Not Found";
                     }
+
+                    // Format the date as "12 Feb 2025"
+                    const options = {
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric",
+                    };
+                    const formattedDate = orderDate
+                      .toLocaleDateString("en-GB", options)
+                      .replace(",", "");
+
+                    document.getElementById("order-date").innerText =
+                      formattedDate;
+                  });
+                </script>
+
+                <h6>
+                  Total Amount: <span id="total-amount">Loading...</span>
+                </h6>
+
+                <script>
+                  document.addEventListener("DOMContentLoaded", function () {
+                    const totalAmount = localStorage.getItem("total");
+
+                    if (totalAmount) {
+                      // Format as Indian Rupees
+                      const formattedAmount = new Intl.NumberFormat("en-IN", {
+                        style: "currency",
+                        currency: "INR",
+                      }).format(totalAmount);
+
+                      document.getElementById("total-amount").innerText =
+                        formattedAmount;
+                    } else {
+                      document.getElementById("total-amount").innerText =
+                        "₹0.00"; // Default if no data
+                    }
+                  });
+                </script>
+
+                <h6>
+                  Payment Method:
+                  <span id="payment-method">Cash On Delivery</span>
+                </h6>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="account-card">
+            <div class="account-title">
+              <h4>Order Details</h4>
+            </div>
+            <div class="account-content">
+              <ul class="invoice-details">
+                <li>
+                  <h6>Total Item</h6>
+                  <p id="totalItem">Loading...</p>
+                </li>
+                <li>
+                  <h6>Order Time</h6>
+                  <p id="orderTime">Loading...</p>
+                </li>
+                <li>
+                  <h6>Delivery Time</h6>
+                  <p id="deliveryTime">Loading...</p>
+                </li>
+                <li>
+                  <h6>Delivery Location</h6>
+                  <p id="deliveryLocation">Loading...</p>
+                </li>
+              </ul>
+            </div>
+
+            <script>
+              document.addEventListener(
+                "DOMContentLoaded",
+                async function () {
+                  const userId = localStorage.getItem("userId");
+                  const checkoutData = JSON.parse(
+                    localStorage.getItem("checkoutData")
+                  );
+
+                  // Update Order Time (Current Time)
+                  const now = new Date();
+                  document.getElementById("orderTime").innerText =
+                    now.toLocaleTimeString() + " " + now.toLocaleDateString();
+
+                  // Update Delivery Time & Location from localStorage
+                  if (checkoutData) {
+                    document.getElementById("deliveryTime").innerText =
+                      checkoutData.deliverySchedule || "Not Available";
+                    document.getElementById("deliveryLocation").innerText =
+                      checkoutData.address || "Not Available";
+                  } else {
+                    document.getElementById("deliveryTime").innerText =
+                      "Not Available";
+                    document.getElementById("deliveryLocation").innerText =
+                      "Not Available";
                   }
-                );
-              </script>
-            </div>
-          </div>
-          <!-- <div class="col-lg-6">
-            <div class="account-card">
-              <div class="account-title">
-                <h4>Amount Details</h4>
-              </div>
-              <div class="account-content">
-                <ul class="invoice-details">
-                  <li>
-                    <h6>Sub Total</h6>
-                    <p>$10,864.00</p>
-                  </li>
-                  <li>
-                    <h6>discount</h6>
-                    <p>$20.00</p>
-                  </li>
-                  <li>
-                    <h6>Payment Method</h6>
-                    <p>Cash On Delivery</p>
-                  </li>
-                  <li>
-                    <h6>Total<small>(Incl. VAT)</small></h6>
-                    <p>$10,874.00</p>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div> -->
-          <div class="col-lg-12">
-            <div class="table-scroll">
-              <table class="table-list">
-                <thead>
-                  <tr>
-                    <th scope="col">Serial</th>
-                    <th scope="col">Product</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Quantity</th>
-                  </tr>
-                </thead>
-                <tbody id="cart-items">
-                  <tr>
-                    <td colspan="6" style="text-align: center">Loading...</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
 
-          <script>
-            document.addEventListener("DOMContentLoaded", async function () {
-              const userId = localStorage.getItem("userId");
-              const cartTableBody = document.getElementById("cart-items");
-              const totalItemCount = document.getElementById("totalItem");
+                  // Fetch total items in cart
+                  if (userId) {
+                    try {
+                      const response = await fetch(
+                        `http://localhost:5000/api/cart/user/${userId}`
+                      );
+                      if (!response.ok)
+                        throw new Error("Failed to fetch cart items");
 
-              if (!userId) {
+                      const cartData = await response.json();
+                      document.getElementById(
+                        "totalItem"
+                      ).innerText = `${cartData.length} Items`;
+                    } catch (error) {
+                      console.error("❌ Error fetching cart items:", error);
+                      document.getElementById("totalItem").innerText =
+                        "Error Loading";
+                    }
+                  } else {
+                    document.getElementById("totalItem").innerText =
+                      "User Not Found";
+                  }
+                }
+              );
+            </script>
+          </div>
+        </div>
+
+        <div class="col-lg-12">
+          <div class="table-scroll">
+            <table class="table-list">
+              <thead>
+                <tr>
+                  <th scope="col">Serial</th>
+                  <th scope="col">Product</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                </tr>
+              </thead>
+              <tbody id="cart-items">
+                <tr>
+                  <td colspan="6" style="text-align: center">Loading...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <script>
+          document.addEventListener("DOMContentLoaded", async function () {
+            const userId = localStorage.getItem("userId");
+            const cartTableBody = document.getElementById("cart-items");
+            const totalItemCount = document.getElementById("totalItem");
+
+            if (!userId) {
+              cartTableBody.innerHTML =
+                '<tr><td colspan="6" style="text-align: center;">User Not Found</td></tr>';
+              return;
+            }
+
+            try {
+              const response = await fetch(
+                `http://localhost:5000/api/cart/user/${userId}`
+              );
+              if (!response.ok) throw new Error("Failed to fetch cart items");
+
+              const cartData = await response.json();
+              if (!cartData || cartData.length === 0) {
                 cartTableBody.innerHTML =
-                  '<tr><td colspan="6" style="text-align: center;">User Not Found</td></tr>';
+                  '<tr><td colspan="6" style="text-align: center;">Cart is Empty</td></tr>';
                 return;
               }
 
-              try {
-                const response = await fetch(
-                  `http://localhost:5000/api/cart/user/${userId}`
-                );
-                if (!response.ok) throw new Error("Failed to fetch cart items");
+              // Clear previous content
+              cartTableBody.innerHTML = "";
+              totalItemCount.innerHTML = cartData.length;
 
-                const cartData = await response.json();
-                if (!cartData || cartData.length === 0) {
-                  cartTableBody.innerHTML =
-                    '<tr><td colspan="6" style="text-align: center;">Cart is Empty</td></tr>';
-                  return;
-                }
+              cartData.forEach((item, index) => {
+                const row = document.createElement("tr");
 
-                // Clear previous content
-                cartTableBody.innerHTML = "";
-                totalItemCount.innerHTML = cartData.length;
-
-                cartData.forEach((item, index) => {
-                  const row = document.createElement("tr");
-                  //           row.innerHTML = `
-                  //   <td class="table-serial"><h6>${index + 1}</h6></td>
-                  //   <td class="table-image"><img src="${
-                  //     item.product.image || "images/default.jpg"
-                  //   }" alt="product" /></td>
-                  //   <td class="table-name"><h6>${item.product.name}</h6></td>
-                  //   <td class="table-price"><h6>$${item.product.price.toFixed(
-                  //     2
-                  //   )}<small>/kilo</small></h6></td>
-                  //   <td class="table-brand"><h6>${item.product.brand || "N/A"}</h6></td>
-                  //   <td class="table-quantity"><h6>${item.quantity}</h6></td>
-                  // `;
-                  row.innerHTML = `
+                row.innerHTML = `
           <td class="table-serial"><h6>${index + 1}</h6></td>
           <td class="table-image"><img src="${item.image}" alt="product" /></td>
           <td class="table-name"><h6>${item.name}</h6></td>
           <td class="table-price"><h6>$${item.price.toFixed(
-            2
-          )}<small>/kilo</small></h6></td>
+                  2
+                )}<small>/kilo</small></h6></td>
           <td class="table-quantity"><h6>${item.quantity}</h6></td>
         `;
-                  cartTableBody.appendChild(row);
-                });
-              } catch (error) {
-                console.error("❌ Error fetching cart items:", error);
-                cartTableBody.innerHTML =
-                  '<tr><td colspan="6" style="text-align: center;">Error Loading Cart</td></tr>';
-              }
-            });
-          </script>
+                cartTableBody.appendChild(row);
+              });
+            } catch (error) {
+              console.error("❌ Error fetching cart items:", error);
+              cartTableBody.innerHTML =
+                '<tr><td colspan="6" style="text-align: center;">Error Loading Cart</td></tr>';
+            }
+          });
+        </script>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 text-center mt-5">
+          <button class="btn btn-inline" id="orderButton">
+            <i class="icofont-download"></i>
+            <span>Order</span>
+          </button>
+          <div class="back-home">
+            <a href="index.htm">Back to Home</a>
+          </div>
         </div>
-        <div class="row">
-          <div class="col-lg-12 text-center mt-5">
-            <button class="btn btn-inline" id="orderButton">
-              <i class="icofont-download"></i>
-              <span>Order</span>
-            </button>
-            <div class="back-home">
-              <a href="index.htm">Back to Home</a>
+      </div>
+
+      <!-- Invoice Modal -->
+      <div id="invoiceModal" class="modal bg-gray-100 fixed inset-0 flex items-center justify-center">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl p-6 w-11/12 md:w-3/4 lg:w-1/2 relative">
+          <span class="close-btn absolute top-4 right-4 text-gray-500 text-2xl cursor-pointer"
+            id="closeModal">&times;</span>
+          <h2 class="text-3xl font-bold text-center text-blue-600 mb-4">Invoice</h2>
+
+          <!-- Scrollable Container for Entire Modal Content -->
+          <div class="modal-body overflow-y-auto max-h-[70vh]">
+
+            <!-- Invoice Details Card -->
+            <div class="invoice-details bg-blue-100 p-4 rounded-lg shadow mb-6">
+              <p><strong>Order Number:</strong> <span id="invoiceOrderNumber">Loading...</span></p>
+              <p><strong>Total Items:</strong> <span id="invoiceTotalItems">Loading...</span></p>
+              <p><strong>Total Amount:</strong> $<span id="invoiceTotalAmount">Loading...</span></p>
+              <p><strong>Delivery Schedule:</strong> <span id="invoiceDeliverySchedule">Loading...</span></p>
+              <p><strong>Delivery Address:</strong> <span id="invoiceDeliveryAddress">Loading...</span></p>
+              <p><strong>Contact Number:</strong> <span id="invoiceContactNumber">Loading...</span></p>
             </div>
+
+            <!-- Product Table -->
+            <h3 class="text-2xl font-semibold text-gray-700 mb-2">Cart Items</h3>
+            <div class="overflow-x-auto mb-4">
+              <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow">
+                <thead class="bg-gray-200">
+                  <tr>
+                    <th class="py-2 px-4 border">Item Name</th>
+                    <th class="py-2 px-4 border">Quantity</th>
+                    <th class="py-2 px-4 border">Price</th>
+                    <th class="py-2 px-4 border">Total</th>
+                  </tr>
+                </thead>
+                <tbody id="invoiceCartItems">
+                  <!-- Dynamic Rows Here -->
+                </tbody>
+              </table>
+            </div>
+
           </div>
+
+          <button id="downloadInvoice"
+            class="mt-6 w-full bg-blue-500 text-white font-semibold py-2 rounded-lg hover:bg-blue-600 transition">
+            Download Invoice
+          </button>
         </div>
+      </div>
 
-        <!-- Invoice Modal -->
-        <div id="invoiceModal" class="modal">
-          <div class="modal-content">
-            <span class="close-btn" id="closeModal">&times;</span>
-            <h2>Invoice</h2>
-            <p>
-              <strong>Order Number:</strong>
-              <span id="invoiceOrderNumber">Loading...</span>
-            </p>
-            <p>
-              <strong>Total Items:</strong>
-              <span id="invoiceTotalItems">Loading...</span>
-            </p>
-            <p>
-              <strong>Total Amount:</strong> $<span id="invoiceTotalAmount"
-                >Loading...</span
-              >
-            </p>
-            <p>
-              <strong>Delivery Schedule:</strong>
-              <span id="invoiceDeliverySchedule">Loading...</span>
-            </p>
-            <p>
-              <strong>Delivery Address:</strong>
-              <span id="invoiceDeliveryAddress">Loading...</span>
-            </p>
-            <p>
-              <strong>Contact Number:</strong>
-              <span id="invoiceContactNumber">Loading...</span>
-            </p>
 
-            <h3>Cart Items</h3>
-            <ul id="invoiceCartItems"></ul>
+      <style>
+        /* Modal Setup */
+        .modal {
+          display: none;
+          /* Initially hidden */
+          z-index: 1000;
+          position: fixed;
+          inset: 0;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
 
-            <button id="downloadInvoice" class="btn btn-inline">
-              Download Invoice
-            </button>
-          </div>
-        </div>
+        /* Modal Content Styling */
+        .modal-content {
+          max-height: 90vh;
+          /* Set the height of the modal */
+          width: 100%;
+          /* Ensure full width on smaller screens */
+          max-width: 800px;
+          /* Maximum width */
+          background-color: white;
+          border-radius: 16px;
+          padding: 20px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          position: relative;
+          display: flex;
+          flex-direction: column;
+        }
 
-        <style>
-          .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-          }
-          .modal-content {
-            background: #fff;
-            padding: 20px;
-            width: 400px;
-            text-align: center;
-            border-radius: 10px;
-          }
-          .close-btn {
-            float: right;
-            cursor: pointer;
-            font-size: 20px;
-          }
-        </style>
+        /* Close Button */
+        .close-btn {
+          cursor: pointer;
+          font-size: 24px;
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          color: #6b7280;
+        }
 
-        <script>
-          document
-            .getElementById("orderButton")
-            .addEventListener("click", async function () {
-              const userId = localStorage.getItem("userId");
-              const checkoutData = JSON.parse(
-                localStorage.getItem("checkoutData")
+        /* Modal Body with Single Scroll */
+        .modal-body {
+          overflow-y: auto;
+          /* Enable vertical scrolling */
+          max-height: 70vh;
+          /* Set a fixed height for the modal body */
+          margin-bottom: 20px;
+        }
+
+        /* Invoice Details Section */
+        .invoice-details {
+          margin-bottom: 20px;
+        }
+
+        /* Table Styling */
+        table {
+          width: 100%;
+          border-collapse: collapse;
+        }
+
+        th,
+        td {
+          padding: 8px 12px;
+          text-align: left;
+          border: 1px solid #ddd;
+        }
+
+        thead {
+          background-color: #f7fafc;
+        }
+
+        tbody tr:nth-child(even) {
+          background-color: #f9fafb;
+        }
+
+        tbody tr:hover {
+          background-color: #edf2f7;
+        }
+
+        /* Button Styling */
+        #downloadInvoice {
+          margin-top: 20px;
+          background-color: #3182ce;
+          color: white;
+          font-weight: bold;
+          padding: 12px;
+          border-radius: 8px;
+          text-align: center;
+        }
+
+        #downloadInvoice:hover {
+          background-color: #2b6cb0;
+        }
+      </style>
+
+      <script>
+        document
+          .getElementById("orderButton")
+          .addEventListener("click", async function () {
+            const userId = localStorage.getItem("userId");
+            const checkoutData = JSON.parse(
+              localStorage.getItem("checkoutData")
+            );
+
+            if (!userId || !checkoutData) {
+              alert("User or checkout data missing!");
+              return;
+            }
+
+            try {
+              // Fetch cart data
+              const cartResponse = await fetch(
+                `http://localhost:5000/api/cart/user/${userId}`
               );
+              if (!cartResponse.ok)
+                throw new Error("Failed to fetch cart data");
 
-              if (!userId || !checkoutData) {
-                alert("User or checkout data missing!");
+              const cartItems = await cartResponse.json();
+
+              if (!cartItems || cartItems.length === 0) {
+                alert("Your cart is empty!");
                 return;
               }
 
-              try {
-                // Fetch cart data
-                const cartResponse = await fetch(
-                  `http://localhost:5000/api/cart/user/${userId}`
-                );
-                if (!cartResponse.ok)
-                  throw new Error("Failed to fetch cart data");
+              const totalAmount = cartItems.reduce(
+                (acc, item) => acc + item.price * item.quantity,
+                0
+              );
 
-                const cartItems = await cartResponse.json();
+              const orderData = {
+                user: userId,
+                products: cartItems.map((item) => ({
+                  product: item.productId,
+                  quantity: item.quantity,
+                })),
+                totalAmount,
+                deliverySchedule: checkoutData.deliverySchedule,
+                contactNumbers: [
+                  { label: "primary", number: checkoutData.phoneNumber },
+                ],
+                deliveryAddresses: [
+                  { label: "Home", address: checkoutData.address },
+                ],
+              };
 
-                if (!cartItems || cartItems.length === 0) {
-                  alert("Your cart is empty!");
-                  return;
+              console.log("pass first");
+
+              // Send order data to backend
+              const orderResponse = await fetch(
+                "http://localhost:5000/api/orders",
+                {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(orderData),
                 }
+              );
 
-                const totalAmount = cartItems.reduce(
-                  (acc, item) => acc + item.price * item.quantity,
-                  0
-                );
+              console.log("pass second");
 
-                const orderData = {
-                  user: userId,
-                  products: cartItems.map((item) => ({
-                    product: item.productId,
-                    quantity: item.quantity,
-                  })),
-                  totalAmount,
-                  deliverySchedule: checkoutData.deliverySchedule,
-                  contactNumbers: [
-                    { label: "primary", number: checkoutData.phoneNumber },
-                  ],
-                  deliveryAddresses: [
-                    { label: "Home", address: checkoutData.address },
-                  ],
-                };
+              if (!orderResponse.ok) throw new Error("Failed to place order");
 
-                console.log("pass first");
+              const orderResult = await orderResponse.json();
 
-                // Send order data to backend
-                const orderResponse = await fetch(
-                  "http://localhost:5000/api/orders",
-                  {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(orderData),
-                  }
-                );
+              // Update invoice modal data
+              document.getElementById("invoiceOrderNumber").innerText =
+                orderResult.orderNumber;
+              document.getElementById("invoiceTotalItems").innerText =
+                cartItems.length;
+              document.getElementById("invoiceTotalAmount").innerText =
+                totalAmount.toFixed(2);
+              document.getElementById("invoiceDeliverySchedule").innerText =
+                checkoutData.deliverySchedule;
+              document.getElementById("invoiceDeliveryAddress").innerText =
+                checkoutData.address;
+              document.getElementById("invoiceContactNumber").innerText =
+                checkoutData.phoneNumber;
 
-                console.log("pass second");
+              // Populate cart items in invoice modal
+              let cartItemsHTML = "";
+              cartItems.forEach((item, index) => {
+                cartItemsHTML += `
+    <tr>
+      <td class="py-2 px-4 border">${item.name}</td>
+      <td class="py-2 px-4 border">${item.quantity}</td>
+      <td class="py-2 px-4 border">$${item.price.toFixed(2)}</td>
+      <td class="py-2 px-4 border">$${(item.price * item.quantity).toFixed(2)}</td>
+    </tr>
+  `;
+              });
 
-                if (!orderResponse.ok) throw new Error("Failed to place order");
+              document.getElementById("invoiceCartItems").innerHTML = cartItemsHTML;
 
-                const orderResult = await orderResponse.json();
 
-                // Update invoice modal data
-                document.getElementById("invoiceOrderNumber").innerText =
-                  orderResult.orderNumber;
-                document.getElementById("invoiceTotalItems").innerText =
-                  cartItems.length;
-                document.getElementById("invoiceTotalAmount").innerText =
-                  totalAmount.toFixed(2);
-                document.getElementById("invoiceDeliverySchedule").innerText =
-                  checkoutData.deliverySchedule;
-                document.getElementById("invoiceDeliveryAddress").innerText =
-                  checkoutData.address;
-                document.getElementById("invoiceContactNumber").innerText =
-                  checkoutData.phoneNumber;
+              // Show invoice modal
+              document.getElementById("invoiceModal").style.display = "flex";
+            } catch (error) {
+              console.error("❌ Error placing order:", error);
+              alert("Error placing order. Please try again.");
+            }
+          });
 
-                // Populate cart items in invoice modal
-                let cartItemsHTML = "";
-                cartItems.forEach((item, index) => {
-                  cartItemsHTML += `
-        <li>${index + 1}. ${item.name} - Quantity: ${item.quantity} | Price: $${
-                    item.price
-                  } | Total: $${(item.price * item.quantity).toFixed(2)}</li>
-      `;
-                });
-                document.getElementById("invoiceCartItems").innerHTML =
-                  cartItemsHTML;
+        // Close Modal
+        document
+          .getElementById("closeModal")
+          .addEventListener("click", function () {
+            document.getElementById("invoiceModal").style.display = "none";
+            window.location.href = "index.html";
+          });
 
-                // Show invoice modal
-                document.getElementById("invoiceModal").style.display = "flex";
-              } catch (error) {
-                console.error("❌ Error placing order:", error);
-                alert("Error placing order. Please try again.");
-              }
-            });
-
-          // Close Modal
-          document
-            .getElementById("closeModal")
-            .addEventListener("click", function () {
-              document.getElementById("invoiceModal").style.display = "none";
-              window.location.href = "index.html";
-            });
-
-          // Download Invoice
-          document
-            .getElementById("downloadInvoice")
-            .addEventListener("click", function () {
-              let invoiceContent = `
+        // Download Invoice
+        document
+          .getElementById("downloadInvoice")
+          .addEventListener("click", function () {
+            let invoiceContent = `
 Order Number: ${document.getElementById("invoiceOrderNumber").innerText}
 Total Items: ${document.getElementById("invoiceTotalItems").innerText}
 Total Amount: $${document.getElementById("invoiceTotalAmount").innerText}
-Delivery Schedule: ${
-                document.getElementById("invoiceDeliverySchedule").innerText
-              }
+Delivery Schedule: ${document.getElementById("invoiceDeliverySchedule").innerText}
 Delivery Address: ${document.getElementById("invoiceDeliveryAddress").innerText}
 Contact Number: ${document.getElementById("invoiceContactNumber").innerText}
 
 Cart Items:
-  `;
+`;
 
-              document
-                .querySelectorAll("#invoiceCartItems li")
-                .forEach((item) => {
-                  invoiceContent += `\n- ${item.innerText}`;
-                });
+            // Loop through the table rows and extract data
+            document.querySelectorAll("#invoiceCartItems tr").forEach((row) => {
+              const cells = row.querySelectorAll("td");
+              const itemName = cells[0].innerText;
+              const quantity = cells[1].innerText;
+              const price = cells[2].innerText;
+              const total = cells[3].innerText;
 
-              const blob = new Blob([invoiceContent], { type: "text/plain" });
-              const link = document.createElement("a");
-              link.href = URL.createObjectURL(blob);
-              link.download = "Invoice.txt";
-              document.body.appendChild(link);
-              link.click();
-              document.body.removeChild(link);
-              window.location.href = "index.html";
+              // Append each cart item to the invoice content
+              invoiceContent += `\n- ${itemName} | Quantity: ${quantity} | Price: ${price} | Total: ${total}`;
             });
-        </script>
-      </div>
-    </section>
-    <!--=====================================
+
+            const blob = new Blob([invoiceContent], { type: "text/plain" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "Invoice.txt";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.location.href = "index.html";
+          });
+
+      </script>
+    </div>
+  </section>
+  <!--=====================================
                     INVOICE PART END
         =======================================-->
 
-    <!--=====================================
-                    NEWSLETTER PART START
-        =======================================-->
-    <section
-      class="news-part"
-      style="background: url(images/newsletter.jpg) no-repeat center"
-    >
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-5 col-lg-6 col-xl-7">
-            <div class="news-text">
-              <h2>Get 20% Discount for Subscriber</h2>
-              <p>Lorem ipsum dolor consectetur adipisicing accusantium</p>
-            </div>
-          </div>
-          <div class="col-md-7 col-lg-6 col-xl-5">
-            <form class="news-form">
-              <input type="text" placeholder="Enter Your Email Address" />
-              <button>
-                <span><i class="icofont-ui-email"></i>Subscribe</span>
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!--=====================================
-                    NEWSLETTER PART END
-        =======================================-->
 
-    <!--=====================================
+  <!--=====================================
                     INTRO PART START
         =======================================-->
-    <section class="intro-part">
-      <div class="container">
-        <div class="row intro-content">
-          <div class="col-sm-6 col-lg-3">
-            <div class="intro-wrap">
-              <div class="intro-icon">
-                <i class="fas fa-truck"></i>
-              </div>
-              <div class="intro-content">
-                <h5>free home delivery</h5>
-                <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-3">
-            <div class="intro-wrap">
-              <div class="intro-icon">
-                <i class="fas fa-sync-alt"></i>
-              </div>
-              <div class="intro-content">
-                <h5>instant return policy</h5>
-                <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-3">
-            <div class="intro-wrap">
-              <div class="intro-icon">
-                <i class="fas fa-headset"></i>
-              </div>
-              <div class="intro-content">
-                <h5>quick support system</h5>
-                <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-3">
-            <div class="intro-wrap">
-              <div class="intro-icon">
-                <i class="fas fa-lock"></i>
-              </div>
-              <div class="intro-content">
-                <h5>secure payment way</h5>
-                <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!--=====================================
+  <div id="section"></div>
+
+  <!-- Import the ES6 Module -->
+  <script type="module">
+    import createIntroSection from './intro.js';
+    document.getElementById('section').innerHTML = createIntroSection();
+  </script>
+  <!--=====================================
                     INTRO PART END
         =======================================-->
 
-    <!--=====================================
+  <!--=====================================
                      FOOTER PART START
         =======================================-->
-    <footer class="footer-part">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-6 col-xl-3">
-            <div class="footer-widget">
-              <a class="footer-logo" href="#">
-                <img src="images/logo.png" alt="logo" />
-              </a>
-              <p class="footer-desc">
-                Adipisci asperiores ipsum ipsa repellat consequatur repudiandae
-                quisquam assumenda dolor perspiciatis sit ipsum dolor amet.
-              </p>
-              <ul class="footer-social">
-                <li><a class="icofont-facebook" href="#"></a></li>
-                <li><a class="icofont-twitter" href="#"></a></li>
-                <li><a class="icofont-linkedin" href="#"></a></li>
-                <li><a class="icofont-instagram" href="#"></a></li>
-                <li><a class="icofont-pinterest" href="#"></a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-sm-6 col-xl-3">
-            <div class="footer-widget contact">
-              <h3 class="footer-title">contact us</h3>
-              <ul class="footer-contact">
-                <li>
-                  <i class="icofont-ui-email"></i>
-                  <p>
-                    <span>support@example.com</span>
-                    <span>carrer@example.com</span>
-                  </p>
-                </li>
-                <li>
-                  <i class="icofont-ui-touch-phone"></i>
-                  <p>
-                    <span>+120 279 532 13</span>
-                    <span>+120 279 532 14</span>
-                  </p>
-                </li>
-                <li>
-                  <i class="icofont-location-pin"></i>
-                  <p>1Hd- 50, 010 Avenue, NY 90001 United States</p>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-sm-6 col-xl-3">
-            <div class="footer-widget">
-              <h3 class="footer-title">quick Links</h3>
-              <div class="footer-links">
-                <ul>
-                  <li><a href="#">My Account</a></li>
-                  <li><a href="#">Order History</a></li>
-                  <li><a href="#">Order Tracking</a></li>
-                  <li><a href="#">Best Seller</a></li>
-                  <li><a href="#">New Arrivals</a></li>
-                </ul>
-                <ul>
-                  <li><a href="#">Location</a></li>
-                  <li><a href="#">Affiliates</a></li>
-                  <li><a href="#">Contact</a></li>
-                  <li><a href="#">Carrer</a></li>
-                  <li><a href="#">Faq</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-xl-3">
-            <div class="footer-widget">
-              <h3 class="footer-title">Download App</h3>
-              <p class="footer-desc">
-                Lorem ipsum dolor sit amet tenetur dignissimos ipsum eligendi
-                autem obcaecati minus ducimus totam reprehenderit
-                exercitationem!
-              </p>
-              <div class="footer-app">
-                <a href="#"
-                  ><img src="images/google-store.png" alt="google"
-                /></a>
-                <a href="#"><img src="images/app-store.png" alt="app" /></a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <div class="footer-bottom">
-              <p class="footer-copytext">
-                &copy; All Copyrights Reserved by
-                <a
-                  target="_blank"
-                  href="https://themeforest.net/user/mironcoder"
-                  >Mironcoder</a
-                >
-              </p>
-              <div class="footer-card">
-                <a href="#"
-                  ><img src="images/payment/jpg/01.jpg" alt="payment"
-                /></a>
-                <a href="#"
-                  ><img src="images/payment/jpg/02.jpg" alt="payment"
-                /></a>
-                <a href="#"
-                  ><img src="images/payment/jpg/03.jpg" alt="payment"
-                /></a>
-                <a href="#"
-                  ><img src="images/payment/jpg/04.jpg" alt="payment"
-                /></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <!--=====================================
+  <div id="footer"></div>
+
+  <script type="module">
+    import { loadFooter } from './footer.js';
+    document.getElementById('footer').innerHTML = loadFooter();
+  </script>
+  <!--=====================================
                       FOOTER PART END
         =======================================-->
 
-    <!--=====================================
+  <!--=====================================
                     JS LINK PART START
         =======================================-->
-    <!-- VENDOR -->
-    <script src="vendor/bootstrap/jquery-1.12.4.min.js"></script>
-    <script src="vendor/bootstrap/popper.min.js"></script>
-    <script src="vendor/bootstrap/bootstrap.min.js"></script>
-    <script src="vendor/countdown/countdown.min.js"></script>
-    <script src="vendor/niceselect/nice-select.min.js"></script>
-    <script src="vendor/slickslider/slick.min.js"></script>
-    <script src="vendor/venobox/venobox.min.js"></script>
+  <!-- VENDOR -->
+  <script src="vendor/bootstrap/jquery-1.12.4.min.js"></script>
+  <script src="vendor/bootstrap/popper.min.js"></script>
+  <script src="vendor/bootstrap/bootstrap.min.js"></script>
+  <script src="vendor/countdown/countdown.min.js"></script>
+  <script src="vendor/niceselect/nice-select.min.js"></script>
+  <script src="vendor/slickslider/slick.min.js"></script>
+  <script src="vendor/venobox/venobox.min.js"></script>
 
-    <!-- CUSTOM -->
-    <script src="js/nice-select.js"></script>
-    <script src="js/countdown.js"></script>
-    <script src="js/accordion.js"></script>
-    <script src="js/venobox.js"></script>
-    <script src="js/slick.js"></script>
-    <script src="js/main.js"></script>
-    <!--=====================================
+  <!-- CUSTOM -->
+  <script src="js/nice-select.js"></script>
+  <script src="js/countdown.js"></script>
+  <script src="js/accordion.js"></script>
+  <script src="js/venobox.js"></script>
+  <script src="js/slick.js"></script>
+  <script src="js/main.js"></script>
+  <!--=====================================
                     JS LINK PART END
         =======================================-->
-  </body>
+</body>
+
 </html>

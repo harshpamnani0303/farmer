@@ -27,7 +27,7 @@
 
         // If a category exists, update the title dynamically
         if (selectedCategory) {
-            document.title = `${selectedCategory} - Greeny`;
+            document.title = `BharatFarmers - ${selectedCategory}`;
         }
     </script>
 
@@ -36,7 +36,6 @@
                     CSS LINK PART START
         =======================================-->
     <!-- FAVICON -->
-    <link rel="icon" href="images/favicon.png">
 
     <!-- FONTS -->
     <link rel="stylesheet" href="fonts/flaticon/flaticon.css">
@@ -94,14 +93,38 @@
 
         <script type="module">
             import { loadCartSidebar } from './cart.js';
-    
+            let userId = localStorage.getItem('userId');
+            console.log(userId);
             // ✅ Ensure the element exists before setting innerHTML
-            document.getElementById('cart-sidebar').innerHTML = loadCartSidebar();
+            document.getElementById('cart-sidebar').innerHTML = loadCartSidebar(userId);
         </script>
     
         <!--=====================================
                         CART SIDEBAR PART END
             =======================================-->
+
+
+             <!--=====================================
+                    PRODUCT VIEW START
+        =======================================-->
+    <!-- Product View Modal -->
+    <div id="product-view" class="modal fade" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Content will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ✅ Include productView.js as Module -->
+    <script type="module">
+        import { createProductModal } from './productView.js';
+    </script>
+
+    <!--=====================================
+                    PRODUCT VIEW END
+        =======================================-->
 
     <!--=====================================
                     BANNER PART START
@@ -177,56 +200,13 @@
     <!--=====================================
     INTRO PART START
     =======================================-->
-    <section class="intro-part">
-        <div class="container">
-            <div class="row intro-content">
-                <div class="col-sm-6 col-lg-3">
-                    <div class="intro-wrap">
-                        <div class="intro-icon">
-                            <i class="fas fa-truck"></i>
-                        </div>
-                        <div class="intro-content">
-                            <h5>free home delivery</h5>
-                            <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="intro-wrap">
-                        <div class="intro-icon">
-                            <i class="fas fa-sync-alt"></i>
-                        </div>
-                        <div class="intro-content">
-                            <h5>instant return policy</h5>
-                            <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="intro-wrap">
-                        <div class="intro-icon">
-                            <i class="fas fa-headset"></i>
-                        </div>
-                        <div class="intro-content">
-                            <h5>quick support system</h5>
-                            <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="intro-wrap">
-                        <div class="intro-icon">
-                            <i class="fas fa-lock"></i>
-                        </div>
-                        <div class="intro-content">
-                            <h5>secure payment way</h5>
-                            <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div id="section"></div>
+
+    <!-- Import the ES6 Module -->
+    <script type="module">
+        import createIntroSection from './intro.js';
+        document.getElementById('section').innerHTML = createIntroSection();
+    </script>
     <!--=====================================
                     INTRO PART END
         =======================================-->

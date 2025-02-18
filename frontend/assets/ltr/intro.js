@@ -1,10 +1,10 @@
 // introSection.js
 export default function createIntroSection() {
     const introData = [
-      { icon: 'fas fa-truck', title: 'Free Home Delivery', desc: 'Lorem ipsum dolor sit amet adipisicing elit nobis.' },
-      { icon: 'fas fa-sync-alt', title: 'Instant Return Policy', desc: 'Lorem ipsum dolor sit amet adipisicing elit nobis.' },
-      { icon: 'fas fa-headset', title: 'Quick Support System', desc: 'Lorem ipsum dolor sit amet adipisicing elit nobis.' },
-      { icon: 'fas fa-lock', title: 'Secure Payment Way', desc: 'Lorem ipsum dolor sit amet adipisicing elit nobis.' }
+      { icon: 'fas fa-truck', title: 'Free Home Delivery', desc: 'Fresh Produce, Fast Delivery – Always Free!' },
+      { icon: 'fas fa-sync-alt', title: 'Instant Return Policy', desc: 'Quality Products | Instant Returns Guaranteed' },
+      { icon: 'fas fa-headset', title: 'Quick Support System', desc: ' 24/7 Customer Support | Fast Help | Instant Solutions' },
+      { icon: 'fas fa-lock', title: 'Secure Payment Way', desc: 'Safe, Fast, and Reliable Payments' }
     ];
   
     return `

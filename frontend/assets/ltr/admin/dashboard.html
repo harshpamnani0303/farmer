@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel - Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div class="flex h-screen">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-gradient-to-b from-green-700 to-green-500 text-white p-5 shadow-lg">
+      <h1 class="text-3xl font-extrabold mb-6 text-center">Admin Panel</h1>
+      <nav>
+        <ul class="space-y-4">
+          <li class="hover:bg-green-600 p-3 rounded">
+            <a href="dashboard.html">Dashboard</a>
+          </li>
+          <li class="hover:bg-green-600 p-3 rounded">
+            <a href="product.html">Products</a>
+          </li>
+          <li class="hover:bg-green-600 p-3 rounded">
+            <a href="order.html">Orders</a>
+          </li>
+          <li class="hover:bg-green-600 p-3 rounded">
+            <a href="#">Users</a>
+          </li>
+          <li class="hover:bg-green-600 p-3 rounded">
+            <a href="#">Settings</a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8">
+      <h2 class="text-4xl font-bold mb-8 text-gray-800">Dashboard</h2>
+
+      <!-- Overview Cards -->
+      <div class="grid grid-cols-3 gap-6 mb-8">
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+          <h3 class="text-2xl font-bold text-gray-700">Total Products</h3>
+          <p class="text-4xl font-extrabold text-green-600">50</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+          <h3 class="text-2xl font-bold text-gray-700">Total Orders</h3>
+          <p class="text-4xl font-extrabold text-green-600">120</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+          <h3 class="text-2xl font-bold text-gray-700">Total Revenue</h3>
+          <p class="text-4xl font-extrabold text-green-600">₹500,000</p>
+        </div>
+      </div>
+
+      <!-- Chart Section -->
+      <div class="bg-white p-6 rounded-lg shadow-lg">
+        <h3 class="text-2xl font-bold text-gray-700 mb-4">Sales Overview</h3>
+        <canvas id="salesChart"></canvas>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6 mt-6">
+        <!-- Product Category Distribution Chart -->
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+          <h3 class="text-2xl font-bold text-gray-700 mb-4">Product Categories</h3>
+          <canvas id="categoryChart"></canvas>
+        </div>
+
+        <!-- Order Status Distribution Chart -->
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+          <h3 class="text-2xl font-bold text-gray-700 mb-4">Order Status</h3>
+          <canvas id="orderStatusChart"></canvas>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Sales Overview Chart
+    const salesChart = document.getElementById('salesChart').getContext('2d');
+    const mySalesChart = new Chart(salesChart, {
+      type: 'line',
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May'],
+        datasets: [{
+          label: 'Sales ($)',
+          data: [5000, 7000, 8000, 6000, 9500],
+          borderColor: 'rgb(75, 192, 192)',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          fill: true,
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // Product Categories Distribution Chart (Pie Chart)
+    const categoryChart = document.getElementById('categoryChart').getContext('2d');
+    const myCategoryChart = new Chart(categoryChart, {
+      type: 'pie',
+      data: {
+        labels: ['Vegetables', 'Fruits', 'Tools', 'Seeds'],
+        datasets: [{
+          data: [40, 30, 20, 10],
+          backgroundColor: ['#4CAF50', '#FF9800', '#2196F3', '#F44336'],
+        }]
+      },
+      options: {
+        responsive: true
+      }
+    });
+
+    // Order Status Distribution Chart (Doughnut Chart)
+    const orderStatusChart = document.getElementById('orderStatusChart').getContext('2d');
+    const myOrderStatusChart = new Chart(orderStatusChart, {
+      type: 'doughnut',
+      data: {
+        labels: ['Pending', 'Shipped', 'Delivered', 'Cancelled'],
+        datasets: [{
+          data: [25, 50, 15, 10],
+          backgroundColor: ['#FFEB3B', '#4CAF50', '#2196F3', '#F44336'],
+        }]
+      },
+      options: {
+        responsive: true
+      }
+    });
+  </script>
+</body>
+</html>

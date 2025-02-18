@@ -18,7 +18,7 @@ export function loadHeader() {
             <div class="modal-content p-5 text-center shadow-lg rounded-lg" style="background: #fff; border-radius: 12px; position:relative; width: 350px;">
               <button class="close-btn" id="close-modal" style="position:absolute; top:10px; right:10px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">×</button>
               <div class="modal-body">
-                <p style="font-size: 1.5rem; font-weight: bold; color: red;">You are logged out, ${userName}</p>
+                <p style="font-size: 1rem; font-weight: bold; color: black;">You are logged out, ${userName}</p>
                 <button class="btn btn-success mt-3" id="logout-button">Logout</button>
               </div>
             </div>

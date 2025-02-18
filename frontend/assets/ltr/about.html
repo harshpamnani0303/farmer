@@ -19,7 +19,7 @@
         =======================================-->
 
     <!-- WEBPAGE TITLE -->
-    <title>Greeny - About Us</title>
+    <title>BharatFarm - About Us</title>
 
     <!--=====================================
                     CSS LINK PART START
@@ -287,56 +287,13 @@
     <!--=====================================
                     INTRO PART START
         =======================================-->
-    <section class="intro-part">
-        <div class="container">
-            <div class="row intro-content">
-                <div class="col-sm-6 col-lg-3">
-                    <div class="intro-wrap">
-                        <div class="intro-icon">
-                            <i class="fas fa-truck"></i>
-                        </div>
-                        <div class="intro-content">
-                            <h5>free home delivery</h5>
-                            <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="intro-wrap">
-                        <div class="intro-icon">
-                            <i class="fas fa-sync-alt"></i>
-                        </div>
-                        <div class="intro-content">
-                            <h5>instant return policy</h5>
-                            <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="intro-wrap">
-                        <div class="intro-icon">
-                            <i class="fas fa-headset"></i>
-                        </div>
-                        <div class="intro-content">
-                            <h5>quick support system</h5>
-                            <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="intro-wrap">
-                        <div class="intro-icon">
-                            <i class="fas fa-lock"></i>
-                        </div>
-                        <div class="intro-content">
-                            <h5>secure payment way</h5>
-                            <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        <div id="section"></div>
+
+        <!-- Import the ES6 Module -->
+        <script type="module">
+            import createIntroSection from './intro.js';
+            document.getElementById('section').innerHTML = createIntroSection();
+        </script>
     <!--=====================================
                     INTRO PART END
         =======================================-->
@@ -362,8 +319,7 @@
                         </div>
                         <div class="choose-text">
                             <h4>100% fresh organic food</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing tempora pariatur provident animi error
-                                dignissimo cumque minus facere dolores cupiditate debitis</p>
+                            <p>I've added a short paragraph highlighting the freshness and quality of your organic food. Let me know if you'd like any adjustments! 😊🌿</p>
                         </div>
                     </div>
                 </div>
@@ -374,8 +330,7 @@
                         </div>
                         <div class="choose-text">
                             <h4>Delivery within one hour</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing tempora pariatur provident animi error
-                                dignissimo cumque minus facere dolores cupiditate debitis</p>
+                            <p>I've added a short paragraph emphasizing your quick delivery service. Let me know if you'd like any further adjustments! 😊🚚</p>
                         </div>
                     </div>
                 </div>
@@ -386,8 +341,7 @@
                         </div>
                         <div class="choose-text">
                             <h4>quickly return policy</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing tempora pariatur provident animi error
-                                dignissimo cumque minus facere dolores cupiditate debitis</p>
+                            <p>I've added a short paragraph highlighting your quick return policy. Let me know if you need any modifications! 😊🔄</p>
                         </div>
                     </div>
                 </div>
@@ -398,8 +352,7 @@
                         </div>
                         <div class="choose-text">
                             <h4>instant support team</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing tempora pariatur provident animi error
-                                dignissimo cumque minus facere dolores cupiditate debitis</p>
+                            <p>I've updated the paragraph to highlight your instant support team's availability and commitment to quick assistance. Let me know if you'd like any adjustments! 😊💬</p>
                         </div>
                     </div>
                 </div>
@@ -449,5 +402,4 @@
                     JS LINK PART END
         =======================================-->
 </body>
-
 </html>

@@ -25,12 +25,11 @@ const orderSchema = new mongoose.Schema({
   status: {
     type: String,
     default: "Pending",
-    enum: ["Pending", "Processing", "Shipped", "Delivered", "Cancelled"],
+    // enum: ["Pending", "Processing", "Shipped", "Delivered", "Cancelled"],
   },
   deliverySchedule: {
     type: String,
     required: true,
-    enum: ["express", "8am-10pm", "Next day"],
     default: "express",
   },
   contactNumbers: [
@@ -66,7 +65,6 @@ orderSchema.pre("save", async function (next) {
         { new: true, upsert: true }
       );
 
-      // Ensure first order starts at 1001
       if (counter.value === 1) {
         counter.value = 1001;
         await counter.save();
@@ -74,11 +72,14 @@ orderSchema.pre("save", async function (next) {
 
       this.orderNumber = counter.value;
     } catch (error) {
-      return next(error);
+      console.error("Error generating order number:", error);
+      return next(error); // Continue to propagate error
     }
   }
   next();
 });
+
+
 
 // Create Order model
 const Order = mongoose.model("Order", orderSchema);

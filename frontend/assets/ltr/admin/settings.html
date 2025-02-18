@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin User Panel - Settings</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 font-sans">
+  <div class="flex h-screen">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-gradient-to-b from-blue-700 to-blue-500 text-white p-5 shadow-lg">
+      <h1 class="text-3xl font-extrabold mb-6 text-center">Admin Panel</h1>
+      <nav>
+        <ul class="space-y-4">
+          <li class="hover:bg-green-600 p-3 rounded">
+            <a href="dashboard.html">Dashboard</a>
+          </li>
+          <li class="hover:bg-green-600 p-3 rounded">
+            <a href="product.html">Products</a>
+          </li>
+          <li class="hover:bg-green-600 p-3 rounded">
+            <a href="order.html">Orders</a>
+          </li>
+          <li class="hover:bg-green-600 p-3 rounded">
+            <a href="user.html">Users</a>
+          </li>
+          <li class="hover:bg-green-600 p-3 rounded">
+            <a href="settings.html">Settings</a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8">
+      <h2 class="text-4xl font-bold mb-8 text-gray-800">Settings</h2>
+
+      <!-- Settings Form -->
+      <div class="bg-white p-6 rounded-lg shadow-lg">
+        <h3 class="text-xl font-semibold mb-4">General Settings</h3>
+        <form action="#" method="POST">
+          <div class="mb-4">
+            <label for="siteName" class="block text-gray-700">Site Name</label>
+            <input type="text" id="siteName" name="siteName" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="Enter site name" required />
+          </div>
+
+          <div class="mb-4">
+            <label for="adminEmail" class="block text-gray-700">Admin Email</label>
+            <input type="email" id="adminEmail" name="adminEmail" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="Enter admin email" required />
+          </div>
+
+          <div class="mb-4">
+            <label for="currency" class="block text-gray-700">Currency</label>
+            <select id="currency" name="currency" class="w-full p-3 border border-gray-300 rounded-lg">
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="INR">INR</option>
+            </select>
+          </div>
+
+          <div class="mb-4">
+            <label for="timezone" class="block text-gray-700">Timezone</label>
+            <select id="timezone" name="timezone" class="w-full p-3 border border-gray-300 rounded-lg">
+              <option value="GMT">GMT</option>
+              <option value="EST">EST</option>
+              <option value="IST">IST</option>
+            </select>
+          </div>
+
+          <div class="mb-4">
+            <label for="theme" class="block text-gray-700">Theme</label>
+            <select id="theme" name="theme" class="w-full p-3 border border-gray-300 rounded-lg">
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+          </div>
+
+          <div class="flex items-center space-x-4 mb-4">
+            <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded-lg">Save Settings</button>
+            <button type="reset" class="bg-red-500 text-white px-6 py-2 rounded-lg">Reset</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Other Settings Sections can be added below -->
+    </main>
+  </div>
+</body>
+
+</html>
