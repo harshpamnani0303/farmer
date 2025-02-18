@@ -116,7 +116,30 @@ document.addEventListener("click", function (event) {
       alert("❌ Please log in to add items to the cart.");
       return;
     }
-
     addToCart(userId, productId, productName, productPrice, productImg);
+  }
+});
+
+// ✅ Event Listener for Buy Now Button
+document.addEventListener("click", function (event) {
+  if (event.target.closest(".buy-now-btn")) {
+    const card = event.target.closest(".product-card");
+
+    // ✅ Collect product data from existing elements
+    const product = {
+      id: card.querySelector(".add-to-cart").getAttribute("data-id"),
+      name: card.querySelector(".add-to-cart").getAttribute("data-name"),
+      price: card.querySelector(".add-to-cart").getAttribute("data-price"),
+      image: card.querySelector(".add-to-cart").getAttribute("data-img"),
+      unit: card.querySelector(".product-image").getAttribute("data-unit"),
+      description: card.querySelector(".product-image").getAttribute("data-desc"),
+    };
+
+    // ✅ Store product data in local storage
+    localStorage.setItem("checkoutProduct", JSON.stringify(product));
+    console.log("✅ Checkout Product Saved:", product);
+
+    // ✅ Redirect to checkout page
+    window.location.href = "checkout.html";
   }
 });

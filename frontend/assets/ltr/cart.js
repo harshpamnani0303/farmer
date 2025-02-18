@@ -196,6 +196,12 @@ export function loadCartSidebar(userId) {
           }
         }
       });
+      document.querySelector(".checkout").addEventListener("click", () => {
+        localStorage.removeItem("checkoutProduct");
+        console.log("✅ checkoutProduct removed from local storage");
+      });
+      
+
   });
 
   function updateCartHeader() {
@@ -233,6 +239,8 @@ export function loadCartSidebar(userId) {
       });
   }
 
+
+
   fetchCart();
 
   return `
@@ -251,7 +259,7 @@ export function loadCartSidebar(userId) {
                     <input type="text" placeholder="Enter your coupon code">
                     <button type="submit"><span>Apply</span></button>
                 </form>
-                <a class='cart-checkout-btn' href='checkout.html'>
+                <a class='checkout cart-checkout-btn' href='checkout.html' >
                     <span class="checkout-label">Proceed to Checkout</span>
                     <span class="checkout-price">₹0.00</span>
                 </a>
@@ -259,3 +267,4 @@ export function loadCartSidebar(userId) {
         </aside>
     `;
 }
+

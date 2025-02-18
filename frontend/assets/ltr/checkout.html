@@ -98,7 +98,7 @@
     <!--=====================================
                     PRODUCT VIEW START
         =======================================-->
-   
+
 
 
     <!--=====================================
@@ -170,46 +170,75 @@
                                 }
                             }
 
-                            function renderCartItems(cartItems) {
+                            async function renderCartItems(cartItems) {
                                 let cartTable = document.getElementById("cart-items");
                                 cartTable.innerHTML = ""; // Clear existing rows
 
-                                if (!cartItems.length) {
-                                    cartTable.innerHTML = `<tr><td colspan="6"><h6 style="text-align:center;">No items in the cart</h6></td></tr>`;
-                                    return;
-                                }
+                                // ✅ Check if checkout data is in local storage
+                                const checkoutData = localStorage.getItem("checkoutProduct");
 
-                                cartItems.forEach((item, index) => {
+                                if (checkoutData) {
+                                    const product = JSON.parse(checkoutData);
+                                    console.log("✅ Checkout Product from Local Storage:", product);
+
                                     let row = document.createElement("tr");
                                     row.innerHTML = `
-                                        <td class="table-serial"><h6>${index + 1
-                                        }</h6></td>
-                                        <td class="table-image"><img src="${item.image
-                                        }" alt="product" style="width:50px; height:50px;"></td>
-                                        <td class="table-name"><h6>${item.name
-                                        }</h6></td>
-                                        <td class="table-price"><h6>₹${item.price
-                                        }<small>/kilo</small></h6></td>
-                                        <td class="table-quantity"><h6>${item.quantity
-                                        }</h6></td>
-                                        <td class="table-action">
-                                            
-                                            <a class="trash" href="#" title="Remove from Cart" data-id="${item.productId
-                                        }">
-                                                <i class="icofont-trash"></i>
-                                            </a>
-                                        </td>
-                                    `;
+      <td class="table-serial"><h6>1</h6></td>
+      <td class="table-image">
+        <img src="${product.image}" alt="product" style="width:50px; height:50px;">
+      </td>
+      <td class="table-name"><h6>${product.name}</h6></td>
+      <td class="table-price"><h6>₹${product.price}<small>/${product.unit}</small></h6></td>
+      <td class="table-quantity"><h6>1</h6></td>
+      <td class="table-action">
+        <a class="trash" href="#" title="Remove from Cart" data-id="${product.id}">
+          <i class="icofont-trash"></i>
+        </a>
+      </td>
+    `;
                                     cartTable.appendChild(row);
-                                });
 
-                                // Attach event listeners for delete buttons
-                                document.querySelectorAll(".trash").forEach((button) => {
-                                    button.addEventListener("click", async function () {
-                                        let productId = this.getAttribute("data-id");
-                                        await removeFromCart(productId);
+                                    // ✅ Handle remove from cart (local storage)
+                                    document.querySelector(".trash").addEventListener("click", () => {
+                                        localStorage.removeItem("checkoutProduct");
+                                        alert("❌ Item removed from checkout.");
+                                        location.reload();
                                     });
-                                });
+                                }
+                                else {
+                                    // ✅ Fetch cart items from API
+                                    if (!cartItems.length) {
+                                        cartTable.innerHTML = `<tr><td colspan="6"><h6 style="text-align:center;">No items in the cart</h6></td></tr>`;
+                                        return;
+                                    }
+
+                                    cartItems.forEach((item, index) => {
+                                        let row = document.createElement("tr");
+                                        row.innerHTML = `
+        <td class="table-serial"><h6>${index + 1}</h6></td>
+        <td class="table-image">
+          <img src="${item.image}" alt="product" style="width:50px; height:50px;">
+        </td>
+        <td class="table-name"><h6>${item.name}</h6></td>
+        <td class="table-price"><h6>₹${item.price}<small>/kilo</small></h6></td>
+        <td class="table-quantity"><h6>${item.quantity}</h6></td>
+        <td class="table-action">
+          <a class="trash" href="#" title="Remove from Cart" data-id="${item.productId}">
+            <i class="icofont-trash"></i>
+          </a>
+        </td>
+      `;
+                                        cartTable.appendChild(row);
+                                    });
+
+                                    // ✅ Attach event listeners for delete buttons
+                                    document.querySelectorAll(".trash").forEach((button) => {
+                                        button.addEventListener("click", async function () {
+                                            let productId = this.getAttribute("data-id");
+                                            await removeFromCart(productId);
+                                        });
+                                    });
+                                }
                             }
 
                             async function removeFromCart(productId) {
@@ -838,13 +867,13 @@
     <!--=====================================
                     INTRO PART START
         =======================================-->
-        <div id="section"></div>
+    <div id="section"></div>
 
-        <!-- Import the ES6 Module -->
-        <script type="module">
-            import createIntroSection from './intro.js';
-            document.getElementById('section').innerHTML = createIntroSection();
-        </script>
+    <!-- Import the ES6 Module -->
+    <script type="module">
+        import createIntroSection from './intro.js';
+        document.getElementById('section').innerHTML = createIntroSection();
+    </script>
     <!--=====================================
                     INTRO PART END
         =======================================-->

@@ -203,23 +203,25 @@
 
                 <script>
                   document.addEventListener("DOMContentLoaded", function () {
-                    const totalAmount = localStorage.getItem("total");
+                    const checkoutProduct = localStorage.getItem("checkoutProduct");
 
-                    if (totalAmount) {
+                    if (checkoutProduct) {
+                      const product = JSON.parse(checkoutProduct);
+                      const totalAmount = product.price;
+
                       // Format as Indian Rupees
                       const formattedAmount = new Intl.NumberFormat("en-IN", {
                         style: "currency",
                         currency: "INR",
                       }).format(totalAmount);
 
-                      document.getElementById("total-amount").innerText =
-                        formattedAmount;
+                      document.getElementById("total-amount").innerText = formattedAmount;
                     } else {
-                      document.getElementById("total-amount").innerText =
-                        "₹0.00"; // Default if no data
+                      document.getElementById("total-amount").innerText = "₹0.00"; // Default if no data
                     }
                   });
                 </script>
+
 
                 <h6>
                   Payment Method:
@@ -284,29 +286,30 @@
                   }
 
                   // Fetch total items in cart
-                  if (userId) {
-                    try {
-                      const response = await fetch(
-                        `http://localhost:5000/api/cart/user/${userId}`
-                      );
-                      if (!response.ok)
-                        throw new Error("Failed to fetch cart items");
-
-                      const cartData = await response.json();
-                      document.getElementById(
-                        "totalItem"
-                      ).innerText = `${cartData.length} Items`;
-                    } catch (error) {
-                      console.error("❌ Error fetching cart items:", error);
-                      document.getElementById("totalItem").innerText =
-                        "Error Loading";
-                    }
+                  const checkoutProduct = localStorage.getItem("checkoutData")
+                  if (checkoutProduct) {
+                    document.getElementById("totalItem").innerText = "1 Items";
                   } else {
-                    document.getElementById("totalItem").innerText =
-                      "User Not Found";
+                    // Fetch total items in cart
+                    if (userId) {
+                      try {
+                        const response = await fetch(
+                          `http://localhost:5000/api/cart/user/${userId}`
+                        );
+                        if (!response.ok)
+                          throw new Error("Failed to fetch cart items");
+
+                        const cartData = await response.json();
+                        document.getElementById("totalItem").innerText = `${cartData.length} Items`;
+                      } catch (error) {
+                        console.error("❌ Error fetching cart items:", error);
+                        document.getElementById("totalItem").innerText = "Error Loading";
+                      }
+                    } else {
+                      document.getElementById("totalItem").innerText = "User Not Found";
+                    }
                   }
-                }
-              );
+                });
             </script>
           </div>
         </div>
@@ -338,50 +341,71 @@
             const cartTableBody = document.getElementById("cart-items");
             const totalItemCount = document.getElementById("totalItem");
 
-            if (!userId) {
-              cartTableBody.innerHTML =
-                '<tr><td colspan="6" style="text-align: center;">User Not Found</td></tr>';
-              return;
-            }
+            // Check if checkoutProduct exists in localStorage
+            const checkoutProduct = JSON.parse(localStorage.getItem("checkoutProduct"));
 
-            try {
-              const response = await fetch(
-                `http://localhost:5000/api/cart/user/${userId}`
-              );
-              if (!response.ok) throw new Error("Failed to fetch cart items");
+            if (checkoutProduct) {
+              // If checkoutProduct is available, display it
+              cartTableBody.innerHTML = ""; // Clear previous cart data
+              totalItemCount.innerHTML = "1 Item"; // Only one item from checkoutProduct
 
-              const cartData = await response.json();
-              if (!cartData || cartData.length === 0) {
+              const row = document.createElement("tr");
+              row.innerHTML = `
+                <td class="table-serial"><h6>1</h6></td>
+                <td class="table-image"><img src="${checkoutProduct.image}" alt="product" /></td>
+                <td class="table-name"><h6>${checkoutProduct.name}</h6></td>
+                <td class="table-price"><h6>₹${checkoutProduct.price}<small>/kilo</small></h6></td>
+                <td class="table-quantity"><h6>1</h6></td>
+              `;
+              cartTableBody.appendChild(row);
+            } else {
+              // If checkoutProduct is not available, fetch the cart data from the API
+              if (!userId) {
                 cartTableBody.innerHTML =
-                  '<tr><td colspan="6" style="text-align: center;">Cart is Empty</td></tr>';
+                  '<tr><td colspan="6" style="text-align: center;">User Not Found</td></tr>';
                 return;
               }
 
-              // Clear previous content
-              cartTableBody.innerHTML = "";
-              totalItemCount.innerHTML = cartData.length;
+              try {
+                const response = await fetch(
+                  `http://localhost:5000/api/cart/user/${userId}`
+                );
+                if (!response.ok) throw new Error("Failed to fetch cart items");
 
-              cartData.forEach((item, index) => {
-                const row = document.createElement("tr");
+                const cartData = await response.json();
+                if (!cartData || cartData.length === 0) {
+                  cartTableBody.innerHTML =
+                    '<tr><td colspan="6" style="text-align: center;">Cart is Empty</td></tr>';
+                  return;
+                }
 
-                row.innerHTML = `
-          <td class="table-serial"><h6>${index + 1}</h6></td>
-          <td class="table-image"><img src="${item.image}" alt="product" /></td>
-          <td class="table-name"><h6>${item.name}</h6></td>
-          <td class="table-price"><h6>$${item.price.toFixed(
-                  2
-                )}<small>/kilo</small></h6></td>
-          <td class="table-quantity"><h6>${item.quantity}</h6></td>
-        `;
-                cartTableBody.appendChild(row);
-              });
-            } catch (error) {
-              console.error("❌ Error fetching cart items:", error);
-              cartTableBody.innerHTML =
-                '<tr><td colspan="6" style="text-align: center;">Error Loading Cart</td></tr>';
+                // Clear previous content
+                cartTableBody.innerHTML = "";
+                totalItemCount.innerHTML = `${cartData.length} Items`;
+
+                cartData.forEach((item, index) => {
+                  const row = document.createElement("tr");
+
+                  row.innerHTML = `
+                    <td class="table-serial"><h6>${index + 1}</h6></td>
+                    <td class="table-image"><img src="${item.image}" alt="product" /></td>
+                    <td class="table-name"><h6>${item.name}</h6></td>
+                    <td class="table-price"><h6>₹${item.price.toFixed(
+                    2
+                  )}<small>/kilo</small></h6></td>
+                    <td class="table-quantity"><h6>${item.quantity}</h6></td>
+                  `;
+                  cartTableBody.appendChild(row);
+                });
+              } catch (error) {
+                console.error("❌ Error fetching cart items:", error);
+                cartTableBody.innerHTML =
+                  '<tr><td colspan="6" style="text-align: center;">Error Loading Cart</td></tr>';
+              }
             }
           });
         </script>
+
       </div>
       <div class="row">
         <div class="col-lg-12 text-center mt-5">
@@ -546,6 +570,9 @@
             const checkoutData = JSON.parse(
               localStorage.getItem("checkoutData")
             );
+            const checkoutProduct = JSON.parse(localStorage.getItem("checkoutProduct"));
+
+
 
             if (!userId || !checkoutData) {
               alert("User or checkout data missing!");
@@ -554,9 +581,44 @@
 
             try {
               // Fetch cart data
+
+              if (checkoutProduct) {
+                const orderData = {
+                  user: userId,
+                  products: {
+                    product: checkoutProduct.id,
+                    quantity: 1,
+                  },
+                  totalAmount: checkoutProduct.price,
+                  deliverySchedule: checkoutData.deliverySchedule,
+                  contactNumbers: [
+                    { label: "primary", number: checkoutData.phoneNumber },
+                  ],
+                  deliveryAddresses: [
+                    { label: "Home", address: checkoutData.address },
+                  ],
+                };
+
+                const orderResponse = await fetch(
+                  "http://localhost:5000/api/orders",
+                  {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(orderData),
+                  }
+                );
+                if (!orderResponse.ok) throw new Error("Failed to place order");
+
+                const orderResult = await orderResponse.json();
+
+              }
+              else {
+
+              
               const cartResponse = await fetch(
                 `http://localhost:5000/api/cart/user/${userId}`
               );
+
               if (!cartResponse.ok)
                 throw new Error("Failed to fetch cart data");
 
@@ -605,7 +667,7 @@
               if (!orderResponse.ok) throw new Error("Failed to place order");
 
               const orderResult = await orderResponse.json();
-
+              }
               // Update invoice modal data
               document.getElementById("invoiceOrderNumber").innerText =
                 orderResult.orderNumber;
