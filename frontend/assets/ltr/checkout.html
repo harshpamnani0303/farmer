@@ -147,7 +147,46 @@
                                 </table>
                             </div>
                         </div>
+                        <style>
+                            .quantity-controls {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                gap: 6px;
+                                padding: 4px;
+                                border-radius: 6px;
+                                border: none;
 
+                            }
+
+                            .minus,
+                            .plus {
+                                border: none;
+                                background-color: #28a745;
+                                color: white;
+                                font-size: 14px;
+                                padding: 6px 10px;
+                                cursor: pointer;
+                                border-radius: 4px;
+                                transition: background-color 0.3s ease;
+                            }
+
+                            .minus:hover,
+                            .plus:hover {
+                                background-color: #218838;
+                            }
+
+                            .quantity {
+                                width: 40px;
+                                text-align: center;
+                                font-size: 14px;
+                                font-weight: bold;
+                                border: none;
+                                border-radius: 4px;
+
+                                color: #333;
+                            }
+                        </style>
                         <!-- Move JavaScript below -->
                         <script>
                             document.addEventListener("DOMContentLoaded", function () {
@@ -180,7 +219,7 @@
                                 if (checkoutData) {
                                     const product = JSON.parse(checkoutData);
                                     console.log("✅ Checkout Product from Local Storage:", product);
-
+                                    // 
                                     let row = document.createElement("tr");
                                     row.innerHTML = `
       <td class="table-serial"><h6>1</h6></td>
@@ -189,14 +228,58 @@
       </td>
       <td class="table-name"><h6>${product.name}</h6></td>
       <td class="table-price"><h6>₹${product.price}<small>/${product.unit}</small></h6></td>
-      <td class="table-quantity"><h6>1</h6></td>
+      <td class="table-quantity">
+  <div class="quantity-controls">
+    <button class="minus"><i class="icofont-minus"></i></button>
+    <input class="quantity" type="text" value="1" readonly>
+    <button class="plus"><i class="icofont-plus"></i></button>
+  </div>
+</td>
+
       <td class="table-action">
         <a class="trash" href="#" title="Remove from Cart" data-id="${product.id}">
           <i class="icofont-trash"></i>
         </a>
       </td>
     `;
+
                                     cartTable.appendChild(row);
+
+                                    // Add event listeners to all plus buttons
+                                    document.querySelectorAll(".plus").forEach((plusBtn) => {
+                                        plusBtn.addEventListener("click", function () {
+                                            const input = this.previousElementSibling; // Get input element before plus button
+                                            let quantity = parseInt(input.value);
+                                            input.value = quantity + 1;
+
+                                            // Get existing checkoutProduct from localStorage
+                                            let checkoutProduct = JSON.parse(localStorage.getItem("checkoutProduct")) || {};
+
+                                            // Update quantity and save back to localStorage
+                                            checkoutProduct.quantity = input.value;
+                                            localStorage.setItem("checkoutProduct", JSON.stringify(checkoutProduct));
+                                        });
+                                    });
+
+                                    // Add event listeners to all minus buttons
+                                    document.querySelectorAll(".minus").forEach((minusBtn) => {
+                                        minusBtn.addEventListener("click", function () {
+                                            const input = this.nextElementSibling; // Get input element after minus button
+                                            let quantity = parseInt(input.value);
+                                            if (quantity > 1) {
+                                                input.value = quantity - 1;
+
+                                                // Get existing checkoutProduct from localStorage
+                                                let checkoutProduct = JSON.parse(localStorage.getItem("checkoutProduct")) || {};
+
+                                                // Update quantity and save back to localStorage
+                                                checkoutProduct.quantity = input.value;
+                                                localStorage.setItem("checkoutProduct", JSON.stringify(checkoutProduct));
+                                            }
+                                        });
+                                    });
+
+
 
                                     // ✅ Handle remove from cart (local storage)
                                     document.querySelector(".trash").addEventListener("click", () => {
@@ -215,21 +298,99 @@
                                     cartItems.forEach((item, index) => {
                                         let row = document.createElement("tr");
                                         row.innerHTML = `
-        <td class="table-serial"><h6>${index + 1}</h6></td>
-        <td class="table-image">
-          <img src="${item.image}" alt="product" style="width:50px; height:50px;">
-        </td>
-        <td class="table-name"><h6>${item.name}</h6></td>
-        <td class="table-price"><h6>₹${item.price}<small>/kilo</small></h6></td>
-        <td class="table-quantity"><h6>${item.quantity}</h6></td>
-        <td class="table-action">
-          <a class="trash" href="#" title="Remove from Cart" data-id="${item.productId}">
+       <tr data-product-id="${item.productId}"> <!-- ✅ Make sure this is present -->
+    <td class="table-serial"><h6>${index + 1}</h6></td>
+    <td class="table-image">
+      <img src="${item.image}" alt="product" style="width:50px; height:50px;">
+    </td>
+    <td class="table-name"><h6>${item.name}</h6></td>
+    <td class="table-price"><h6>₹${item.price}<small>/kilo</small></h6></td>
+    <td class="table-quantity">
+        <div class="quantity-controls">
+            <button data-id="${item.productId}" class="minus"><i class="icofont-minus"></i></button>
+            <input class="quantity" type="text" value="${item.quantity}" readonly>
+            <button data-id="${item.productId}" class="plus"><i class="icofont-plus"></i></button>
+        </div>
+    </td>    
+    <td class="table-action">
+        <a class="trash" href="#" title="Remove from Cart" data-id="${item.productId}">
             <i class="icofont-trash"></i>
-          </a>
-        </td>
+        </a>
+    </td>
+</tr>
+
       `;
                                         cartTable.appendChild(row);
                                     });
+
+
+                                   
+
+                                    // Add event listeners to plus buttons
+                                    document.querySelectorAll(".plus").forEach((plusBtn) => {
+                                        plusBtn.addEventListener("click", async function () {
+                                            const input = this.previousElementSibling;
+                                            let newQuantity = parseInt(input.value) + 1;
+                                            input.value = newQuantity;
+
+                                            
+                                            let productId = this.getAttribute("data-id");
+                                            console.log(productId);
+                                            
+                        
+
+                                            await updateQuantity(productId, newQuantity);
+                                        });
+                                    });
+
+                                    // Add event listeners to minus buttons
+                                    document.querySelectorAll(".minus").forEach((minusBtn) => {
+                                        minusBtn.addEventListener("click", async function () {
+                                            const input = this.nextElementSibling;
+                                            let newQuantity = parseInt(input.value);
+                                            if (newQuantity > 1) {
+                                                newQuantity -= 1;
+                                                input.value = newQuantity;
+
+                                                let productId = this.getAttribute("data-id");
+                                                console.log(productId);
+
+                                                await updateQuantity(productId, newQuantity);
+                                            }
+                                        });
+                                    });
+
+                                    // Function to update product quantity via API
+                                    async function updateQuantity(productId, newQuantity) {
+                                        const userId = localStorage.getItem("userId");
+
+                                        try {
+                                            console.log(
+                                                `🔹 Updating ProductID: ${productId}, New Quantity: ${newQuantity}`
+                                            );
+
+                                            const response = await fetch("http://localhost:5000/api/cart/update", {
+                                                method: "PUT",
+                                                headers: { "Content-Type": "application/json" },
+                                                body: JSON.stringify({ userId, productId, quantity: newQuantity }),
+                                            });
+
+                                            if (!response.ok) throw new Error("Failed to update quantity");
+
+                                            const updatedCart = await response.json();
+                                            console.log("✅ Updated Cart from API:", updatedCart);
+
+                                            // Update localStorage and UI
+                                            localStorage.setItem("cartItems", JSON.stringify(updatedCart.items));
+                                            location.reload();
+                                        } catch (error) {
+                                            console.error("❌ Error updating quantity:", error);
+                                            fetchCart(); // Reload the cart if update fails
+                                        }
+                                    }
+
+
+
 
                                     // ✅ Attach event listeners for delete buttons
                                     document.querySelectorAll(".trash").forEach((button) => {

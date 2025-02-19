@@ -7,39 +7,48 @@ const router = express.Router();
 // Register Route
 router.post("/register", async (req, res) => {
   try {
+    console.log("Received Request Body:", req.body); // ✅ Check incoming data
+
     const { name, email, phoneNumber, password } = req.body;
 
     // Check if user already exists
     const userExists = await User.findOne({ email });
     if (userExists) {
+      console.log("User already exists:", email); // ✅ Log existing user
       return res.status(400).json({ message: "User already exists" });
     }
 
     // Validate phone number (must be 10 digits)
     if (!/^\d{10}$/.test(phoneNumber)) {
+      console.log("Invalid phone number:", phoneNumber); // ✅ Log invalid phone
       return res
         .status(400)
         .json({ message: "Invalid phone number. Must be 10 digits." });
     }
 
     // Hash Password
+    console.log("Hashing password...");
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create and save user
+    console.log("Saving user to DB...");
     const user = new User({
       name,
       email,
       phoneNumber,
       password: hashedPassword,
     });
+
     await user.save();
+    console.log("User registered successfully!");
 
     res.status(201).json({ message: "User Registered Successfully" });
   } catch (error) {
-    console.error("Registration Error:", error);
-    res.status(500).json({ message: "Error Registering User" });
+    console.error("Registration Error:", error); // ✅ Log error details
+    res.status(500).json({ message: "Error Registering User", error: error.message });
   }
 });
+
 
 router.put("/update", async (req, res) => {
   try {

@@ -68,7 +68,10 @@ export function loadHeader() {
 
     // ✅ Update cart details in header
     function updateCartHeader() {
+      console.log("pass"); 
       const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+      console.log("pass"); 
+
       const totalItems = cartItems.reduce(
         (total, item) => total + item.quantity,
         0
@@ -82,6 +85,9 @@ export function loadHeader() {
       document.querySelector(
         ".header-cart small"
       ).textContent = `₹${totalPrice}`;
+
+      
+      
     }
 
     // ✅ Listen for cart updates
