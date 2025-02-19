@@ -204,10 +204,11 @@
                 <script>
                   document.addEventListener("DOMContentLoaded", function () {
                     const checkoutProduct = localStorage.getItem("checkoutProduct");
+                    const total = localStorage.getItem("total");
 
                     if (checkoutProduct) {
                       const product = JSON.parse(checkoutProduct);
-                      const totalAmount = product.price;
+                      const totalAmount = product.price * product.quantity;
 
                       // Format as Indian Rupees
                       const formattedAmount = new Intl.NumberFormat("en-IN", {
@@ -217,7 +218,7 @@
 
                       document.getElementById("total-amount").innerText = formattedAmount;
                     } else {
-                      document.getElementById("total-amount").innerText = "₹0.00"; // Default if no data
+                      document.getElementById("total-amount").innerText = `₹${total}`; // Default if no data
                     }
                   });
                 </script>
@@ -355,7 +356,7 @@
                 <td class="table-image"><img src="${checkoutProduct.image}" alt="product" /></td>
                 <td class="table-name"><h6>${checkoutProduct.name}</h6></td>
                 <td class="table-price"><h6>₹${checkoutProduct.price}<small>/kilo</small></h6></td>
-                <td class="table-quantity"><h6>1</h6></td>
+                <td class="table-quantity"><h6>${checkoutProduct.quantity}</h6></td>
               `;
               cartTableBody.appendChild(row);
             } else {
@@ -433,7 +434,7 @@
             <div class="invoice-details bg-blue-100 p-4 rounded-lg shadow mb-6">
               <p><strong>Order Number:</strong> <span id="invoiceOrderNumber">Loading...</span></p>
               <p><strong>Total Items:</strong> <span id="invoiceTotalItems">Loading...</span></p>
-              <p><strong>Total Amount:</strong> $<span id="invoiceTotalAmount">Loading...</span></p>
+              <p><strong>Total Amount:</strong> ₹<span id="invoiceTotalAmount">Loading...</span></p>
               <p><strong>Delivery Schedule:</strong> <span id="invoiceDeliverySchedule">Loading...</span></p>
               <p><strong>Delivery Address:</strong> <span id="invoiceDeliveryAddress">Loading...</span></p>
               <p><strong>Contact Number:</strong> <span id="invoiceContactNumber">Loading...</span></p>
@@ -589,7 +590,7 @@
                     product: checkoutProduct.id,
                     quantity: 1,
                   },
-                  totalAmount: checkoutProduct.price,
+                  totalAmount: checkoutProduct.price * checkoutProduct.quantity,
                   deliverySchedule: checkoutData.deliverySchedule,
                   contactNumbers: [
                     { label: "primary", number: checkoutData.phoneNumber },
@@ -617,7 +618,7 @@
                 document.getElementById("invoiceTotalItems").innerText =
                   1;
                 document.getElementById("invoiceTotalAmount").innerText =
-                  checkoutProduct.price;
+                  checkoutProduct.price * checkoutProduct.quantity;
                 document.getElementById("invoiceDeliverySchedule").innerText =
                   checkoutData.deliverySchedule;
                 document.getElementById("invoiceDeliveryAddress").innerText =
@@ -630,9 +631,9 @@
                 cartItemsHTML += `
     <tr>
       <td class="py-2 px-4 border">${checkoutProduct.name}</td>
-      <td class="py-2 px-4 border">1</td>
+      <td class="py-2 px-4 border">${checkoutProduct.quantity}</td>
       <td class="py-2 px-4 border">₹${checkoutProduct.price}</td>
-      <td class="py-2 px-4 border">₹${(checkoutProduct.price * 1).toFixed(2)}</td>
+      <td class="py-2 px-4 border">₹${(checkoutProduct.price * checkoutProduct.quantity).toFixed(2)}</td>
     </tr>
   `;
 
@@ -727,7 +728,7 @@
                     let invoiceContent = `
 Order Number: ${document.getElementById("invoiceOrderNumber").innerText}
 Total Items: ${document.getElementById("invoiceTotalItems").innerText}
-Total Amount: $${document.getElementById("invoiceTotalAmount").innerText}
+Total Amount: ₹${document.getElementById("invoiceTotalAmount").innerText}
 Delivery Schedule: ${document.getElementById("invoiceDeliverySchedule").innerText}
 Delivery Address: ${document.getElementById("invoiceDeliveryAddress").innerText}
 Contact Number: ${document.getElementById("invoiceContactNumber").innerText}
@@ -739,7 +740,7 @@ Cart Items:
                     document.querySelectorAll("#invoiceCartItems tr").forEach((row) => {
                       const cells = row.querySelectorAll("td");
                       const itemName = cells[0].innerText;
-                      const quantity = cells[1].innerText;
+                      const quantity = cells[1].innerText ;
                       const price = cells[2].innerText;
                       const total = cells[3].innerText;
 
@@ -783,7 +784,7 @@ Cart Items:
             let invoiceContent = `
 Order Number: ${document.getElementById("invoiceOrderNumber").innerText}
 Total Items: ${document.getElementById("invoiceTotalItems").innerText}
-Total Amount: $${document.getElementById("invoiceTotalAmount").innerText}
+Total Amount: ₹${document.getElementById("invoiceTotalAmount").innerText}
 Delivery Schedule: ${document.getElementById("invoiceDeliverySchedule").innerText}
 Delivery Address: ${document.getElementById("invoiceDeliveryAddress").innerText}
 Contact Number: ${document.getElementById("invoiceContactNumber").innerText}
