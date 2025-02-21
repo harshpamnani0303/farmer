@@ -54,23 +54,19 @@ router.get("/", async (req, res) => {
 });
 
 /* ✅ Get orders by user ID */
-router.get("/user/:userId", async (req, res) => {
+router.get('/user/:userId', async (req, res) => {
   try {
-    const { userId } = req.params;
+      const { userId } = req.params;
+      const orders = await Order.find({ user: userId }); // Assuming 'user' holds userId in the order document
 
-    // Validate ObjectId
-    if (!mongoose.Types.ObjectId.isValid(userId)) {
-      return res.status(400).json({ error: "Invalid user ID" });
-    }
+      if (!orders.length) {
+          return res.status(404).json({ message: 'No orders found for this user' });
+      }
 
-    const orders = await Order.find({ user: userId }).populate(
-      "products.product",
-      "name price"
-    );
-    res.status(200).json(orders);
+      res.status(200).json(orders);
   } catch (error) {
-    console.error("❌ Error fetching user orders:", error);
-    res.status(500).json({ error: "Internal server error" });
+      console.error('Error fetching orders:', error);
+      res.status(500).json({ error: 'Internal server error' });
   }
 });
 

@@ -133,6 +133,7 @@ document.addEventListener("click", function (event) {
       image: card.querySelector(".add-to-cart").getAttribute("data-img"),
       unit: card.querySelector(".product-image").getAttribute("data-unit"),
       description: card.querySelector(".product-image").getAttribute("data-desc"),
+      quantity: 1
     };
 
     // ✅ Store product data in local storage

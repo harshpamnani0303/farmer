@@ -49,7 +49,7 @@ export function loadFooter() {
                         <div class="footer-links">
                             <ul>
                                 <li><a href="#">My Account</a></li>
-                                <li><a href="#">Order History</a></li>
+                                <li><a href="orderlist.html">Order History</a></li>
                                 <li><a href="#">Best Seller</a></li>
                                 <li><a href="#">New Arrivals</a></li>
                                 <li><a href="faq.html">FAQ</a></li>
