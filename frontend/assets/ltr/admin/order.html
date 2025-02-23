@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body class="bg-gray-100 font-sans">
     <div class="flex h-screen">
         <!-- Sidebar -->
@@ -22,18 +24,23 @@
                 </ul>
             </nav>
         </aside>
-        
+
         <!-- Main Content -->
         <main class="flex-1 p-8">
             <h2 class="text-4xl font-bold mb-8 text-gray-800">Orders & Products</h2>
-            
+
             <!-- Order Filtering -->
-            <div class="mb-6">
-                <button class="bg-blue-500 text-white px-4 py-2 rounded" onclick="filterOrders('all')">All</button>
-                <button class="bg-yellow-500 text-white px-4 py-2 rounded" onclick="filterOrders('pending')">Pending</button>
-                <button class="bg-green-500 text-white px-4 py-2 rounded" onclick="filterOrders('delivered')">Delivered</button>
-                <button class="bg-red-500 text-white px-4 py-2 rounded" onclick="filterOrders('cancelled')">Cancelled</button>
+            <div class="mb-6" id="filterButtons">
+                <button class="bg-blue-500 text-white mx-2 px-4 py-2 rounded" onclick="filterOrders('all', this)">All</button>
+                <button class="bg-yellow-500 text-white mx-2 px-4 py-2 rounded" onclick="filterOrders('pending', this)">Pending</button>
+                <button class="bg-green-500 text-white mx-2 px-4 py-2 rounded" onclick="filterOrders('received', this)">Received</button>
+                <button class="bg-indigo-500 text-white mx-2 px-4 py-2 rounded" onclick="filterOrders('processed', this)">Processed</button>
+                <button class="bg-purple-500 text-white mx-2 px-4 py-2 rounded" onclick="filterOrders('shipped', this)">Shipped</button>
+                <button class="bg-green-600 text-white mx-2 px-4 py-2 rounded" onclick="filterOrders('delivered', this)">Delivered</button>
+                <button class="bg-red-500 text-white mx-2 px-4 py-2 rounded" onclick="filterOrders('cancelled', this)">Cancelled</button>
             </div>
+            
+            
 
             <!-- Orders Table -->
             <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
@@ -50,22 +57,6 @@
                     <tbody id="orderTable"></tbody>
                 </table>
             </div>
-
-            <!-- Products Table -->
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <table class="w-full border-collapse border border-gray-200">
-                    <thead>
-                        <tr class="bg-gray-200">
-                            <th class="border p-2">Product ID</th>
-                            <th class="border p-2">Name</th>
-                            <th class="border p-2">Stock</th>
-                            <th class="border p-2">Price</th>
-                            <th class="border p-2">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="productTable"></tbody>
-                </table>
-            </div>
         </main>
     </div>
 
@@ -75,53 +66,130 @@
             const orders = await response.json();
             let orderTable = document.getElementById("orderTable");
             orderTable.innerHTML = "";
+
             orders.forEach(order => {
                 orderTable.innerHTML += `
-                    <tr>
+                    <tr data-order-id="${order._id}">
                         <td class="border p-2">${order.orderNumber}</td>
                         <td class="border p-2">${order.customer}</td>
-                        <td class="border p-2">${order.status}</td>
-                        <td class="border p-2">$${order.totalAmount}</td>
+                        <td class="border p-2 status">${order.status}</td>
+                        <td class="border p-2">₹${order.totalAmount}</td>
                         <td class="border p-2">
-                            <button class="bg-blue-500 text-white px-2 py-1 rounded">View</button>
-                            <button class="bg-red-500 text-white px-2 py-1 rounded">Cancel</button>
+                            <button class="bg-blue-500 text-white px-2 py-1 rounded" onclick="viewOrder('${order._id}')">View</button>
+                            <button class="bg-red-500 text-white px-2 py-1 rounded" onclick="cancelOrder('${order._id}')">Cancel</button>
+                            ${order.status === 'Pending'
+                        ? `<button class="bg-green-500 text-white px-2 py-1 rounded" onclick="updateOrderStatus('${order._id}','Received')">Received</button>`
+                        : ''}
+
+                        ${order.status === 'Received'
+                        ? `<button class="bg-indigo-500 text-white px-2 py-1 rounded" onclick="updateOrderStatus('${order._id}', 'Processed')">Processed</button>`
+                        : ''}
+
+                        ${order.status === 'Processed'
+                        ? `<button class="bg-purple-500 text-white px-2 py-1 rounded" onclick="updateOrderStatus('${order._id}', 'Shipped')">Shipped</button>`
+                        : ''}
+
+                         ${order.status === 'Shipped'
+                        ? `<button class="bg-green-500 text-white px-2 py-1 rounded" onclick="updateOrderStatus('${order._id}', 'Delivered')">Delivered</button>`
+                        : ''}
+
                         </td>
                     </tr>`;
             });
         }
 
-        async function fetchProducts() {
-            const response = await fetch("http://localhost:5000/api/products");
-            const products = await response.json();
-            let productTable = document.getElementById("productTable");
-            productTable.innerHTML = "";
-            products.forEach(product => {
-                productTable.innerHTML += `
-                    <tr>
-                        <td class="border p-2">${product._id}</td>
-                        <td class="border p-2">${product.name}</td>
-                        <td class="border p-2">${product.stock}</td>
-                        <td class="border p-2">$${product.price}</td>
-                        <td class="border p-2">
-                            <button class="bg-blue-500 text-white px-2 py-1 rounded">Edit</button>
-                            <button class="bg-red-500 text-white px-2 py-1 rounded">Delete</button>
-                        </td>
-                    </tr>`;
-            });
+
+        async function updateOrderStatus(orderId, newStatus) {
+    try {
+        const response = await fetch(`http://localhost:5000/api/orders/${orderId}/status`, {
+            method: 'PUT', // Assuming your backend uses PUT for status updates
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ status: newStatus }) // Sending new status
+        });
+
+        if (response.ok) {
+            const updatedOrder = await response.json();
+
+            // ✅ Update the status in the table
+            const row = document.querySelector(`tr[data-order-id="${orderId}"]`);
+            row.querySelector('.status').innerText = updatedOrder.status;
+
+            // ✅ Refresh the action buttons after status change
+            fetchOrders();
+
+            alert(`✅ Order status updated to ${newStatus}`);
+        } else {
+            const errorData = await response.json();
+            alert(`❌ Failed to update: ${errorData.error}`);
+        }
+    } catch (error) {
+        console.error('❌ Error updating order status:', error);
+        alert('Error updating order status');
+    }
+}
+
+        async function cancelOrder(orderId) {
+            const confirmCancel = confirm("Are you sure you want to cancel this order?");
+            if (!confirmCancel) return;
+
+            try {
+                const response = await fetch(`http://localhost:5000/api/orders/${orderId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ status: 'Cancelled' })
+                });
+
+                if (response.ok) {
+                    const row = document.querySelector(`tr[data-order-id="${orderId}"]`);
+                    row.querySelector('.status').innerText = 'Cancelled';
+
+                    // Remove action buttons after cancellation
+                    row.querySelectorAll('button').forEach(btn => btn.remove());
+
+                    alert('Order Cancelled');
+                } else {
+                    alert('Failed to cancel the order');
+                }
+            } catch (error) {
+                console.error('Error cancelling order:', error);
+                alert('Error cancelling order');
+            }
         }
 
-        function filterOrders(status) {
-            let rows = document.querySelectorAll("#orderTable tr");
-            rows.forEach(row => {
-                let orderStatus = row.cells[2].innerText.toLowerCase();
-                row.style.display = status === 'all' || orderStatus === status ? "" : "none";
-            });
+        function viewOrder(orderId) {
+            alert(`Viewing details for Order ID: ${orderId}`);
+            // Implement your logic to show order details
         }
+
+        function filterOrders(status, clickedButton) {
+                    // Filter orders (existing logic)
+                    let rows = document.querySelectorAll("#orderTable tr");
+                    rows.forEach(row => {
+                        let orderStatus = row.querySelector('.status').innerText.toLowerCase();
+                        row.style.display = status === 'all' || orderStatus === status ? "" : "none";
+                    });
+            
+                    // Highlight the active button
+                    const buttons = document.querySelectorAll('#filterButtons button');
+                    buttons.forEach(btn => btn.classList.remove('ring-2', 'ring-black')); // Remove highlight
+            
+                    clickedButton.classList.add('ring-2', 'ring-black'); // Add highlight to the clicked button
+                }
+            
+                // Set 'All' as default active on page load
+                document.addEventListener('DOMContentLoaded', () => {
+                    document.querySelector('#filterButtons button').classList.add('ring-2', 'ring-black');
+                });
 
         document.addEventListener("DOMContentLoaded", () => {
             fetchOrders();
-            fetchProducts();
         });
     </script>
+
 </body>
+
 </html>

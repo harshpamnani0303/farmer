@@ -123,214 +123,222 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="orderlist-filter">
-                        <h5>total order <span>- (4)</span></h5>
+                        <h5>Total Orders <span id="totalOrders">- (0)</span></h5>
                         <div class="filter-short">
-                            <label class="form-label">short by:</label>
-                            <select class="form-select">
-                                <option value="all" selected="">all order</option>
-                                <option value="recieved">recieved order</option>
-                                <option value="processed">processed order</option>
-                                <option value="shipped">shipped order</option>
-                                <option value="delivered">delivered order</option>
+                            <label class="form-label">Sort by:</label>
+                            <select class="form-select" id="orderFilter">
+                                <option value="all" selected>All Orders</option>
+                                <option value="received">Received Order</option>
+                                <option value="processed">Processed Order</option>
+                                <option value="shipped">Shipped Order</option>
+                                <option value="delivered">Delivered Order</option>
                             </select>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
+
+            <!-- Dynamic Order Content -->
+            <div class="row" id="orderContainer">
                 <div class="col-lg-12">
                     <div class="orderlist">
-                        <div class="orderlist-head">
-                            <h5>order#01</h5>
-                            <h5>order recieved</h5>
-                        </div>
-                        <div class="orderlist-body">
-                            <div class="row">
-                                <!-- order tracking -->
-                                <div class="col-lg-12">
-                                    <div class="order-track">
-                                        <ul class="order-track-list">
-                                            <li class="order-track-item active">
-                                                <i class="icofont-check"></i>
-                                                <span>order recieved</span>
-                                            </li>
-                                            <li class="order-track-item ">
-                                                <i class="icofont-check"></i>
-                                                <span>order processed</span>
-                                            </li>
-                                            <li class="order-track-item">
-                                                <i class="icofont-close"></i>
-                                                <span>order shipped</span>
-                                            </li>
-                                            <li class="order-track-item">
-                                                <i class="icofont-close"></i>
-                                                <span>order delivered</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-5">
-                                    <ul class="orderlist-details">
-                                        <li>
-                                            <h6>Order ID</h6>
-                                            <p id="orderId">Loading...</p>
-                                        </li>
-                                        <li>
-                                            <h6>Total Items</h6>
-                                            <p id="totalItems">Loading...</p>
-                                        </li>
-                                        <li>
-                                            <h6>Order Time</h6>
-                                            <p id="orderTime">Loading...</p>
-                                        </li>
-                                        <li>
-                                            <h6>Delivery Time</h6>
-                                            <p id="deliveryTime">Loading...</p>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="col-lg-3">
-                                    <div class="orderlist-deliver">
-                                        <h6>Delivery Location</h6>
-                                        <p id="deliveryLocation">loading...</p>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12">
-                                    <div class="table-scroll">
-                                        <table class="table-list">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Serial</th>
-                                                    <th scope="col">Product</th>
-                                                    <th scope="col">Name</th>
-                                                    <th scope="col">Price</th>
-                                                    <th scope="col">Quantity</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="productTableBody">
-                                                <!-- Dynamic product rows will be inserted here -->
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-
-                                <script>
-                                    // Function to fetch and display order details
-                                    async function fetchOrderDetails() {
-                                        try {
-                                            // Get userId from localStorage
-                                            const userId = localStorage.getItem('userId');
-
-                                            if (!userId) {
-                                                console.warn('No userId found in localStorage');
-                                                return;
-                                            }
-
-                                            // Fetch orders by userId
-                                            const response = await fetch(`http://localhost:5000/api/orders/user/${userId}`);
-
-                                            if (!response.ok) {
-                                                throw new Error(`HTTP error! status: ${response.status}`);
-                                            }
-
-                                            const orders = await response.json();
-
-                                            if (orders.length === 0) {
-                                                console.warn('No orders found for this user');
-                                                document.getElementById('orderId').innerText = 'No Orders';
-                                                return;
-                                            }
-
-                                            // Display the first order's details
-                                            let order = orders[0];
-                                            document.getElementById('orderId').innerText = order.orderNumber || 'N/A';
-                                            document.getElementById('totalItems').innerText = `${order.products.length || 0} Items`;
-
-                                            const orderDate = new Date(order.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-                                            document.getElementById('orderTime').innerText = orderDate;
-
-                                            // Assuming delivery is 5 days after order date
-                                            const deliveryDate = new Date(order.createdAt);
-                                            const schedule = order.deliverySchedule?.toLowerCase(); // To handle case-insensitivity
-
-                                            if (schedule === 'express' || schedule === '8am-10pm') {
-                                                // Same-day delivery
-                                                document.getElementById('deliveryTime').innerText = deliveryDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-                                            } else {
-                                                // Next-day delivery
-                                                deliveryDate.setDate(deliveryDate.getDate() + 1);
-                                                document.getElementById('deliveryTime').innerText = deliveryDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-                                            }
-
-                                            document.getElementById('deliveryLocation').innerText = order.deliveryAddresses[0]?.address || 'No location provided';
-
-
-                                            // Assuming first order for demo
-                                            order = orders[0]; // Assuming first order
-                                            const productTableBody = document.getElementById('productTableBody');
-                                            productTableBody.innerHTML = ''; // Clear existing table data
-
-                                            // Loop through products in order and fetch details
-                                            for (const [index, orderProduct] of order.products.entries()) {
-                                                try {
-                                                    const productId = orderProduct.product; // Product ID from orders
-
-                                                    // Fetch product details using productId
-                                                    const productResponse = await fetch(`http://localhost:5000/api/products/${productId}`);
-                                                    if (!productResponse.ok) {
-                                                        console.error(`Failed to fetch product with ID: ${productId}`);
-                                                        continue;
-                                                    }
-
-                                                    const productDetails = await productResponse.json();
-                                                    console.log("Product Details:", productDetails); // ✅ Verify image path here
-
-                                                    // ✅ Prepend backend URL to image path
-                                                    const imageUrl = `http://localhost:5000${productDetails.image}`
-                                                         
-                                                       console.log(productDetails.image);
-                                                       
-                                                    // Create table row with product details
-                                                    const row = `
-            <tr>
-                <td class="table-serial"><h6>${index + 1}</h6></td>
-                <td class="table-image"><img src=${imageUrl} alt="${productDetails.name}" width="60"></td>
-                <td class="table-name"><h6>${productDetails.name}</h6></td>
-                <td class="table-price"><h6>₹${productDetails.price}<small>/kilo</small></h6></td>
-                <td class="table-quantity"><h6>${orderProduct.quantity}</h6></td>
-            </tr>
-        `;
-                                                    productTableBody.insertAdjacentHTML('beforeend', row);
-                                                } catch (error) {
-                                                    console.error(`Error fetching product ${orderProduct.product}:`, error);
-                                                }
-                                            }
-
-
-                                        } catch (error) {
-                                            console.error('Error fetching order:', error);
-                                            document.getElementById('orderId').innerText = 'Error loading order';
-                                        }
-                                    }
-
-                                    // Call the function on page load
-                                    fetchOrderDetails();
-                                </script>
-
-
-
-
-
-                            </div>
-                        </div>
+                        <!-- Dynamic content -->
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <script>
+        // Function to fetch and display all orders
+        async function fetchOrderDetails() {
+            try {
+                const userId = localStorage.getItem('userId');
+                if (!userId) {
+                    console.warn('No userId found in localStorage');
+                    return;
+                }
+
+                const response = await fetch(`http://localhost:5000/api/orders/user/${userId}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const orders = await response.json();
+                document.getElementById('totalOrders').innerText = `- (${orders.length})`;
+
+                if (orders.length === 0) {
+                    console.warn('No orders found for this user');
+                    return;
+                }
+
+                // Clear existing orders before rendering new ones
+                document.getElementById('orderContainer').innerHTML = '';
+
+                // Loop through all orders and render them
+                orders.forEach((order, orderIndex) => {
+                    const orderContainer = document.createElement('div');
+                    orderContainer.classList.add('orderlist');
+
+                    // Determine if Cancel or Return button is needed
+                    let actionButton = '';
+                    if (order.status === 'Pending' || order.status === 'Received' || order.status === 'Processed') {
+                        actionButton = `<button class="btn btn-danger my-4" onclick="cancelOrder('${order._id}')">Cancel Order</button>`;
+                    } else if (order.status === 'Delivered') {
+                        actionButton = `<button class="btn btn-warning my-4" onclick="returnOrder('${order._id}')">Return Order</button>`;
+                    }
+
+                    orderContainer.innerHTML = `
+                    <div class="orderlist-head">
+                        <h5>Order#${orderIndex + 1}</h5>
+                        <h5>${order.status || 'Order Received'}</h5>
+                    </div>
+                    <div class="orderlist-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="order-track">
+                                    <ul class="order-track-list">
+                                        <li class="order-track-item ${(order.status === 'Received' || order.status === 'Processed' || order.status === 'Shipped' || order.status === 'Delivered') ? 'active' : ''}">
+                                            <i class="icofont-check"></i><span>Order Received</span>
+                                        </li>
+                                        <li class="order-track-item ${(order.status === 'Processed' || order.status === 'Shipped' || order.status === 'Delivered') ? 'active' : ''}">
+                                            <i class="icofont-check"></i><span>Order Processed</span>
+                                        </li>
+                                        <li class="order-track-item ${(order.status === 'Shipped' || order.status === 'Delivered') ? 'active' : ''}">
+                                            <i class="icofont-check"></i><span>Order Shipped</span>
+                                        </li>
+                                        <li class="order-track-item ${order.status === 'Delivered' ? 'active' : ''}">
+                                            <i class="icofont-check"></i><span>Order Delivered</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-5">
+                                <ul class="orderlist-details">
+                                    <li><h6>Order ID</h6><p>${order.orderNumber || 'N/A'}</p></li>
+                                    <li><h6>Total Items</h6><p>${order.products.length || 0} Items</p></li>
+                                    <li><h6>Order Time</h6><p>${new Date(order.createdAt).toLocaleDateString('en-GB')}</p></li>
+                                    <li><h6>Delivery Time</h6><p>${new Date(order.createdAt).toLocaleDateString('en-GB')}</p></li>
+                                </ul>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="orderlist-deliver">
+                                    <h6>Delivery Location</h6>
+                                    <p>${order.deliveryAddresses[0]?.address || 'No location provided'}</p>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="table-scroll">
+                                    <table class="table-list">
+                                        <thead>
+                                            <tr>
+                                                <th>Serial</th>
+                                                <th>Product</th>
+                                                <th>Name</th>
+                                                <th>Price</th>
+                                                <th>Quantity</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="productTableBody-${orderIndex}">
+                                            <!-- Products will be inserted here -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 text-end mt-3">
+                                ${actionButton} <!-- Cancel or Return Button -->
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                    document.getElementById('orderContainer').appendChild(orderContainer);
+
+                    // Fetch and display product details for each order
+                    order.products.forEach(async (orderProduct, productIndex) => {
+                        try {
+                            const productResponse = await fetch(`http://localhost:5000/api/products/${orderProduct.product}`);
+                            if (!productResponse.ok) {
+                                console.error(`Failed to fetch product with ID: ${orderProduct.product}`);
+                                return;
+                            }
+
+                            const productDetails = await productResponse.json();
+                            const imageUrl = `http://localhost:5000${productDetails.image}`;
+
+                            const row = `
+                            <tr>
+                                <td class="table-serial"><h6>${productIndex + 1}</h6></td>
+                                <td class="table-image"><img src="${imageUrl}" alt="${productDetails.name}" width="60"></td>
+                                <td class="table-name"><h6>${productDetails.name}</h6></td>
+                                <td class="table-price"><h6>₹${productDetails.price}<small>/kilo</small></h6></td>
+                                <td class="table-quantity"><h6>${orderProduct.quantity}</h6></td>
+                            </tr>
+                        `;
+
+                            document.getElementById(`productTableBody-${orderIndex}`).insertAdjacentHTML('beforeend', row);
+                        } catch (error) {
+                            console.error(`Error fetching product ${orderProduct.product}:`, error);
+                        }
+                    });
+                });
+            } catch (error) {
+                console.error('Error fetching orders:', error);
+            }
+        }
+
+        // Cancel Order Function
+        async function cancelOrder(orderId) {
+            if (confirm('Are you sure you want to cancel this order?')) {
+                try {
+                    const response = await fetch(`http://localhost:5000/api/orders/${orderId}/cancel`, { method: 'PUT' });
+                    if (response.ok) {
+                        alert('Order cancelled successfully!');
+                        fetchOrderDetails(); // Refresh orders
+                    } else {
+                        alert('Failed to cancel the order.');
+                    }
+                } catch (error) {
+                    console.error('Error cancelling order:', error);
+                }
+            }
+        }
+
+        // Return Order Function
+        async function returnOrder(orderId) {
+            if (confirm('Are you sure you want to return this order?')) {
+                try {
+                    const response = await fetch(`http://localhost:5000/api/orders/${orderId}/status`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ status: 'Returned' }) // ✅ Updating status to Returned
+                    });
+
+                    if (response.ok) {
+                        alert('✅ Order returned successfully!');
+                        fetchOrderDetails(); // Refresh the order list or details
+                    } else {
+                        const errorData = await response.json();
+                        alert(`❌ Failed to return the order: ${errorData.error}`);
+                    }
+                } catch (error) {
+                    console.error('❌ Error returning order:', error);
+                    alert('Error returning order');
+                }
+            }
+        }
+
+        // Run on page load
+        fetchOrderDetails();
+    </script>
+
+
 
 
 

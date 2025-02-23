@@ -56,17 +56,17 @@ router.get("/", async (req, res) => {
 /* ✅ Get orders by user ID */
 router.get('/user/:userId', async (req, res) => {
   try {
-      const { userId } = req.params;
-      const orders = await Order.find({ user: userId }); // Assuming 'user' holds userId in the order document
+    const { userId } = req.params;
+    const orders = await Order.find({ user: userId }); // Assuming 'user' holds userId in the order document
 
-      if (!orders.length) {
-          return res.status(404).json({ message: 'No orders found for this user' });
-      }
+    if (!orders.length) {
+      return res.status(404).json({ message: 'No orders found for this user' });
+    }
 
-      res.status(200).json(orders);
+    res.status(200).json(orders);
   } catch (error) {
-      console.error('Error fetching orders:', error);
-      res.status(500).json({ error: 'Internal server error' });
+    console.error('Error fetching orders:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
@@ -76,14 +76,26 @@ router.put("/:orderId/status", async (req, res) => {
     const { orderId } = req.params;
     const { status } = req.body;
 
-    // Validate status value
+    // Validate orderId and status
+    if (!orderId) {
+      return res.status(400).json({ error: "Order ID is required" });
+    }
+
+    if (!status) {
+      return res.status(400).json({ error: "Order status is required" });
+    }
+
+    // Valid status options
     const validStatuses = [
       "Pending",
-      "Processing",
+      "Processed",
       "Shipped",
       "Delivered",
       "Cancelled",
+      "Received",
+      "Returned"
     ];
+
     if (!validStatuses.includes(status)) {
       return res.status(400).json({ error: "Invalid order status" });
     }
@@ -95,37 +107,19 @@ router.put("/:orderId/status", async (req, res) => {
       { new: true }
     );
 
-    if (!updatedOrder)
+    if (!updatedOrder) {
       return res.status(404).json({ error: "Order not found" });
+    }
 
-    res.status(200).json(updatedOrder);
+    res.status(200).json({ message: "Order status updated", updatedOrder });
   } catch (error) {
     console.error("❌ Error updating order status:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
 
-/* ✅ Delete an order */
-router.delete("/:orderId", async (req, res) => {
-  try {
-    const { orderId } = req.params;
 
-    // Validate ObjectId
-    if (!mongoose.Types.ObjectId.isValid(orderId)) {
-      return res.status(400).json({ error: "Invalid order ID" });
-    }
-
-    const deletedOrder = await Order.findByIdAndDelete(orderId);
-    if (!deletedOrder)
-      return res.status(404).json({ error: "Order not found" });
-
-    res.status(200).json({ message: "Order deleted successfully" });
-  } catch (error) {
-    console.error("❌ Error deleting order:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
+// time shecduling
 router.get("/order/:orderId", async (req, res) => {
   try {
     const order = await Order.findById(req.params.orderId).populate(
