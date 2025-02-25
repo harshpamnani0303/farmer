@@ -123,6 +123,14 @@ document.addEventListener("click", function (event) {
 // ✅ Event Listener for Buy Now Button
 document.addEventListener("click", function (event) {
   if (event.target.closest(".buy-now-btn")) {
+    // ✅ Check if user is logged in
+    const userId = localStorage.getItem("userId");
+    if (!userId) {
+      alert("❌ Please log in to not buy any product");
+      window.location.href = "login.html"; // Redirect to login page if not logged in
+      return; // Stop further execution
+    }
+
     const card = event.target.closest(".product-card");
 
     // ✅ Collect product data from existing elements

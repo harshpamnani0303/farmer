@@ -30,7 +30,9 @@
     <link rel="stylesheet" href="fonts/flaticon/flaticon.css">
     <link rel="stylesheet" href="fonts/icofont/icofont.min.css">
     <link rel="stylesheet" href="fonts/fontawesome/fontawesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- VENDOR -->
     <link rel="stylesheet" href="vendor/venobox/venobox.min.css">
@@ -136,18 +138,19 @@
                                 <div class="col-md-6 col-lg-4">
                                     <div class="form-group">
                                         <label class="form-label">name</label>
-                                        <input class="form-control" type="text" value="Miron Mahmud">
+                                        <input class="form-control" id="nameInput" type="text" value="">
                                     </div>
                                 </div>
+                                
                                 <div class="col-md-6 col-lg-4">
                                     <div class="form-group">
                                         <label class="form-label">Email</label>
-                                        <input class="form-control" type="email" value="mironcoder@gmail.com">
+                                        <input class="form-control " id="emailInput" type="email" value="">
                                     </div>
                                 </div>
                                 <div class="col-lg-2">
                                     <div class="profile-btn">
-                                        <a href='change-password.html'>change pass.</a>
+                                        <button class="btn btn-danger" id="logoutBtn">Logout</button>
                                     </div>
                                 </div>
                             </div>
@@ -157,6 +160,63 @@
             </div>
         </div>
     </section>
+    <script>
+        const email = localStorage.getItem('userEmail')
+        if (email) {
+            document.getElementById('emailInput').value = email;
+        }
+
+        const name = localStorage.getItem('userName')
+        if (name) {
+            document.getElementById('nameInput').value = name;
+        }
+
+        
+    // Attach event listener to the Logout button
+    document.getElementById("logoutBtn").addEventListener("click", showLogoutModal);
+
+    function showLogoutModal() {
+        const userName = localStorage.getItem("userName") || "User"; // Default if no name is stored
+
+        const modal = document.createElement("div");
+        modal.innerHTML = `
+            <div class="modal fade show" id="logout-modal" 
+                style="display:flex; background:rgba(0,0,0,0.5); position:fixed; inset:0; align-items:center; justify-content:center;">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content p-5 text-center shadow-lg rounded-lg" 
+                        style="background: #fff; border-radius: 12px; position:relative; width: 350px;">
+                        <button class="close-btn" id="close-modal" 
+                            style="position:absolute; top:10px; right:10px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">×</button>
+                        <div class="modal-body">
+                            <p style="font-size: 1rem; font-weight: bold; color: black;">You are logged out, ${userName}</p>
+                            <button class="btn btn-success mt-3" id="logout-button">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        // Logout functionality
+        document.getElementById("logout-button").addEventListener("click", () => {
+            localStorage.removeItem("userName"); // Remove user data
+            localStorage.removeItem("userId"); // Remove userID
+            window.location.href = "index.html"; // Redirect to login page after logout
+        });
+
+        // Close modal functionality
+        document.getElementById("close-modal").addEventListener("click", () => {
+            modal.remove(); // Remove modal from DOM
+        });
+
+        // Close modal on outside click
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) modal.remove();
+        });
+    }
+</script>
+        
+    
     <!--=====================================
                     PROFILE PART END
         =======================================-->
@@ -279,22 +339,22 @@
                                         <ul class="order-track-list">
                                             
                                             <li class="order-track-item ${order.status === 'Returned'
-                            ?  'return': (['Received', 'Processed', 'Shipped', 'Delivered', 'Cancelled'].includes(order.status) ? 'active' : '')}">
+                            ? 'return' : (['Received', 'Processed', 'Shipped', 'Delivered', 'Cancelled'].includes(order.status) ? 'active' : '')}">
                                                 <i class="${(order.status === 'Received' || order.status === 'Processed' || order.status === 'Shipped' || order.status === 'Delivered' || order.status === 'Returned' || order.status === 'Cancelled') ? 'icofont-check' : 'icofont-close'}"></i><span>Order Confirmed</span>
                                             </li>
 
 
-                                            <li class="order-track-item ${order.status === 'Returned' || order.status === 'Cancelled' ? (order.status==='Returned' ? 'return' : 'cancel') : (order.status === 'Processed' || order.status === 'Shipped' || order.status === 'Delivered') ? 'active' : ''}">
-                                                <i class="${(order.status === 'Processed' || order.status === 'Shipped' || order.status === 'Delivered' || order.status === 'Returned') ? 'icofont-check' : 'icofont-close'}"></i><span>Order ${order.status==='Cancelled'? 'Cancelled' : 'Processed'} </span>
+                                            <li class="order-track-item ${order.status === 'Returned' || order.status === 'Cancelled' ? (order.status === 'Returned' ? 'return' : 'cancel') : (order.status === 'Processed' || order.status === 'Shipped' || order.status === 'Delivered') ? 'active' : ''}">
+                                                <i class="${(order.status === 'Processed' || order.status === 'Shipped' || order.status === 'Delivered' || order.status === 'Returned') ? 'icofont-check' : 'icofont-close'}"></i><span>Order ${order.status === 'Cancelled' ? 'Cancelled' : 'Processed'} </span>
                                             </li>
 
 
                                             <li class="order-track-item ${order.status === 'Returned' ? 'return' : (order.status === 'Shipped' || order.status === 'Delivered') ? 'active' : ''}">
-                                                <i class="${(order.status === 'Shipped' || order.status === 'Delivered' ||order.status === 'Returned') ? 'icofont-check' : 'icofont-close'}"></i><span>Order Shipped</span>
+                                                <i class="${(order.status === 'Shipped' || order.status === 'Delivered' || order.status === 'Returned') ? 'icofont-check' : 'icofont-close'}"></i><span>Order Shipped</span>
                                             </li>
 
                                             <li class="order-track-item ${order.status === 'Returned' ? 'return' : (order.status === 'Delivered' ? 'active' : '')}">
-                                                <i class="${order.status === 'Delivered' ? 'icofont-check' : order.status==='Returned' ? 'fa-solid fa-rotate-left':'icofont-close' }"></i><span>Order ${order.status === 'Returned' ? 'Returned' : 'Delivered'} </span>
+                                                <i class="${order.status === 'Delivered' ? 'icofont-check' : order.status === 'Returned' ? 'fa-solid fa-rotate-left' : 'icofont-close'}"></i><span>Order ${order.status === 'Returned' ? 'Returned' : 'Delivered'} </span>
                                             </li>
                                         </ul>
                                     </div>

@@ -6,45 +6,9 @@ export function loadHeader() {
 
     if (userName) {
       userWidget.textContent = userName;
-      userWidget.closest("a").setAttribute("href", "#"); // Prevent login redirection
-      userWidget.closest("a").addEventListener("click", showLogoutModal);
+
     }
 
-    function showLogoutModal() {
-      const modal = document.createElement("div");
-      modal.innerHTML = `
-        <div class="modal fade show" id="logout-modal" style="display:flex; background:rgba(0,0,0,0.5); position:fixed; inset:0; align-items:center; justify-content:center;">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content p-5 text-center shadow-lg rounded-lg" style="background: #fff; border-radius: 12px; position:relative; width: 350px;">
-              <button class="close-btn" id="close-modal" style="position:absolute; top:10px; right:10px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">×</button>
-              <div class="modal-body">
-                <p style="font-size: 1rem; font-weight: bold; color: black;">You are logged out, ${userName}</p>
-                <button class="btn btn-success mt-3" id="logout-button">Logout</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-      document.body.appendChild(modal);
-    
-      // Logout functionality
-      document.getElementById("logout-button").addEventListener("click", () => {
-        localStorage.removeItem("userName"); // Remove user data
-        localStorage.removeItem("userId"); // Remove userID
-        location.reload(); // Refresh the page
-      });
-    
-      // Close modal functionality
-      document.getElementById("close-modal").addEventListener("click", () => {
-        modal.style.display = "none"; // Hide the modal instead of removing
-      });
-    
-      // Close modal on outside click
-      modal.addEventListener("click", (e) => {
-        if (e.target === modal) modal.style.display = "none";
-      });
-    }
-    
 
     // ✅ Cart Sidebar Toggle
     const cartButtons = document.querySelectorAll(".header-cart, .cart-btn");
@@ -73,7 +37,7 @@ export function loadHeader() {
       console.log("pass"); 
 
       const totalItems = cartItems.reduce(
-        (total, item) => total + item.quantity,
+        (total, item) => total + 1,
         0
       );
       const totalPrice = cartItems
@@ -111,6 +75,8 @@ export function loadHeader() {
                         <img src="images/logo.png" alt="logo">
                     </a>
 
+                
+            
                 <form class="header-form">
                     <input type="text" placeholder="Search anything...">
                     <button><i class="fas fa-search"></i></button>
@@ -123,7 +89,7 @@ export function loadHeader() {
                         
                     </button>
 
-                    <a class='header-widget' href='login.html' title='My Account'>
+                    <a class='header-widget' href='profile.html' title='My Account'>
                     <img src="images/user.png" alt="user">
                     <span>join</span>
                 </a>
