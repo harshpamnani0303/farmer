@@ -45,7 +45,7 @@ export function loadProductCard(product) {
             </a>
           </h6>
           <h6 class="product-price">
-            <span>₹${product.price}<small>/ ${product.unit}</small></span>
+            <span>₹${product.price}<small>/ ${product.category === 'Tools' ? 'piece' : product.unit}</small></span>
           </h6>
 
                     <button class="btn btn-inline add-to-cart " 

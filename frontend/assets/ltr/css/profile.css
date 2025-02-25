@@ -39,15 +39,3 @@
 .profile-btn a:hover {
   background: var(--green);
 }
-
-@media (max-width: 991px) {
-  .profile-btn {
-    margin-top: 5px;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  .profile-image {
-    margin-bottom: 20px;
-  }
-}

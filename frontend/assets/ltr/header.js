@@ -111,11 +111,6 @@ export function loadHeader() {
                         <img src="images/logo.png" alt="logo">
                     </a>
 
-                <a class='header-widget' href='login.html' title='My Account'>
-                    <img src="images/user.png" alt="user">
-                    <span>join</span>
-                </a>
-            
                 <form class="header-form">
                     <input type="text" placeholder="Search anything...">
                     <button><i class="fas fa-search"></i></button>
@@ -125,8 +120,13 @@ export function loadHeader() {
                     <button class="header-widget header-cart" title="Cartlist">
                         <i class="fas fa-shopping-basket"></i>
                         <sup>0</sup> <!-- Updated dynamically -->
-                        <span>total price <small>₹0.00</small></span> <!-- Updated dynamically -->
+                        
                     </button>
+
+                    <a class='header-widget' href='login.html' title='My Account'>
+                    <img src="images/user.png" alt="user">
+                    <span>join</span>
+                </a>
                 </div>
             </div>
         </div>

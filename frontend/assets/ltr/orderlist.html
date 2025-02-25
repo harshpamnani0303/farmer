@@ -19,13 +19,12 @@
         =======================================-->
 
     <!-- WEBPAGE TITLE -->
-    <title>Greeny - Order History</title>
+    <title>BharatFarmers - Order History</title>
 
     <!--=====================================
                     CSS LINK PART START
         =======================================-->
-    <!-- FAVICON -->
-    <link rel="icon" href="images/favicon.png">
+   
 
     <!-- FONTS -->
     <link rel="stylesheet" href="fonts/flaticon/flaticon.css">
@@ -44,6 +43,9 @@
     <!--=====================================
                     CSS LINK PART END
         =======================================-->
+
+
+
 </head>
 
 <body>
@@ -148,7 +150,6 @@
             </div>
         </div>
     </section>
-
     <script>
         // Function to fetch and display all orders
         async function fetchOrderDetails() {
@@ -189,7 +190,7 @@
                     }
 
                     orderContainer.innerHTML = `
-                    <div class="orderlist-head">
+                    <div class="orderlist-head ${order.status === 'Cancelled' || order.status === 'Returned' ? 'blurred-order' : ''} ">
                         <h5>Order#${orderIndex + 1}</h5>
                         <h5>${order.status || 'Order Received'}</h5>
                     </div>
@@ -198,17 +199,17 @@
                             <div class="col-lg-12">
                                 <div class="order-track">
                                     <ul class="order-track-list">
-                                        <li class="order-track-item ${(order.status === 'Received' || order.status === 'Processed' || order.status === 'Shipped' || order.status === 'Delivered') ? 'active' : ''}">
-                                            <i class="icofont-check"></i><span>Order Received</span>
+                                        <li class=" order-track-item ${(order.status === 'Received' || order.status === 'Processed' || order.status === 'Shipped' || order.status === 'Delivered') ? 'cancel' : ''}">
+                                            <i class="${(order.status === 'Received' || order.status === 'Processed' || order.status === 'Shipped' || order.status === 'Delivered') ? 'icofont-check' : 'icofont-close'}"></i><span>Order Received</span>
                                         </li>
-                                        <li class="order-track-item ${(order.status === 'Processed' || order.status === 'Shipped' || order.status === 'Delivered') ? 'active' : ''}">
-                                            <i class="icofont-check"></i><span>Order Processed</span>
+                                        <li class="order-track-item ${(order.status === 'Processed' || order.status === 'Shipped' || order.status === 'Delivered') ? 'cancel' : ''}">
+                                            <i class="${(order.status === 'Processed' || order.status === 'Shipped' || order.status === 'Delivered') ? 'icofont-check' : 'icofont-close'}"></i><span>Order Processed</span>
                                         </li>
                                         <li class="order-track-item ${(order.status === 'Shipped' || order.status === 'Delivered') ? 'active' : ''}">
-                                            <i class="icofont-check"></i><span>Order Shipped</span>
+                                            <i class="${(order.status === 'Shipped' || order.status === 'Delivered') ? 'icofont-check' : 'icofont-close'}"></i><span>Order Shipped</span>
                                         </li>
                                         <li class="order-track-item ${order.status === 'Delivered' ? 'active' : ''}">
-                                            <i class="icofont-check"></i><span>Order Delivered</span>
+                                            <i class="${order.status === 'Delivered' ?'icofont-check' : 'icofont-close'}"></i><span>Order Delivered</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -293,20 +294,29 @@
 
         // Cancel Order Function
         async function cancelOrder(orderId) {
-            if (confirm('Are you sure you want to cancel this order?')) {
-                try {
-                    const response = await fetch(`http://localhost:5000/api/orders/${orderId}/cancel`, { method: 'PUT' });
-                    if (response.ok) {
-                        alert('Order cancelled successfully!');
-                        fetchOrderDetails(); // Refresh orders
-                    } else {
-                        alert('Failed to cancel the order.');
-                    }
-                } catch (error) {
-                    console.error('Error cancelling order:', error);
-                }
+    if (confirm('Are you sure you want to cancel this order?')) {
+        try {
+            const response = await fetch(`http://localhost:5000/api/orders/${orderId}/status`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ status: 'Cancelled' }) // ✅ Sending updated status
+            });
+
+            if (response.ok) {
+                alert('Order cancelled successfully!');
+                fetchOrderDetails(); // 🔄 Refresh order list
+            } else {
+                const errorData = await response.json();
+                alert(`Failed to cancel the order: ${errorData.message || 'Unknown error'}`);
             }
+        } catch (error) {
+            console.error('Error cancelling order:', error);
+            alert('An error occurred while cancelling the order.');
         }
+    }
+}
 
         // Return Order Function
         async function returnOrder(orderId) {
@@ -337,11 +347,6 @@
         // Run on page load
         fetchOrderDetails();
     </script>
-
-
-
-
-
     <!--=====================================
                     ORDERLIST PART END
         =======================================-->

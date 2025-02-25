@@ -152,23 +152,4 @@
   background: var(--chalk);
 }
 
-@media (max-width: 575px) {
-  .orderlist-filter {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-  }
-  .orderlist-filter h5 {
-    margin-bottom: 15px;
-  }
-  .orderlist {
-    padding: 0px 15px;
-  }
-  .orderlist-head {
-    padding: 15px 0px;
-  }
-}
+

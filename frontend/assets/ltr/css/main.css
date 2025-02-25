@@ -1436,13 +1436,36 @@ tbody tr td:last-child {
   background: var(--primary);
 }
 
+.order-track-item.cancel::before {
+  background: red;
+}
+.order-track-item.return::before {
+  background: gold;
+}
+
 .order-track-item.active i {
   color: var(--white);
   background: var(--primary);
 }
+.order-track-item.cancel i {
+  color: var(--white);
+  background: red;
+  border: 2px dotted red;
+}
+.order-track-item.return i {
+  color: var(--white);
+  background: gold;
+  border: 2px dotted gold;
+}
 
 .order-track-item.active span {
   color: var(--primary);
+}
+.order-track-item.cancel span {
+  color: red;
+}
+.order-track-item.return span {
+  color: gold;
 }
 
 
