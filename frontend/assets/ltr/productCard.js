@@ -117,6 +117,7 @@ document.addEventListener("click", function (event) {
       return;
     }
     addToCart(userId, productId, productName, productPrice, productImg);
+    
   }
 });
 

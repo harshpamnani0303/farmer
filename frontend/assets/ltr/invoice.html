@@ -420,6 +420,38 @@
         </div>
       </div>
 
+      <script>
+        document.getElementById("orderButton").addEventListener("click", async function () {
+          const userId = localStorage.getItem("userId"); // Get userId from localStorage
+      
+          if (!userId) {
+            alert("⚠️ You must be logged in to place an order.");
+            window.location.href = "login.html"; // Redirect to login if not logged in
+            return;
+          }
+      
+          try {
+            const response = await fetch(`http://localhost:5000/api/cart/clear/${userId}`, {
+              method: "DELETE",
+              headers: { "Content-Type": "application/json" }
+            });
+      
+            const result = await response.json();
+      
+            if (response.ok) {
+              alert(result.message); // Show success message
+              console.log("✅ Cart cleared successfully:", result);
+            } else {
+              alert("❌ Failed to clear cart: " + result.error);
+              console.error("Error:", result);
+            }
+          } catch (error) {
+            alert("❌ An error occurred: " + error.message);
+            console.error("Request failed:", error);
+          }
+        });
+      </script>
+
       <!-- Invoice Modal -->
       <div id="invoiceModal" class="modal bg-gray-100 fixed inset-0 flex items-center justify-center">
         <div class="modal-content bg-white rounded-2xl shadow-2xl p-6 w-11/12 md:w-3/4 lg:w-1/2 relative">

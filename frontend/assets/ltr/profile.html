@@ -436,7 +436,6 @@
                 console.error('Error fetching orders:', error);
             }
         }
-
         // Cancel Order Function
         async function cancelOrder(orderId) {
             if (confirm('Are you sure you want to cancel this order?')) {
@@ -462,7 +461,6 @@
                 }
             }
         }
-
         // Return Order Function
         async function returnOrder(orderId) {
             if (confirm('Are you sure you want to return this order?')) {
@@ -488,19 +486,16 @@
                 }
             }
         }
-
         // Run on page load
         fetchOrderDetails();
     </script>
     <!--=====================================
                         ORDERLIST PART END
             =======================================-->
-
     <!--=====================================
                     INTRO PART START
         =======================================-->
     <div id="section"></div>
-
     <!-- Import the ES6 Module -->
     <script type="module">
         import createIntroSection from './intro.js';
@@ -509,13 +504,10 @@
     <!--=====================================
                     INTRO PART END
         =======================================-->
-
-
     <!--=====================================
                      FOOTER PART START
         =======================================-->
     <div id="footer"></div>
-
     <script type="module">
         import { loadFooter } from './footer.js';
         document.getElementById('footer').innerHTML = loadFooter();
@@ -523,7 +515,6 @@
     <!--=====================================
                       FOOTER PART END
         =======================================-->
-
 
     <!--=====================================
                     JS LINK PART START
@@ -536,7 +527,6 @@
     <script src="vendor/niceselect/nice-select.min.js"></script>
     <script src="vendor/slickslider/slick.min.js"></script>
     <script src="vendor/venobox/venobox.min.js"></script>
-
     <!-- CUSTOM -->
     <script src="js/nice-select.js"></script>
     <script src="js/countdown.js"></script>
@@ -548,5 +538,4 @@
                     JS LINK PART END
         =======================================-->
 </body>
-
 </html>

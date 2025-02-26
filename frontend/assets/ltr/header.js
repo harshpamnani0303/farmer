@@ -6,7 +6,6 @@ export function loadHeader() {
 
     if (userName) {
       userWidget.textContent = userName;
-
     }
 
 
@@ -32,29 +31,25 @@ export function loadHeader() {
 
     // ✅ Update cart details in header
     function updateCartHeader() {
-      console.log("pass"); 
+      console.log("Updating cart...");
+
+      // ✅ Get updated cart from localStorage
       const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-      console.log("pass"); 
+      const totalItems = cartItems.length;
 
-      const totalItems = cartItems.reduce(
-        (total, item) => total + 1,
-        0
-      );
-      const totalPrice = cartItems
-        .reduce((total, item) => total + item.price * item.quantity, 0)
-        .toFixed(2);
+      // ✅ Select elements safely
+      const cartCountElement = document.querySelector(".header-cart sup");
 
-      // Update cart count and total price
-      document.querySelector(".header-cart sup").textContent = totalItems;
-      document.querySelector(
-        ".header-cart small"
-      ).textContent = `₹${totalPrice}`;
 
-      
-      
+      // ✅ Update cart count and total price if elements exist
+      if (cartCountElement) {
+        cartCountElement.textContent = totalItems;
+      } else {
+        console.warn("⚠️ Cart count element not found!");
+      }
+
     }
-
-    // ✅ Listen for cart updates
+    // ✅ Listen for "cartUpdated" event to update the UI immediately
     document.addEventListener("cartUpdated", updateCartHeader);
 
     // Initial cart update
@@ -75,8 +70,6 @@ export function loadHeader() {
                         <img src="images/logo.png" alt="logo">
                     </a>
 
-                
-            
                 <form class="header-form">
                     <input type="text" placeholder="Search anything...">
                     <button><i class="fas fa-search"></i></button>
@@ -99,3 +92,4 @@ export function loadHeader() {
     </header>
     `;
 }
+
