@@ -81,7 +81,7 @@ export function loadCartSidebar(userId) {
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
 
       updateCartUI();
-      //   updateCartHeader();
+      updateCartHeader();
     } catch (error) {
       console.error("❌ Error updating quantity:", error);
       fetchCart(); // Reload the cart if update fails

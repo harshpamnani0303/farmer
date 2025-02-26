@@ -8,6 +8,8 @@ export function loadHeader() {
       userWidget.textContent = userName;
     }
 
+    
+    
 
     // ✅ Cart Sidebar Toggle
     const cartButtons = document.querySelectorAll(".header-cart, .cart-btn");
@@ -31,25 +33,29 @@ export function loadHeader() {
 
     // ✅ Update cart details in header
     function updateCartHeader() {
-      console.log("Updating cart...");
-
-      // ✅ Get updated cart from localStorage
+      console.log("pass"); 
       const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-      const totalItems = cartItems.length;
+      console.log("pass"); 
 
-      // ✅ Select elements safely
-      const cartCountElement = document.querySelector(".header-cart sup");
+      const totalItems = cartItems.reduce(
+        (total, item) => total + item.quantity,
+        0
+      );
+      const totalPrice = cartItems
+        .reduce((total, item) => total + item.price * item.quantity, 0)
+        .toFixed(2);
 
+      // Update cart count and total price
+      document.querySelector(".header-cart sup").textContent = totalItems;
+      document.querySelector(
+        ".header-cart small"
+      ).textContent = totalPrice;
 
-      // ✅ Update cart count and total price if elements exist
-      if (cartCountElement) {
-        cartCountElement.textContent = totalItems;
-      } else {
-        console.warn("⚠️ Cart count element not found!");
-      }
-
+      
+      
     }
-    // ✅ Listen for "cartUpdated" event to update the UI immediately
+
+    // ✅ Listen for cart updates
     document.addEventListener("cartUpdated", updateCartHeader);
 
     // Initial cart update
@@ -70,6 +76,11 @@ export function loadHeader() {
                         <img src="images/logo.png" alt="logo">
                     </a>
 
+                <a class='header-widget' href='profile.html' title='My Account'>
+                    <img src="images/user.png" alt="user">
+                    <span>join</span>
+                </a>
+            
                 <form class="header-form">
                     <input type="text" placeholder="Search anything...">
                     <button><i class="fas fa-search"></i></button>
@@ -79,17 +90,14 @@ export function loadHeader() {
                     <button class="header-widget header-cart" title="Cartlist">
                         <i class="fas fa-shopping-basket"></i>
                         <sup>0</sup> <!-- Updated dynamically -->
-                        
+                        <span>total price <small>₹0.00</small></span> <!-- Updated dynamically -->
                     </button>
-
-                    <a class='header-widget' href='profile.html' title='My Account'>
-                    <img src="images/user.png" alt="user">
-                    <span>join</span>
-                </a>
                 </div>
+
+                
+            
             </div>
         </div>
     </header>
-    `;
+  `;
 }
-
