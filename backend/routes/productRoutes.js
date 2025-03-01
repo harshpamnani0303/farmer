@@ -66,6 +66,7 @@ router.post("/", upload.single("image"), async (req, res) => {
       name,
       price: parsedPrice,
       category,
+      unit,
       stock: parsedStock,
       description: description || "No description",
       image: `/uploads/${req.file.filename}`,
@@ -105,7 +106,7 @@ router.put("/update/:id", upload.single("image"), async (req, res) => {
     product.stock = parsedStock;
     product.description = description || product.description;
     product.discount = parsedDiscount;
-
+    product.unit = req.body.unit || product.unit;
     // Handle image update if a new file is uploaded
     if (req.file) {
       product.image = `/uploads/${req.file.filename}`;

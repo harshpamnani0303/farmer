@@ -4,7 +4,7 @@ const productSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     price: { type: Number, required: true },
-    unit: { type: String, default: "kg" }, // Default unit
+    unit: { type: String , required:true}, // Default unit
     image: { type: String, required: true }, // Image URL
     category: { 
       type: String,  

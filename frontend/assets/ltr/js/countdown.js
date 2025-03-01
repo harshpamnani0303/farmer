@@ -1,6 +1,3 @@
-
-
-
 $('[data-countdown]').each(function () {
     
     var $this = $(this),

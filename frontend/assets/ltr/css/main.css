@@ -372,19 +372,7 @@ button:focus {
   background: var(--primary);
 }
 
-.menu-badge {
-  font-size: 10px;
-  padding: 0px 5px;
-  margin-left: 5px;
-  line-height: 18px;
-  border-radius: 3px;
-  letter-spacing: 0.3px;
-  display: inline-block;
-  text-transform: uppercase;
-  color: var(--white);
-  background: var(--red);
-  text-shadow: var(--primary-tshadow);
-}
+
 
 .dropdown-arrow {
   position: relative;
@@ -872,106 +860,6 @@ button:focus {
 
 .tab-pane.active {
   display: block;
-}
-
-
-
-.pagination {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-.page-item {
-  margin-left: 10px;
-}
-
-.page-item:first-child .page-link, .page-item:last-child .page-link {
-  border-radius: 50%;
-}
-
-.page-item .active {
-  color: var(--white);
-  background: var(--primary);
-}
-
-.page-link {
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  border-radius: 50%;
-  font-weight: 400;
-  border: none;
-  padding: 0px;
-  color: var(--text);
-  background: var(--white);
-}
-
-.page-link:hover {
-  color: var(--white);
-  background: var(--primary);
-}
-
-.page-link:focus {
-  -webkit-box-shadow: none;
-          box-shadow: none;
-}
-
-
-
-.star-rating {
-  direction: rtl;
-  text-align: center;
-  margin: 25px 0px;
-}
-
-.star-rating input {
-  display: none;
-}
-
-.star-rating input:checked ~ label::after {
-  opacity: 1;
-}
-
-.star-rating label {
-  display: inline-block;
-  position: relative;
-  cursor: pointer;
-  margin: 0px 8px;
-}
-
-.star-rating label:hover::after {
-  opacity: 1;
-}
-
-.star-rating label:hover:hover ~ label::after {
-  opacity: 1;
-}
-
-.star-rating label::before {
-  content: "\ec7c";
-  font-family: 'Icofont';
-  font-weight: 900;
-  font-size: 35px;
-  display: block;
-  color: #bbbbbb;
-}
-
-.star-rating label::after {
-  content: "\ec7c";
-  font-family: 'Icofont';
-  font-weight: 900;
-  font-size: 35px;
-  position: absolute;
-  display: block;
-  top: 0px;
-  left: 0px;
-  color: var(--yellow);
-  opacity: 0;
 }
 
 .slider-arrow:hover .dandik,

@@ -28,30 +28,10 @@ $(window).on("scroll", function(){
 });
 
 
-//========================================
-//        DROPDOWN MENU FUNCTION
-//========================================
-$(function () {
-    $(".dropdown-link").click(function() {
-        $(this).next().toggle();
-        $(this).toggleClass('active');
-        if($('.dropdown-list:visible').length > 1) {
-            $('.dropdown-list:visible').hide();
-            $(this).next().show();
-            $('.dropdown-link').removeClass('active');
-            $(this).addClass('active');
-        }
-    }); 
-});
 
 
-//========================================
-//       NAV SIDEBAR MENU ACTIVE
-//========================================
-$('.nav-link').on('click', function(){
-    $('.nav-list li a').removeClass('active');
-    $(this).addClass('active');
-});
+
+
 
 
 //========================================
@@ -149,29 +129,6 @@ $('.product-add').on('click', function(){
 });
 
 
-// //========================================
-// //      INCREMENT PRODUCT QUANTITY
-// //========================================
-// $('.action-plus').on('click', function(){
-//     var increamentValue = $(this).closest('.product-action').children('.action-input').get(0).value++
-//     var actionMinus = $(this).closest('.product-action').children('.action-minus');
-
-//     if(increamentValue > 0) {
-//         actionMinus.removeAttr('disabled');
-//     }
-// });
-
-
-// //========================================
-// //      DECREMENT PRODUCT QUANTITY
-// //========================================
-// $('.action-minus').on('click', function(){
-//     var decrementValue = $(this).closest('.product-action').children('.action-input').get(0).value--
-
-//     if(decrementValue == 2) {
-//         $(this).attr('disabled', 'disabled');
-//     }
-// });
 
 
 //========================================
@@ -182,12 +139,7 @@ $('.review-widget-btn').on('click', function(){
 });
 
 
-//========================================
-//          COUPON SELECT TEXT
-//========================================
-$('.offer-select').on('click', function(){
-    $(this).text('Copied!');
-});
+
 
 
 //========================================
@@ -225,10 +177,4 @@ $('.profile-card.address').on('click', function(){
 });
 
 
-//========================================
-//         PROFILE PAYMENT ACTIVE
-//========================================
-$('.payment-card.payment').on('click', function(){
-    $('.payment-card.payment').removeClass('active');
-    $(this).addClass('active');
-});
+
